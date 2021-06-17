@@ -112,3 +112,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# project-specific
+*.csv
+*.png
+*.pdf
+*.txt
+*.jpeg
+*.jpg
+*.svg
+*.p
+*.csv
+regex_dataset.csv

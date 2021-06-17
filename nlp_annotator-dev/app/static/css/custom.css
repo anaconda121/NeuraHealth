@@ -1,0 +1,436 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700');
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #F1F5F9;
+  font-family: 'Open Sans', sans-serif;
+  color: #3B3C40;
+}
+
+.title-banner {
+  background: #0A2342;
+  color: white;
+  padding: 12px;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+/* .footer-banner {
+  background: #156AA2;
+  padding: 12px;
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+} */
+
+.logo {
+  height: 45px;
+  float: left;
+  padding: 6px;
+  margin-top: 1px;
+  margin-bottom: 0px;
+  padding-left: 48px;
+  margin-right: 12px;
+}
+
+.page-link {
+  color: white;
+  height: 45px;
+  float: right;
+  padding: 6px;
+  margin-top: 6px
+}
+
+.title-container {
+  float: left;
+}
+
+.nav-container {
+    float: right;
+  }
+
+.button-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 650;
+    color: white;
+    width: 100px;
+    float: right;
+    margin: 8px 6px 0px 6px;
+    padding: 0px 6px 2px 6px;
+  }
+
+  /* .vl {
+    border-left: 1px solid white;
+    height: 38px;
+    width: 10px;
+    position: inline;
+  } */
+
+.h2-title {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+  display: inline-block;
+  letter-spacing: 3.8px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.title-link {
+  color: white;
+  text-decoration: none;
+}
+
+.title-link:hover {
+  color: white; }
+
+
+h4 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #8E4A49;
+  padding-bottom: 20px;
+  text-align: center;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  line-height: 0;
+  white-space: nowrap;
+}
+
+h5 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #3B3C40;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  line-height: 0;
+  white-space: nowrap;
+}
+
+span.consensus-actor {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  text-transform: none;
+  /* letter-spacing: 0px; */
+  font-size: 12px;
+  font-weight: 500;
+  font-style: italic;
+  padding-left: 5px;
+  float: right;
+}
+
+.small-button,
+small-button {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #8E4A49;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 20px;
+  border: 1px solid #8E4A49;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin: 0px auto;
+}
+
+.small-button:hover,
+small-button:hover {
+  color: #888;
+  border-color: #888;
+  outline: 0;
+}
+
+.small-button:focus,
+small-button:focus {
+  outline: none;
+}
+
+/* .alert {
+  padding: 20px;
+  background-color: #f44336; 
+  color: white;
+} */
+
+.bg-white {
+  background-color: white;
+  padding: 32px 32px 22px 32px;
+  box-shadow: 2px 2px 2px lightgray;
+  border-radius: 20px;
+  overflow: auto;
+  /* height: 500px; */
+}
+ 
+.app-body {
+  margin-left: 4%;
+}
+
+.padding-top-bot{
+    padding-top: 12px;
+    padding-bottom: 12px;
+}  
+
+.note{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    max-height: 25%;
+    overflow-y: auto;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.pcc-note {
+  margin-top: 12px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  max-height: 10%;
+  overflow-y: auto;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.med {
+  margin-top: 12px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  max-height: 10%;
+  overflow-y: auto;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.icd {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  max-height: 10%;
+  overflow-y: auto;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.labs {
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 12px;
+  max-height: 15%;
+  overflow-y: auto;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.imaging {
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 12px;
+  max-height: 15%;
+  overflow-y: auto;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+
+
+.card{
+  padding: 48px 24px 48px 24px;
+  margin-left: 4%;
+}
+
+.card-left{
+  padding: 48px 24px 48px 24px;
+  margin-left: 0px;
+}
+
+.card-bottom{
+  padding: 0px 24px 48px 0px;
+  margin: 0px;
+}
+
+.card-btm-right{
+  padding: 0px 0px 48px 24px;
+  margin: 0px;
+}
+
+.inside-bottom{
+    margin-left: 0px;
+    margin-top: 48px;
+}
+
+
+/* CSS FOR YEAR PATIENT COLOR */
+
+.year-color {
+  color: #78698C;
+}
+
+.yc-btn,
+yc-btn {
+  color: #78698C;
+  border: 1px solid #78698C;
+}
+
+span.keyword-nav {
+  font-size: 13px;
+  font-weight: 800;
+  text-align: right;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+/* span.keyword-nav:hover {
+  color: #8E4A49;
+}
+
+span.keyword-nav-yc {
+  font-size: 13px;
+  font-weight: 800;
+  text-align: right;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+span.keyword-nav-yc:hover {
+  color: #78698C;
+} */
+
+
+/* CSS FOR LEFT/RIGHT BUTTONS */
+
+.btn-nav {
+  position: relative;
+  font-size: 40px;
+  font-weight: 100;
+  color: #8E4A49;
+  border-color: #8E4A49;
+  border-width: 0px;
+  border-radius: 50%;
+  padding: auto;
+  line-height: 0%;
+  height: 30px;
+  width: 30px;
+}
+
+.year-btn {
+  color: #78698C;
+  border-color: #78698C;
+}
+
+.btn-nav:hover {
+  color: #888;
+  border-color: #888;
+  border-width: 0px;
+}
+
+
+/* CSS TO MAKE SCROLLABLE DIVS */
+.scrollable { /* not working currently, hence not implemented in template files */
+  overflow-x: auto; /* related to bg-white overflow behavior */
+  overflow-y: visible;
+}
+
+
+/* CSS FOR COLLAPSIBLE SECTIONS IN HOME PAGE */
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  padding-left: 10px;
+}
+
+
+.collapsible:hover {
+  color: var(--my-hover-var); 
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+
+@media (max-width: 768px) {
+
+  .card, .card-left, .card-bottom{
+    padding: 24px;  
+    margin: 0px;
+  } 
+
+  .bg-white{
+    height: auto;
+  }
+  
+  .study-browser-banner{
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .logo{
+    float: left;
+  }
+
+  .app-body{
+    margin-left: 0px;
+  }
+
+}

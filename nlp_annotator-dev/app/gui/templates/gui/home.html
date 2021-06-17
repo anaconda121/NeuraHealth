@@ -1,0 +1,116 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load notes_filter %}
+
+{% block content %}
+
+<div>
+    <div class="eleven columns" style="padding-top: 10px;">
+
+        <div class="padding-top-bot">
+            <h4>Annotate</h4>
+            <div class="seven columns">
+                <div class="card bg-white">
+                    <span id="sentenceContents" style="display: none;">{{ currentSentence.Contents }}</span>
+                    <p id="sentenceDisplay">{{ currentSentence.Contents }}</p>
+                </div>
+                <p style="margin-left: 6%;">Sentence {{ sequenceNumber }} / {{ sentenceCount }}
+            </div>
+            <div style="text-align: center;">
+            <h5 style="padding-bottom: 5px;">Matching Patterns</h5>
+                <div class="card bg-white four columns" style="overflow-y: scroll;">
+                    <ul style="text-align: left; line-height: 70%;">
+                        {% for regex in matchingPatterns %}
+                        <li>{{ regex.Pattern }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="eleven columns">
+        <hr>
+    </div>
+
+    <div class="eleven columns">
+        <div class="seven columns">
+            <form method="POST" id="regexForm">
+                {% csrf_token %}
+                <input type="hidden" name="formType" value="regex"/>
+                <input type="hidden" name="sentenceId" value="{{ currentSentence.id }}" />
+                <h5 style="padding-bottom: 10px; text-align: center;">Always Yes</h5>
+                <div class="textbox card" style="margin-top: 5px;">
+                    {{ regexForm.yes_patterns }}
+                </div>
+                <h5 style="padding-bottom: 10px; text-align: center; padding-top: 5px;">Always No</h5>
+                <div class="textbox card" style="margin-top: 5px;">
+                    {{ regexForm.no_patterns }}
+                </div>
+                <h5 style="padding-bottom: 10px; text-align: center; padding-top: 5px;">Always Neither</h5>
+                <div class="textbox card" style="margin-top: 5px;">
+                    {{ regexForm.neither_patterns }}
+                </div>
+                <div style="margin-top: 15px; padding-bottom: 15px; display: flex; justify-content: space-around;">
+                    <input id="previewButton" type="button" value="Preview Patterns">
+                    <input id="regexFormSubmit" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+        <div class="one columns">
+            <br>
+        </div>
+        <div class="three columns">
+            <h5 style="text-align: center; padding-bottom: 10px;">Label</h5>
+            <div class="bg-white">
+                <form method="POST" class="selection-form">
+                    <input type="hidden" name="formType" value="manualLabel" />
+                    <input type="hidden" name="sentenceId" value="{{ currentSentence.id }}" />
+                    {% csrf_token %}
+                    {{ labelForm }}
+                    <input type="submit" value="Submit" style="width: 100%;">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="spinner"></div>
+
+<script type="text/javascript">
+    $("#previewButton").click(function() {
+        console.log("Preview clicked");
+        let text = $("#sentenceContents").text();
+        let yes = $("#id_yes_patterns").val();
+        let no = $("#id_no_patterns").val();
+        let neither = $("#id_neither_patterns").val();
+        fetch('/highlight', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                text: text,
+                yesPatterns: yes || '',
+                noPatterns: no || '',
+                neitherPatterns: neither || ''
+            })
+        })
+        .then(resp => resp.json())
+        .then(json => json.text)
+        .then(text => {
+            console.log(`Sentence display ${text}`);
+            let disp = $("#sentenceDisplay");
+            console.log(disp);
+            disp.html(text);
+        });
+    });
+
+    $("#regexFormSubmit").click(function (e) {
+        $("#spinner").show();
+        $("#regexForm").submit();
+    });
+</script>
+
+{% endblock content %}
