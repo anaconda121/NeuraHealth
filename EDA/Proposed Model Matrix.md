@@ -1,2 +1,2 @@
-| Row Id | Sentence Id      | Content | Label        | Keyword Matches | Always Patterns |
-| ---:   | :---             |   :----:|         ---: |            ---: |            ---: |
+| Patient Id      | Content | Label        | 
+| :---            |   :----:|         ---: |     
