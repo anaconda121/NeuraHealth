@@ -1,4 +1,2 @@
-| Syntax      | Description | Test Text     |
+| Sentence Id      | Content | Label        | Keyword Matches | Always Patterns |
 | :---        |    :----:   |          ---: |
-| Header      | Title       | Here's this   |
-| Paragraph   | Text        | And more      |
