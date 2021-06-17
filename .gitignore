@@ -123,4 +123,5 @@ dmypy.json
 *.svg
 *.p
 *.csv
-regex_dataset.csv
+*.sqlite3
+*.sqlite3-journal
