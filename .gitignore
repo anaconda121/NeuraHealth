@@ -125,3 +125,4 @@ dmypy.json
 *.csv
 *.sqlite3
 *.sqlite3-journal
+Data_Upload/
