@@ -9,6 +9,8 @@ First Slide
   * School
   * Research Center / Mentor
 
+<br>
+
 Second Slide
   * Introduction
    * Stats about AD
@@ -17,6 +19,8 @@ Second Slide
      * Notes are frequently never ultilized, accumualte over time despite valuable info 
      * Dementia is severely underdiagnosed
    * Purpose
+  
+<br>
 
 Third Slide
  * Framework
@@ -25,8 +29,19 @@ Third Slide
     * LR / RFC / SVM
     * Diagram of Original Sequence, then depict conversion to preprocessed data and then converted into TFIDF vectors and feed into models, then CV folds 
   * DL techniques to predict Cognitive Impairment
-   * BERT
-   * Don't know diagram yet since haven't done BERT yet (assuming just model architecture w/ data pipelinew
+    * BERT
+    * Don't know diagram yet since haven't done BERT yet (assuming just model architecture w/ data pipelinew
+
+<br>
 
 Fourth Slide
- * 
+ * Framework slide continued if needed
+   * Findings besides stats
+   * E.g. talk about words that have most correlation towards cognitive impairment
+
+<br>
+
+Fifth Slide
+  * Findings
+    * ACC / ROC / PPV / NPV / TP / FP / TN / FN
+    * Graphs of Stats (E.g. boxplots)
