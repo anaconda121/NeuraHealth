@@ -29,6 +29,7 @@
      * High ACC
      * Non-invasive
      * Efficient
+     * Low Cost (PPL always have to get PCP checkups - these are where the notes are coming from)
 
 <br>
 
@@ -45,13 +46,52 @@
   * Methods Cont.
     * DL techniques to predict Cognitive Impairment
       * BERT
-      * Don't know diagram yet since haven't done BERT yet (assuming just model architecture w/ data pipeline)
+        * Don't know diagram yet since haven't done BERT yet (assuming just model architecture w/ data pipeline)
       
 <br> 
 
 ## Sixth Slide
-  * Findings
+  * Findings for ML techniques
     * ACC / ROC / PPV / NPV / TP / FP / TN / FN
     * Graphs of Stats on validation / CV (E.g. boxplots)
+    * Graph of Words with most correlation for each model
     * Maybe also a sample sentence with output (Y / N / NTR, whether or not to recommend to specialist, flagged words)
+
+<br>
+
+## Seventh Slide
+  * Findings for BERT and other MISC. items (think about again when actually do BERT)
+    * Graph for Stats as mentioned on last slide
+    * Correlation graph again??
+
+
+<br>
+
+<br>
+
+## Tenth Slide
+
+
+<br>
+
+## Eleventh Slide
+  * Discussion 
+    * Error Analysis 
+    * Project Summary
+      * engineering goals
+      * methods
+      * acc scores
+
+<br>
+
+## Twelfth Slide
+  * Conclusions
+    * List out basic stats
+    * Summarize Impact
+      * This project will transform the diagnosis on Neurodegenerative diseases, in particular AD due to its (put engineering goals here) (e.g. low cast, accurate..) methods. 
+      * Notes are more acc than current methods 
+      * Take a lot of stuff from intro slide
+  * References
+
+
 
