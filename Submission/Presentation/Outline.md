@@ -12,7 +12,7 @@ First Slide
 Second Slide
   * Introduction
    * Stats about AD
-    * Talk about how doctors notes include plethora of info about AD situation for a patient
+     * Talk about how doctors notes include plethora of info about AD situation for a patient
    * Discuss underultilization of doctor's notes
     * Notes are frequently never ultilized, accumualte over time despite valuable info 
     * Dementia is severely underdiagnosed
