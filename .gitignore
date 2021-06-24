@@ -10,6 +10,7 @@
 *.csv
 *.sqlite3
 *.sqlite3-journal
+*.pptx
 Data_Upload/
 
 # Byte-compiled / optimized / DLL files
