@@ -64,23 +64,22 @@
     * Graph for Stats as mentioned on last slide
     * Correlation graph again??
 
-
 <br>
 
 <br>
 
 ## Tenth Slide
-
-
-<br>
-
-## Eleventh Slide
   * Discussion 
     * Error Analysis 
     * Project Summary
       * engineering goals
       * methods
       * acc scores
+
+<br>
+
+## Eleventh Slide
+  * Future Plans
 
 <br>
 
@@ -92,6 +91,3 @@
       * Notes are more acc than current methods 
       * Take a lot of stuff from intro slide
   * References
-
-
-
