@@ -12,6 +12,8 @@
 *.sqlite3-journal
 *.pptx
 Data_Upload/
+*.tmp
+*.docx
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
