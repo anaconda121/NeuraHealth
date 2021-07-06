@@ -12,6 +12,7 @@
 *.sqlite3-journal
 *.pptx
 Data_Upload/
+Preparation/
 *.tmp
 *.docx
 
