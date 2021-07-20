@@ -25,6 +25,9 @@
 \addtolength{\textheight}{1.7in}%
 \addtolength{\topmargin}{-1in}%
 
+% Graphics
+\graphicspath{images/}
+
 \usepackage{subfiles} % Best loaded last in the preamble
 
 \def\spacingset#1{\renewcommand{\baselinestretch}%
@@ -58,7 +61,7 @@
 
 \section{Abstract}
 
-\subfile{sections/abstract}
+\input{sections/abstract}
 
 \section{Second section}
 
@@ -70,12 +73,5 @@
 
 \label{sec:conc}
 
-%\bibliographystyle{Chicago}
-
-%\bibliography{Bibliography-MM-MC}
-
-\begin{thebibliography}{}
-
-\end{thebibliography}
 
 \end{document}
