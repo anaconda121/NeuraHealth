@@ -34,7 +34,7 @@ else:
     raise ValueError(f"Invalid DJANGO_ENVIRONMENT {ENVIRONMENT}! Must be 'dev' or 'prod'")
 
 
-_hosts = ['rc-slat.partners.org', 'slat.partners.org', '127.0.0.1', 'localhost']
+_hosts = ['127.0.0.1', 'localhost', '0.0.0.0', 'rc-nat.partners.org', 'nat.partners.org']
 ALLOWED_HOSTS = _hosts
 
 CSRF_TRUSTED_ORIGINS = _hosts

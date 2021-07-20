@@ -29,8 +29,6 @@ MarkupPy = "==1.14"
 PyYAML = "==5.4.1"
 
 [dev-packages]
-rope = "*"
-faker = "*"
 
 [requires]
 python_version = "3.7"

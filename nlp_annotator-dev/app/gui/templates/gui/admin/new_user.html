@@ -1,0 +1,26 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load notes_filter %}
+
+{% block content %}
+
+<div>
+    <div class="eleven columns" style="padding-top: 10px;">
+
+        <div class="padding-top-bot">
+            <h4>Create New User</h4>
+            <div class="card bg-white">
+                <form action="/new-user" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <br />
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+{% endblock content %}

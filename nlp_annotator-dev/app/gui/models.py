@@ -27,6 +27,11 @@ class Sentence(BaseModel):
     Contents = models.TextField(blank = False, null = False)
     Note = models.ForeignKey("gui.Note", null = False, on_delete=models.PROTECT)
 
+    @classmethod
+    def unassigned(cls):
+        return cls.objects.filter(sentenceassignment__isnull=True).order_by('id')
+
+
 class SentenceAssignment(BaseModel):
     User = models.ForeignKey("accounts.CustomUser", null = False, on_delete=models.PROTECT)
     Sentence = models.ForeignKey("gui.Sentence", null = False, on_delete=models.PROTECT)
@@ -70,6 +75,10 @@ class AlwaysRegex(BaseModel):
     @property
     def regex(self):
         return re.compile(self.Pattern, flags=re.IGNORECASE)
+
+    @property
+    def Count(self):
+        return SentenceAlwaysRegex.objects.filter(AlwaysRegex=self).count()
 
 class SentenceAlwaysRegex(BaseModel):
     Sentence = models.ForeignKey("gui.Sentence", null = False, on_delete=models.PROTECT)

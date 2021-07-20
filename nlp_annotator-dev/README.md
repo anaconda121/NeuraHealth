@@ -24,7 +24,7 @@ To add new data, first update the `.csv` files in the `load_data/data` directory
 python manage.py shell
 > %run load_data/load_data.py
 ```
-At this time, it is advisable to delete all existing data in the database before replacing with new data. Duplicate records (by `PatientID`) will not be updated. 
+At this time, it is advisable to delete all existing data in the database before replacing with new data. Duplicate records (by `NATPatientID`) will not be updated. 
 
 To delete all data in the database:
 ```python

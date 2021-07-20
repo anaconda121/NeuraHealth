@@ -32,10 +32,13 @@
 
     <div class="title-banner row">
         <div class="title-container">
-            <h2 class="h2-title">SENTENCE ANNOTATOR TOOL</h2>
+            <a href="/" style="text-decoration: none; color: white;">
+                <h2 class="h2-title">SENTENCE ANNOTATOR TOOL</h2>
+            </a>
         </div>
 
         <div class="nav-container"></div>
+
         {% if user.is_authenticated %}
             <!-- <div class="vl"></div> -->
             <a href="/logout"><button class="button-title">Log Out</button></a>
@@ -43,7 +46,9 @@
             <!-- <a href="/search"><button class="button-title">Search</button></a> -->
             <!-- <a href="/about"><button class="button-title">About</button></a> -->
             <!-- <a href="/profile"><button class="button-title">Profile</button></a> -->
-            <!-- <a href="/home"><button class="button-title">Home</button></a> -->
+            
+            <a href="/admin-menu"><button class="button-title">Admin</button></a>
+            <a href="/home"><button class="button-title">Home</button></a>
         {% else %}
             <a href="/login"><button class="button-title">Log In</button></a>
             <a href="/about"><button class="button-title">About</button></a>

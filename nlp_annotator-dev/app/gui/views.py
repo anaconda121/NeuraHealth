@@ -1,13 +1,16 @@
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import Form, ModelForm, Textarea
+from django.http.response import HttpResponseNotAllowed, HttpResponseNotFound
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, HttpResponseForbidden
 from django.template import loader
+from django import forms
 from django.template.response import TemplateResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import FilteredRelation, Q, Count
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
+from django.core.paginator import Paginator
 import json
 import regex as re
 import functools
@@ -26,6 +29,7 @@ from accounts.forms import SignUpForm
 from django.contrib import messages
 
 from accounts.models import CustomUser
+User = CustomUser
 
 #reading in headers
 import pandas as pd
@@ -34,6 +38,8 @@ import pandas as pd
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+
+Form = forms.Form
 
 
 def custom_error_404(request, exception):
@@ -53,6 +59,12 @@ def custom_error_403(request, exception):
     context = {'exception': "403"}
     print("403 for: ", request)
     return HttpResponse(template.render(context, request), status=403)
+
+
+def get_page_params(request):
+    page = request.GET.get("page", 1)
+    page_size = request.GET.get("page_size", 100)
+    return page, page_size
 
 ## INDEX VIEW
 def index(request):
@@ -399,6 +411,135 @@ def annotator_home(request):
 
     return HttpResponse(template.render(context, request))
 
+@login_required()
+def admin_menu(request):
+    current_user = request.user
+    # if not current_user.is_staff:
+    #     return HttpResponseForbidden()
+    return render(request, "gui/admin/menu.html")
+
+
+class CreateUserForm(Form):
+    username = forms.CharField(label="username")
+    password = forms.CharField(label="password")
+
+
+@login_required()
+def create_user(request):
+    current_user = request.user
+    # if not current_user.is_staff:
+    #     return HttpResponseForbidden()
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            pwd = form.cleaned_data['password']
+            new_form = SignUpForm({
+                "first_name": "",
+                "last_name": "",
+                "username": username,
+                "email": "",
+                "password1": pwd,
+                "password2": pwd
+            })
+            if new_form.is_valid():
+                new_form.save()
+                messages.success(request, f"User {username} created")
+            else:
+                messages.error(request, "Could not create user, please make sure the password is 8+ characters.")
+        else:
+            messages.error(request, "Error creating user.")
+    form = CreateUserForm()
+    context = {
+        "form": form
+    }
+    return render(request, "gui/admin/new_user.html", context=context)
+
+
+class AssignmentForm(Form):
+    username = forms.CharField(label="Username to assign to", required=True)
+    number = forms.IntegerField(label="Number of sentences to assign", required=True, min_value=1)
+
+def _assign(username, number):
+    user = User.objects.get(username=username)
+    sentences = Sentence.unassigned()[:number]
+    if not sentences:
+        raise ValueError('No sentences available to assign!')
+    else:    
+        assigned = 0
+        for sentence in sentences:
+            sentence, created = SentenceAssignment.objects.get_or_create(Sentence=sentence, User=user)
+            sentence.save()
+            if created:
+                assigned +=1 
+        return assigned
+        
+
+@login_required()
+def assign_new(request):
+    current_user = request.user
+    # if not current_user.is_staff:
+    #     return HttpResponseForbidden()
+    if request.method == "POST":
+        form = AssignmentForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            num = form.cleaned_data['number']
+            try:
+                assigned = _assign(username, num)
+                messages.success(request, f"Assigned {assigned} sentences to {username}")
+            except Exception as e:
+                messages.error(request, str(e))
+    
+    form = AssignmentForm()
+    available_count = Sentence.unassigned().count()
+    usernames = [u.username for u in User.objects.all()]
+    context = {
+        "form": form,
+        'available_count': available_count,
+        'usernames': usernames
+    }
+    return render(request, "gui/admin/assign.html", context=context)
+
+@login_required()
+def always_pattern_list(request):
+    current_user = request.user
+    # if not current_user.is_staff:
+    #     return HttpResponseForbidden()
+    p, size = get_page_params(request)
+    always_patterns = AlwaysRegex.objects.all()
+    regex_pages = Paginator(always_patterns, size)
+    current_page = regex_pages.get_page(p)
+    context = {
+        "patterns": current_page,
+    }
+    return render(request, "gui/admin/always_list.html", context=context)
+
+@login_required()
+@csrf_exempt
+def undo_always_pattern(request, pattern_id):
+    current_user = request.user
+    # if not current_user.is_staff:
+    #     return HttpResponseForbidden()
+    if request.method == "POST":
+        pattern = AlwaysRegex.objects.get(pk=pattern_id)
+        if not pattern:
+            return HttpResponseNotFound()
+        with transaction.atomic():
+            annotations = SentenceAlwaysRegex.objects.filter(AlwaysRegex=pattern)
+            sentences = [
+                annotation.Sentence
+                for annotation in annotations
+            ]
+            (SentenceAssignment
+                .objects
+                .filter(Sentence__in=sentences
+                ).update(CompletedAt=None)
+            )   
+            annotations.delete()
+            pattern.delete()
+        return redirect("pattern_list")
+    return HttpResponseNotAllowed()
 
 def _apply_pattern(user, pattern, label):
     regex = AlwaysRegex(Pattern=pattern, Annotation=label, CreatedBy=user)
