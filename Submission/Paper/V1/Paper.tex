@@ -1,0 +1,104 @@
+% Basic Setup
+\documentclass[12pt]{article}
+
+% Imports
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{natbib} %comment out if you do not have the package
+\usepackage{url} % not crucial - just used below for the URL 
+\usepackage[load-configurations=version-1]{siunitx}
+
+% Macros
+%\pdfminorversion=4
+% NOTE: To produce blinded version, replace "0" with "1" below.
+\newcommand{\blind}{0}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+% Margins
+% DON'T change margins - should be 1 inch all around.
+\addtolength{\oddsidemargin}{-.5in}%
+\addtolength{\evensidemargin}{-1in}%
+\addtolength{\textwidth}{1in}%
+\addtolength{\textheight}{1.7in}%
+\addtolength{\topmargin}{-1in}%
+
+\usepackage{subfiles} % Best loaded last in the preamble
+
+
+\def\spacingset#1{\renewcommand{\baselinestretch}%
+{#1}\small\normalsize} \spacingset{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% Authors
+\if0\blind {
+    \title {
+        \bf Natural Language Processing to Detect Cognitive Concerns in Electronic Health Records Using Deep Learning
+    }
+    
+    \author {
+        Author 1 \\
+        Department of YYY, University of XXX\\
+        and \\
+        Author 2 \\
+        Department of ZZZ, University of WWW
+    }
+    
+    \maketitle
+} \fi
+
+% TOC
+\newpage
+    \tableofcontents
+\newpage
+
+\section{Abstract}
+
+\subfile{sections/abstract}
+
+\section{Second section}
+
+
+
+
+
+
+
+
+\cite{Campbell02}, \cite{Schubert13}, \cite{Chi81}
+
+
+
+\section{Conclusion}
+\label{sec:conc}
+
+
+\bigskip
+\begin{center}
+{\large\bf SUPPLEMENTARY MATERIAL}
+\end{center}
+
+\begin{description}
+
+\item[Title:] Brief description. (file type)
+
+\item[R-package for  MYNEW routine:] R-package ÒMYNEWÓ containing code to perform the diagnostic methods described in the article. The package also contains all datasets used as examples in the article. (GNU zipped tar file)
+
+\item[HIV data set:] Data set used in the illustration of MYNEW method in Section~ 3.2. (.txt file)
+
+\end{description}
+
+%\bibliographystyle{Chicago}
+
+%\bibliography{Bibliography-MM-MC}
+
+\begin{thebibliography}{}
+
+\end{thebibliography}
+
+\end{document}

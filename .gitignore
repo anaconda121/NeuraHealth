@@ -17,6 +17,8 @@ Preparation/
 *.docx
 UMAP Test.ipynb
 Mia_*.ipynb 
+*.toc
+*.aux
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
