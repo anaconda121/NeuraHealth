@@ -11,7 +11,7 @@ from gui.models import Sentence, SeedRegex, PatientDemographic, Note
 ROOT_DIR = Path(__file__).parent
 
 # specify the import filename
-filename = "test_data.csv"
+filename = r"C:\Users\MIND_DS\Dropbox (Partners HealthCare)\NLP\Tanish\BigDataSets\Regex_match\Diversity_Sampling\5000_SLAT_import_7_19.csv"
 
 columns = [
     "PatientID",
