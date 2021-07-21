@@ -60,7 +60,7 @@ with open(ROOT_DIR / filename, "r", encoding = 'utf-8') as f:
     for patient_id, mrn, empi in patient_ids:
         p = PatientDemographic(PatientID=patient_id, MRN=mrn, EMPI=empi).save()
         patients[patient_id] = p
-    print("NoteIDS: ", note_ids)
+    #print("NoteIDS: ", note_ids)
     for patient_id, note_id, encounter_id in note_ids:
         print("PI: ", patient_id, "NI: ", note_id, "EI: ", encounter_id, "Date: ", Note(PatientID=patient_id, PatientEncounterID=encounter_id, NoteID=note_id).Date)
         n = Note(PatientID=patient_id, PatientEncounterID=encounter_id, NoteID=note_id).save()
