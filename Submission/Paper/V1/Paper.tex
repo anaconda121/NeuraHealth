@@ -9,7 +9,7 @@
 \usepackage{booktabs}
 \usepackage{natbib} %comment out if you do not have the package
 \usepackage{url} % not crucial - just used below for the URL 
-\usepackage[load-configurations=version-1]{siunitx}
+\usepackage{siunitx}
 
 % Macros
 %\pdfminorversion=4
@@ -44,7 +44,7 @@
 % Authors
 \if0\blind {
     \title {
-        \bf Natural Language Processing to Detect Cognitive Concerns in Electronic Health Records Using Deep Learning
+        \bf Title
     }
     
     \author {
@@ -76,16 +76,20 @@
 
 % Methodology
 \section{Methodology}
-	\subsection{Datasets}
-		\subsubsection{Sequence Level Annotation Tool (SLAT)}
-	
+	\subsection{Acquisition of Data}
+	\tab Our gold-standard dataset consisted of 16K sampled patients with APOE gene <insert info about Biobank>. Each patient's EHR record was reviewed by an expert clinician (neurologist, psychiatrist, or geriatric psychiatrist) to annotate patients with presence, absence, or inconclusiveness of cognitive impairment. 
+		
 	\subsection{Preprocessing}
+	\tab We first created a list of keywords related to cognitive impairment (full list with frequency matches in Appendix A). For each patient in the BioBank data repository (mentioned above), we extracted all sequences containing any of the keywords. Several preprocessing steps were completed to increase the sequences to 800 characters minimum (more details in Appendix B) to allow for annotators to have more context when evaluating sequences.The preprocessed sequences were used as input for all models.
+	
+	% \subsubsection{Obtaining Gold Standard Labels} Fair Header (where you would talk about SLAT)
+	
 	
 	\subsection{Machine Learning Models}
-		\subsubsection{TFIDF Vectors}
+		% \subsubsection{TFIDF Vectors} Fair Header
 	
 	\subsection{Deep Learning Model}
-		\subsubsection{BERT and Transformers}
+		% \subsubsection{BERT and Transformers} Fair Header
 
 % Results
 \section{Results}
@@ -99,5 +103,45 @@
 
 % References
 \section{References}
+
+\section{Appendix A}
+
+\begin{table*}[htbp] 
+
+	{
+		\begin{tabular}{c|c|c}
+		\toprule
+	    \textbf{Rank} & \textbf{Keyword} & \textbf{Match Count} \\
+	    \midrule
+	    
+		1 & \textbf{Memory} & 109218 \\ 
+		2 & \textbf{Cognition}  & 87655 \\ 
+		3 & \textbf{Dementia} & 51034 \\ 
+		4 & \textbf{Cerebral} &  45886 \\ 
+		5 & \textbf{Cerebrovascular} & 36370 \\ 
+		6 & \textbf{Cerebellar} & 26863 \\
+		7 & \textbf{Cognitive Impairment} & 20267 \\ 
+		8 & \textbf{Alzheimer} & 20581 \\ 
+		9 & \textbf{MOCA} & 9767 \\ 
+		10 & \textbf{Neurocognitive} & 7711 \\ 
+		11 & \textbf{MCI} & 3889 \\ 
+		12 & \textbf{Amnesia} & 3695 \\ 
+		13 & \textbf{AD} & 2673 \\ 
+		14 & \textbf{Lewy} & 2561 \\ 
+		15 & \textbf{MMSE} & 2134 \\ 
+		16 & \textbf{LBD} & 224 \\ 
+		17 & \textbf{Corticobasal} & 147 \\ 
+		18 & \textbf{Pick's} & 41 \\ 
+		
+	    \bottomrule
+		\end{tabular}
+	}
+	{\caption{Keywords indicative of Cognitive Impairment}}
+
+
+    
+\end{table*}
+
+\section{Appendix B}
 
 \end{document}
