@@ -6,12 +6,15 @@ import json
 from pathlib import Path
 import django.shortcuts
 from gui.models import Sentence, SeedRegex, PatientDemographic, Note
+import sys
+
+csv.field_size_limit(1000000000)
 
 # everything is relative to this file
 ROOT_DIR = Path(__file__).parent
 
 # specify the import filename
-filename = "SLAT_production_7_22.csv"
+filename = "char_limit.csv"
 
 columns = [
     "PatientID",
