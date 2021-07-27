@@ -65,7 +65,7 @@ with open(ROOT_DIR / filename, "r", encoding = 'utf-8') as f:
         patients[patient_id] = p
     #print("NoteIDS: ", note_ids)
     for patient_id, note_id, encounter_id in note_ids:
-        print("PI: ", patient_id, "NI: ", note_id, "EI: ", encounter_id, "Date: ", Note(PatientID=patient_id, PatientEncounterID=encounter_id, NoteID=note_id).Date)
+        #print("PI: ", patient_id, "NI: ", note_id, "EI: ", encounter_id, "Date: ", Note(PatientID=patient_id, PatientEncounterID=encounter_id, NoteID=note_id).Date)
         n = Note(PatientID=patient_id, PatientEncounterID=encounter_id, NoteID=note_id).save()
         notes[note_id] = n
     for regex in all_regexes:
