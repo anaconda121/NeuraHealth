@@ -457,19 +457,25 @@ def create_user(request):
 
 
 class AssignmentForm(Form):
-    username = forms.CharField(label="Username to assign to", required=True)
-    number = forms.IntegerField(label="Number of sentences to assign", required=True, min_value=1)
+    username = forms.CharField(label="Username to assign to")
+    number = forms.IntegerField(label="Number of sentences to assign", min_value=1)
 
-def _assign(username, number):
+def _assign(request, username, number):
     user = User.objects.get(username=username)
     sentences = Sentence.unassigned()[:number]
+    #messages.error(request, str(user))
     if not sentences:
         raise ValueError('No sentences available to assign!')
     else:    
         assigned = 0
+        #messages.error(request, "entering for loop")
         for sentence in sentences:
+            messages.error(request, "starting first step", str(sentence))
+            #print("------------------------sentence ", sentence, " --------------------------------")
             sentence, created = SentenceAssignment.objects.get_or_create(Sentence=sentence, User=user)
+            #messages.error(request, "Attemping to Save")
             sentence.save()
+            #messages.error(request, "Save Done")
             if created:
                 assigned +=1 
         return assigned
@@ -486,7 +492,7 @@ def assign_new(request):
             username = form.cleaned_data['username']
             num = form.cleaned_data['number']
             try:
-                assigned = _assign(username, num)
+                assigned = _assign(request, username, num)
                 messages.success(request, f"Assigned {assigned} sentences to {username}")
             except Exception as e:
                 messages.error(request, str(e))
