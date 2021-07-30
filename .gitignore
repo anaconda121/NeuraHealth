@@ -19,6 +19,7 @@ UMAP Test.ipynb
 Mia_*.ipynb 
 *.toc
 *.aux
+*.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
