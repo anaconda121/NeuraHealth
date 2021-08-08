@@ -1,8 +1,5 @@
 # APOE-SLAT
  
-Researcher: Tanish Tyagi <br>
-Mentors: Ayush Noori, Colin Magdamo, Dr. Sudeshna Das
+Authors: Tanish Tyagi*, Colin Magdamo*, Ayush Noori, Mayuresh Deodhar, Zhuoqiao Hong, Dmitry Prokopenko, Rudy E. Tanzi, Deborah Blacker, Bradley T. Hyman, Shibani S. Mukerji, M. Brandon Westover, Sudeshna Das
 
-## EDA
-
-Houses all relevant files used in Explatory Data Analysis portion of this project.
+* First Authors with equal contribution
