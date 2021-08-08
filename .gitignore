@@ -21,7 +21,7 @@ Mia_*.ipynb
 *.aux
 *.pkl
 Old/
-Model_Training.py
+Example-Code/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
