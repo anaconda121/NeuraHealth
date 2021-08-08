@@ -32,7 +32,7 @@ import time
 data_dir = Path("../Data")
 results_dir = Path("../Results/")
 
-# set seeds to make computations deterministic
+# set seeds
 np.random.seed(1234)
 torch.manual_seed(1234)
 
@@ -41,21 +41,18 @@ cuda_available = torch.cuda.is_available()
 print("Is CUDA available? ", "Yes" if cuda_available else "No")
 
 always_patterns = pd.read_csv("input_optimized.csv") 
-manual_review = pd.read_csv(r"C:\Users\MIND_DS\Dropbox (Partners HealthCare)\NLP\Tanish\APOE-SLAT\Modeling\test_and_validation.csv")
+manual_review = pd.read_csv(r"C:\\Users\\MIND_DS\\Dropbox (Partners HealthCare)\\NLP\\Tanish\\APOE-SLAT\\Modeling\\test_and_validation.csv")
 manual_review = manual_review[['patient_id', 'sequence', 'annotator_label']]
 always_patterns = always_patterns[['patient_id', 'sequence', 'annotator_label']]
 
 def split_data(trial):
-    # stratify across sequences with and without always pattern matches and class_label (Y, N, NTR)
-    
+    # stratify across sequences with and without always pattern matches and class_label (Y, N, NTR)    
     # stratifying across sequences with always pattern
     X_train, X_other = train_test_split(always_patterns, random_state = 0,test_size = 0.1, stratify = always_patterns["annotator_label"].to_numpy())
-
     X_valid, X_test = train_test_split(X_other, random_state = 0, test_size = 0.25, stratify = X_other["annotator_label"].to_numpy())
     
     # stratifying across sequences without always pattern
     X_train_2, X_other_2 = train_test_split(manual_review, random_state = 0,test_size = 0.6, stratify = manual_review["annotator_label"].to_numpy())
-
     X_valid_2, X_test_2 = train_test_split(X_other_2, random_state = 0, test_size = (0.25/0.6), stratify = X_test_2["annotator_label"].to_numpy())
     
     # combining to get final train, test, validation splits
@@ -123,7 +120,7 @@ def fpr_tpr(df, val):
 
     for thres in thres_list:
         # compare the CB prediction to the threshold of current iteration, convert to binary prediction
-        df['PatientLabel'] = df['SeqProbs'].apply(lambda x: 1 if x > thres else 0)
+        df['PatientLabel'] = df['SeqProbs'].apply(lambda x: 1 if x > thres else 0) # edit
         val[['PatientID', 'labels']].merge(df, on = 'PatientID')
 
         # calculate TP, FP, TN, FN
@@ -271,5 +268,6 @@ best_trial = study.best_trial
 print("- Number: ", best_trial.number)
 print("- Value: ", best_trial.value)
 print("- Hyperparameters: ")
+
 for key, value in best_trial.params.items():
     print("   - {}: {}".format(key, value))

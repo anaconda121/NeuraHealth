@@ -20,6 +20,8 @@ Mia_*.ipynb
 *.toc
 *.aux
 *.pkl
+Old/
+Model_Training.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
