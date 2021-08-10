@@ -27,6 +27,7 @@
 \def\spacingset#1{\renewcommand{\baselinestretch}%
 {#1}\small\normalsize} \spacingset{1}
 
+% 4 columns
 \begin{table}[hbtp]
 \floatconts
 %   {\caption{TF-IDF Vector Features Correlation}}
@@ -40,3 +41,28 @@
 \textbf{Concentration} & \fseries 0.42 & \textbf{Fund} & \fseries 0.38  & \textbf{Knowledge} & \fseries 0.36  & \textbf{Attention} & \fseries 0.35 \\ 
 \textbf{Orientation} & \fseries 0.41 & \textbf{Experiences} & \fseries 0.36 & \textbf{Insight} & \fseries 0.36 & \textbf{Content} & \fseries 0.34  \\ 
 \textbf{Perceptions} & \fseries 0.40 & \textbf{Ideation} & \fseries 0.36  & \textbf{Associations} & \fseries 0.36  & \textbf{Thought} & \fseries 0.34   \\ 
+\bottomrule
+\end{tabular}}
+
+% 2 columns
+\begin{table*}[hbtp]
+\floatconts
+    {\caption{Demographics of Data}} \\
+    {\begin{tabular}{cccc}
+    \toprule 
+    \bfseries Word & \bfseries Corr & \bfseries Word & \bfseries Corr &
+    \midrule
+    
+    \textbf{Intact} & \fseries 0.56 & \textbf{Experiences} & \fseries 0.36 \\
+    \textbf{Oriented} & \fseries 0.43 & \textbf{Associations} & \fseries 0.36 \\ 
+    \textbf{Concentration} & \fseries 0.42 & \textbf{Homicidal} & \fseries 0.36 \\ 
+    \textbf{Orientation} & \fseries 0.41 & \textbf{Observation} & \fseries 0.36 \\
+    \textbf{Sensorium} & \fseries 0.40 & \textbf{Knowledge} & \fseries 0.36 \\ 
+    \textbf{Perceptions} & \fseries 0.40 & \textbf{Abstract} & \fseries 0.36 \\
+    \textbf{Judgement} & \fseries 0.39 & \textbf{Suicidal} & \fseries 0.35 \\
+    \textbf{Fund} & \fseries 0.38 & \textbf{Attention} & \fseries 0.35 \\
+    \textbf{Insight } & \fseries 0.36 & \textbf{Content} & \fseries 0.34 \\ 
+    \textbf{Ideation} & \fseries 0.36 & \textbf{Thought} & \fseries 0.34  \\  
+    
+    \bottomrule
+  \end{tabular}}
