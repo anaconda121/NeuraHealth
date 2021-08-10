@@ -23,6 +23,7 @@ Mia_*.ipynb
 Old/
 Example-Code/
 *.sav
+Modeling/Storage/Model/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
