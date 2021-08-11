@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+
+%\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{unicode-math}
+\usepackage{bm}
+%\usepackage{enumerate}
+\usepackage{natbib} %comment out if you do not have the package
+\usepackage{url} % not crucial - just used below for the URL 
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+%\pdfminorversion=4
+% NOTE: To produce blinded version, replace "0" with "1" below.
+\newcommand{\blind}{0}
+
+% DON'T change margins - should be 1 inch all around.
+\addtolength{\oddsidemargin}{-.5in}%
+\addtolength{\evensidemargin}{-1in}%
+\addtolength{\textwidth}{1in}%
+\addtolength{\textheight}{1.7in}%
+\addtolength{\topmargin}{-1in}%
+
+
+\begin{document}
+
+\begin{table}[hbtp]
+%   {\caption{TF-IDF Vector Features Correlation}}
+  {\begin{tabular}{cccccc}
+    \toprule 
+    
+    \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries Med/ICD Code (\%)  \\ 
+    
+    \bfseries{APOE ${\bm{\varepsilon}}$2 & \fseries 1654 & \fseries 0.37 & \fseries 0.63 & \fseries 0.15  \\
+    \bfseries{APOE ${\bm{\varepsilon}}$3 & \fseries 8284 & \fseries 0.38 & \fseries 0.62 & \fseries 0.16  \\
+    \bfseries{APOE ${\bm{\varepsilon}}$4 & \fseries 3439 & \fseries 0.40 & \fseries 0.60 & \fseries 0.24  \\
+    
+    \bottomrule
+  \end{tabular}}
+  {\caption{TF-IDF Vector Features Correlation}}
+\end{table}
+\end{document}
