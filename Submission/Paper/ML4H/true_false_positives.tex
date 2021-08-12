@@ -1,0 +1,45 @@
+\documentclass[12pt]{article}
+
+%\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{unicode-math}
+\usepackage{bm}
+%\usepackage{enumerate}
+\usepackage{natbib} %comment out if you do not have the package
+\usepackage{url} % not crucial - just used below for the URL 
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+%\pdfminorversion=4
+% NOTE: To produce blinded version, replace "0" with "1" below.
+\newcommand{\blind}{0}
+
+% DON'T change margins - should be 1 inch all around.
+\addtolength{\oddsidemargin}{-.5in}%
+\addtolength{\evensidemargin}{-1in}%
+\addtolength{\textwidth}{1in}%
+\addtolength{\textheight}{1.7in}%
+\addtolength{\topmargin}{-1in}%
+
+
+\begin{document}
+
+\begin{table}[hbtp]
+%   {\caption{TF-IDF Vector Features Correlation}}
+  {\begin{tabular}{ccc}
+    \toprule 
+    
+    \bfseries{Patient CI} & \bfseries{Med/ICD Code} & \bfseries{Count}  \\ 
+    
+    \midrule 
+    
+    \fseries 1 & \fseries 1 & 1665 \\
+    \fseries 1 & \fseries 0 & 6999 \\
+    \fseries 0 & \fseries 1 & 84 \\
+    \fseries 0 & \fseries 0 & 5193 \\
+    
+    \bottomrule
+  \end{tabular}}
+  {\caption{TF-IDF Vector Features Correlation}}
+\end{table}
+\end{document}
