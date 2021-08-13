@@ -27,7 +27,7 @@
 \def\spacingset#1{\renewcommand{\baselinestretch}%
 {#1}\small\normalsize} \spacingset{1}
 
-% 4 columns
+% multiclass classifcation 4 columns
 \begin{table}[hbtp]
 \floatconts
 %   {\caption{TF-IDF Vector Features Correlation}}
@@ -44,7 +44,7 @@
 \bottomrule
 \end{tabular}}
 
-% 2 columns
+% multiclass classifcation 2 columns
 \begin{table*}[hbtp]
 \floatconts
     {\caption{Demographics of Data}} \\
@@ -66,3 +66,28 @@
     
     \bottomrule
   \end{tabular}}
+\end{table}
+
+% binary classficiation word features
+\begin{table}[hbtp]
+%   {\caption{TF-IDF Vector Features Correlation}}
+  {\begin{tabular}{cccc}
+    \toprule 
+    \bfseries Word & \bfseries Corr & \bfseries Word & \bfseries Corr \\
+    \midrule
+    
+    \textbf{Alzheimer} & \fseries 0.352 & \textbf{Relation} & \fseries 0.271 \\
+    \textbf{Deficits}  & \fseries 0.341 &  \textbf{Disease} & \fseries 0.271 \\ 
+    \textbf{Cognitive} & \fseries 0.325 &  \textbf{Onset} & \fseries 0.266  \\ 
+    \textbf{MOCA} & \fseries 0.321 & \textbf{Age} & \fseries  0.263 \\
+    \textbf{Short} & \fseries 0.316 & \textbf{Reports} & \fseries 0.237 \\ 
+    \textbf{Family} & \fseries 0.311 & \textbf{Social} & \fseries 0.230 \\ 
+    \textbf{Mother} & \fseries 0.295 & \textbf{Learning} & \fseries 0.222 \\
+    \textbf{History} & \fseries 0.294  & \textbf{Impairment} & \fseries 0.212 \\
+    \textbf{Father} & \fseries 0.286 & \textbf{Difficulties} & \fseries 0.211  \\ 
+    \textbf{Memory} & \fseries 0.276 & \textbf{Term} & \fseries 0.207   \\  
+    
+    \bottomrule
+  \end{tabular}}
+  {\caption{TF-IDF Vector Features Correlation}}
+\end{table}
