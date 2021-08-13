@@ -22,6 +22,7 @@
 
 \begin{document}
 
+% multiclass classification model stats - threshold is max of 3 probabilities
 \begin{table}[hbtp]
 %   {\caption{TF-IDF Vector Features Correlation}}
   {\begin{tabular}{ccc|ccc}
@@ -38,4 +39,23 @@
   \end{tabular}}
   {\caption{TF-IDF Vector Features Correlation}}
 \end{table}
+
+% binary classification model stats - probability threshold of 0.89
+\begin{table}[hbtp]
+%   {\caption{TF-IDF Vector Features Correlation}}
+  {\begin{tabular}{ccc|ccc}
+    \toprule 
+    
+    \bfseries AUCROC & \bfseries ACC  & \bfseries Sensitivity \\ 
+    0.94 & 0.90 & 0.73  \\
+    \toprule 
+    
+    \bfseries Specificity & \bfseries Lambda & \bfseries Correlation \\
+    0.935 & 10 & 0.01 \\
+    
+    \bottomrule
+  \end{tabular}}
+  {\caption{TF-IDF Vector Features Correlation}}
+\end{table}
+
 \end{document}
