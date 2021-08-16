@@ -24,6 +24,8 @@ Old/
 Example-Code/
 *.sav
 Modeling/Storage/Model/
+*.gz
+*.ppt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
