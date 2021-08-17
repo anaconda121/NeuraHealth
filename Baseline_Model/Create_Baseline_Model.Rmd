@@ -62,11 +62,11 @@ structured_variables[,AD_Med_or_ICD_Code := ifelse(Dx_Count > 0 | Med_Count > 0,
 
 # tanish set 
 
-tanish <- fread('data/20K_sample.csv')
+tanish <- fread('data/sample_8_12.csv')
 # need EMPI for tanish's set, get from EDW data
 tanish[rbindlist(list(meds,diagnoses),fill =T),on=.(patient_id = PatientID),EMPI := i.EMPI]
 # 0 = no, 1 = neither, 2 = CI
-tanish[,Binary_CI := ifelse(prediction == 2,1,0)]
+tanish[,Binary_CI := ifelse(predictions == 2,1,0)]
 # at least one CI, give 1 for patient level cognitive impairment 
 tanish[,patient_CI := ifelse(sum(Binary_CI) > 0,1,0),by=.(patient_id)]
 tanish[,num_sequences_patient := .N,by=.(patient_id)]
@@ -100,8 +100,38 @@ fwrite(tanish_predictions,file='data/tanish_predictions_with_structured_features
 View(tanish[patient_id %in% tanish_predictions[patient_CI == 0 & AD_Med_or_ICD_Code == 1,patient_id]])
 #view false positives
 View(tanish[patient_id %in% tanish_predictions[patient_CI == 1 & AD_Med_or_ICD_Code == 0,patient_id]])
+fwrite(tanish[patient_id %in% tanish_predictions[patient_CI == 1 & AD_Med_or_ICD_Code == 0,patient_id]][order(patient_id,-predictions)],file='data/false_positive_sequences.csv')
 
 
+
+
+
+##### TANISH - ACCURACY MAXIMIZING THRESHOLD #####
+
+library(ROCR)
+library(data.table)
+
+# put your test set with binary probs here, 1 col named 'probability' and one named 'annotator_label'
+tanish_test_set <- fread("data/test_binary_classification.csv")
+# tanish_test_set[,annotator_label := ifelse(annotator_label == 2,1,0)]
+# tanish_test_set[annotator_label == 0,probability := 1 - probability]
+
+acc <- performance(prediction(tanish_test_set$probability,tanish_test_set$annotator_label),measure = 'acc')
+acc <- data.table(cutoffs = acc@x.values[[1]],accuracy = acc@y.values[[1]])
+threshold <- acc[acc[,.I[which.max(accuracy)]],cutoffs]
+
+# .729 sens
+sens <- performance(prediction(tanish_test_set$probability,tanish_test_set$annotator_label),measure = 'sens')
+sens <- data.table(cutoffs = sens@x.values[[1]],sens = sens@y.values[[1]])
+sens[cutoffs == threshold]
+
+# 0.9346939	
+spec <- performance(prediction(tanish_test_set$probability,tanish_test_set$annotator_label),measure = 'spec')
+spec <- data.table(cutoffs = spec@x.values[[1]],spec= spec@y.values[[1]])
+spec[cutoffs == threshold]
+
+# 0.9343537
+auc <- performance(prediction(tanish_test_set$probability,tanish_test_set$annotator_label),measure = 'auc')
 
 ## read in gold standards 
 # gold <- fread("data/Dementia_ReferenceStandardDataset_08292019_subset_mrn.csv")
