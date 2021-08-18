@@ -137,7 +137,7 @@ EHR, NLP, Demetia
 \section{Dataset, Preprocessing, and Annotations}
 
 \paragraph{Dataset}
-\label{sec:Dataset} Our gold-standard dataset consisted of a cohort (N=16,428) of patients from the Mass General Brigham (MGB) HealthCare (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021) and had APOE genotype data available from the BioBank. Each patients' EHR record was then annotated by neurologists using a web-based annotation tool (UI Interface in Appendix A) as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither i.e., sequence has no information on patient’s cognition.
+\label{sec:Dataset} Our gold-standard dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021) and had APOE genotype data available from the BioBank. Each patients' EHR record was then annotated by neurologists using a web-based annotation tool (UI Interface in Appendix A) as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither i.e., sequence has no information on patient’s cognition.
 
 \paragraph{Preprocessing}
 \label{sec:Preprocessing} For each patient in our gold-standard dataset, we extracted unstructured clinician notes, identified matches to dementia-related keywords (listed in Table 1), and constructed 800 character sequences from the note text around each of these matches. Our cohort of 16,428 patients had 279,224 sequences in total. 
@@ -182,18 +182,24 @@ Currently, 8,656 sequences have been annotated, 8,050 through always patterns an
 
 The final dataset was split between train (95\%) and holdout test (5\%) sets, stratified across label and proportion of sequences annotated manually and through always patterns. % {Will change} % 
 Validation datasets were split from the train set using techniques described in the Methodology section. Table 2 shows demographics of the cohort of patients.  
-
 \section{Methodology}
 \label{sec:Methodology}  
 
-We built x models and compared performance to baseline model. 
+We built 4 models and compared performance to the baseline model. It is important to note that these models were trained on binary labels, despite annotators labeling sequences with 3 classes. This was done because our overall task was to classify if a patient had CI, not whether a sequence indicates CI. This means that a label of neither is not relevant, as a patient can only be classified as having or not having CI. In order to convert this problem to binary labels, we aggregated no and neither labels to class 0 and yes labels to class 1. 
 
-\paragraph{(1) Baseline Model} We performed L1 regularized logistic regression where the cognitive concern label was regressed on the counts of medications and ICD codes relevant to CI. The lambda value was selected through 10-fold Cross Validation (CV) to maximize the average area under the Receiver Operator Characteristic (ROC). % {To be implemented} %
+\label{sec:Baseline}  
+\paragraph{(1) Baseline Model} We performed L1 regularized logistic regression where the cognitive concern label was regressed on the counts of medications, keyword counts, and ICD codes relevant to CI. The lambda value was selected through 10-fold Cross Validation (CV) to maximize the average area under the Receiver Operator Characteristic (ROC). % {To be implemented} %
 
+\label{sec:TFIDF}  
 \paragraph{(2) Logistic Regression with TF-IDF Vectors} We performed TF-IDF (term frequency-inverse document frequency) vectorization on the annotated sequences and selected features based on a term's Pearson correlation coefficient with the outcome. L1 Regularized logistic regression was applied with the annotated cognitive impairment labels. We used different correlation coefficients as thresholds to select features and iterated over different lambda values to determine the optimal lambda value and correlation coefficient threshold. 
 
-\paragraph{(3) Model 1 + Model 2} % {TBD} %
+\label{sec:BaselineTFIDF}  
+\paragraph{(3) Model 1 + Model 2} % {TBD} % 
 
+\label{sec:Transformer}  
 \paragraph{(4) Transformer Based Sequence Classification Language Model} % {To be implemented} %
+
+\section{Results}
+\label{sec:Results}  
 
 \end{document}
