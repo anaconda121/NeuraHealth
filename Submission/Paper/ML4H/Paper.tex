@@ -62,59 +62,28 @@ A Line Break}
 
  %\title{Title of the Article\titletag{\thanks{Some footnote}}}
 
-
- % Use \Name{Author Name} to specify the name.
- % If the surname contains spaces, enclose the surname
- % in braces, e.g. \Name{John {Smith Jones}} similarly
- % if the name has a "von" part, e.g \Name{Jane {de Winter}}.
- % If the first letter in the forenames is a diacritic
- % enclose the diacritic in braces, e.g. \Name{{\'E}louise Smith}
-
- % \thanks must come after \Name{...} not inside the argument for
- % example \Name{John Smith}\nametag{\thanks{A note}} NOT \Name{John
- % Smith\thanks{A note}}
-
- % Anything in the name that should appear in the title but not in the 
- % article's header or footer or in the volume's
- % table of contents should be placed inside \nametag{}
-
- % Two authors with the same address
- % \author{%
- %  \Name{Author Name1\nametag{\thanks{A note}}} \Email{abc@sample.com}\and
- %  \Name{Author Name2} \Email{xyz@sample.com}\\
- %  \addr Address
- % }
-
- % Three or more authors with the same address:
- % \author{%
- %  \Name{Author Name1} \Email{an1@sample.com}\\
- %  \Name{Author Name2} \Email{an2@sample.com}\\
- %  \Name{Author Name3} \Email{an3@sample.com}\\
- %  \Name{Author Name4} \Email{an4@sample.com}\\
- %  \Name{Author Name5} \Email{an5@sample.com}\\
- %  \Name{Author Name6} \Email{an6@sample.com}\\
- %  \Name{Author Name7} \Email{an7@sample.com}\\
- %  \Name{Author Name8} \Email{an8@sample.com}\\
- %  \Name{Author Name9} \Email{an9@sample.com}\\
- %  \Name{Author Name10} \Email{an10@sample.com}\\
- %  \Name{Author Name11} \Email{an11@sample.com}\\
- %  \Name{Author Name12} \Email{an12@sample.com}\\
- %  \Name{Author Name13} \Email{an13@sample.com}\\
- %  \Name{Author Name14} \Email{an14@sample.com}\\
- %  \addr Address
- % }
-
- % Authors with different addresses and equal first authors:
-\author{%
-\Name{First Author 1}\equal{These authors contributed equally} \Email{abc@sample.com}\\
-\addr University X, Country 1
-\AND
-% footnotemark[1] is to refer to the \equal footnote
-\Name{First Author 2}\footnotemark[1] \Email{def@sample.com}\\
-\addr University Y, Country 2
-\AND
-\Name{Last Author} \Email{ghi@sample.com}\\
-\addr University Z, Country 3
+\author{Tanish Tyagi \nametag{\thanks{Authors contributed equally}\SUP{1}},
+Colin G. Magdamo\nametag{\footnotemark[1]\SUP{1}}, 
+Ayush Noori \SUP{1},
+Mayuresh Deodhar \SUP{1},
+Zhuoqiao Hong \SUP{1},
+Dimitry Propenko \SUP{1},
+Rudy E. Tanzi \SUP{1},
+Deborah Blacker \SUP{1},
+Bradley T. Hyman \SUP{1},
+Shibani S. Mukerji \SUP{1},
+M. Brandon Westover \SUP{1},
+Sudeshna Das\SUP{1},
+\centering \Email{
+\\[\bigskipamount] 
+\SUP{1}\{ttanish, 
+cmagdamo,
+anoori1,
+...
+sdas5\}
+@mgh.harvard.edu}
+% 
+\begin{center}\addr Massachusetts General Hospital, Boston, MA\end{center}
 }
 
 \begin{document}
@@ -122,15 +91,17 @@ A Line Break}
 \maketitle
 
 \begin{abstract}
-\tab Dementia is a neurodegenerative disorder that causes cognitive decline and affects more than 50 million people worldwide. Dementia is under-diagnosed by healthcare professionals—only one in four people who suffer from dementia are diagnosed. Even when a diagnosis is made, it may not be entered as a structured diagnosis code in a patient’s charts.  Information relevant to cognitive impairment is often found within electronic health records but manual review of clinician notes by experts is both time consuming and often prone to errors. Automated evaluation of these notes presents an opportunity to label patients with cognitive impairment (CI) in real-world data. 
+\tab Dementia is a neurodegenerative disorder that causes cognitive decline and affects more than 50 million people worldwide. Dementia is under-diagnosed by healthcare professionals—only one in four people who suffer from dementia are diagnosed. Even when a diagnosis is made, it may not be entered as a structured diagnosis code in a patient’s charts.  Information relevant to cognitive impairment is often found within electronic health records but manual review of clinician notes by experts is both time consuming and often prone to errors. Automated evaluation of these notes presents an opportunity to label patients with cognitive impairment (CI) in real-world data. In order to identify patients with cognitive impairment, we applied natural language processing (NLP) techniques. Model performance was compared to a baseline model that utilized structured features such as medication and ICD counts. % Add which model had highest performance %  
 \end{abstract}
 
 \begin{keywords}
-EHR, NLP, Demetia
+EHR, NLP, Dementia
 \end{keywords}
 
 \section{Introduction}
-\label{sec:intro}
+\label{sec:intro} The possibility of early diagnosis of dementia is important for improving clinical outcomes and patient management of dementia. Often, diagnosis is given once patient has reached moderate dementia, but irreversible damage has already been done to the brain. 
+% https://www.dementiacarecentral.com/aboutdementia/facts/stages/ %
+Yet, dementia is not formally diagnosed or coded in claims data for over 50\% of older adults living with probable dementia. Tools that can efficiently and effectively analyze medical records for warning signs of dementia and recommend patients for care can be critical to obtaining early diagnosis for dementia. In this project, we aim to use NLP to detect signs of cognitive impairment from unstructured clinician notes in electronic health records (EHR) by using machine and deep learning techniques. 
 
 \section{Related Works}
 \label{sec:RelatedWorks}
@@ -138,7 +109,7 @@ EHR, NLP, Demetia
 \section{Dataset, Preprocessing, and Annotations}
 
 \paragraph{Dataset}
-\label{sec:Dataset} Our gold-standard dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021) and had APOE genotype data available from the BioBank. Each patients' EHR record was then annotated by neurologists using a web-based annotation tool (UI Interface in Appendix A) as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither i.e., sequence has no information on patient’s cognition.
+\label{sec:Dataset} Our gold-standard dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021) and had APOE genotype (biggest genetic risk factor for dementia) data available from the BioBank. Each patients' EHR record was then annotated by neurologists using a web-based annotation tool (UI Interface in Appendix A) as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither i.e., sequence has no information on patient’s cognition.
 
 \paragraph{Preprocessing}
 \label{sec:Preprocessing} For each patient in our gold-standard dataset, we extracted unstructured clinician notes, identified matches to dementia-related keywords (Appendix B), and constructed 800 character sequences from the note text around each of these matches. Our cohort of 16,428 patients had 279,224 sequences in total. 
@@ -186,13 +157,13 @@ We built 4 models and compared performance to the baseline model. It is importan
 
 % Talk about Stats
 % TF-IDF model struggles with understanding context of words around keyword match
+% Future plans include reducing false positives by gathering more annotated sequences and using deep learning natural language. Currently, many of our false positives are from the model identifying the presence of a keyword but struggling to understand the context around the keyword match; many of these contexts negate the presence of CI for the patient in question. Deep Learning can leverage contextual information, making it promising for this task.
 
 We evaluated each model using a prediction threshold to maximize the accuracy and calculated performance metrics based on that threshold. Model performance for each model in shown in Table 2. 
 
 \section{Conclusion and Future Work} 
-\label{sec:ConclusionFutureWork} We applied innovative Machine Learning and Deep Learning NLP techniques to identify patients with CI in EHR. Our work can help combat the issues of underdiagnosis and misdiagnosis for dementia. 
+\label{sec:ConclusionFutureWork} We applied innovative Machine Learning and Deep Learning NLP techniques to identify patients with CI in EHR. Our work can help combat the issues of underdiagnosis and misdiagnosis for dementia. % {More coming soon } %
 
-Future plans include reducing false positives by gathering more annotated sequences and using deep learning natural language. Currently, many of our false positives are from the model identifying the presence of a keyword but struggling to understand the context around the keyword match; many of these contexts negate the presence of CI for the patient in question. Deep Learning can leverage contextual information, making it promising for this task.
 
 \clearpage
 \appendix
