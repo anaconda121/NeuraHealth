@@ -35,7 +35,7 @@
 \newcommand{\equal}[1]{{\hypersetup{linkcolor=black}\thanks{#1}}}
 
 % Customized Tabs
-\newcommand\mytab{\tab \hspace{-5cm}}
+\newcommand\mytab{\hspace{10mm} \hspace{-5cm}}
 
  % Define an unnumbered theorem just for this sample document for
  % illustrative purposes:
@@ -91,7 +91,7 @@ sdas5\}
 \maketitle
 
 \begin{abstract}
-\tab Dementia is a neurodegenerative disorder that causes cognitive decline and affects more than 50 million people worldwide. Dementia is under-diagnosed by healthcare professionals—only one in four people who suffer from dementia are diagnosed. Even when a diagnosis is made, it may not be entered as a structured diagnosis code in a patient’s charts.  Information relevant to cognitive impairment is often found within electronic health records but manual review of clinician notes by experts is both time consuming and often prone to errors. Automated evaluation of these notes presents an opportunity to label patients with cognitive impairment (CI) in real-world data. In order to identify patients with cognitive impairment, we applied natural language processing (NLP) techniques. Model performance was compared to a baseline model that utilized structured features such as medication and ICD counts. % Add which model had highest performance %  
+\hspace{10mm} Dementia is a neurodegenerative disorder that causes cognitive decline and affects more than 50 million people worldwide. Dementia is under-diagnosed by healthcare professionals—only one in four people who suffer from dementia are diagnosed. Even when a diagnosis is made, it may not be entered as a structured diagnosis code in a patient’s charts.  Information relevant to cognitive impairment is often found within electronic health records (EHR) but manual review of clinician notes by experts is both time consuming and often prone to errors. Automated mining of these notes presents an opportunity to label patients with cognitive impairment (CI) in real-world data. In order to identify patients with cognitive impairment, we applied natural language processing (NLP) techniques. Model performance was compared to a baseline model that utilized structured features such as medication and ICD counts. % Add which model had highest performance %  
 \end{abstract}
 
 \begin{keywords}
@@ -99,32 +99,73 @@ EHR, NLP, Dementia
 \end{keywords}
 
 \section{Introduction}
-\label{sec:intro} The possibility of early diagnosis of dementia is important for improving clinical outcomes and patient management of dementia. Often, diagnosis is given once patient has reached moderate dementia, but irreversible damage has already been done to the brain. 
+\label{sec:intro} The possibility of early diagnosis of dementia is important for improving clinical outcomes and patient management of dementia. Often, a diagnosis is given once patient has reached moderate dementia, but irreversible damage has already been done to the brain. 
 % https://www.dementiacarecentral.com/aboutdementia/facts/stages/ %
-Yet, dementia is not formally diagnosed or coded in claims data for over 50\% of older adults living with probable dementia. Tools that can efficiently and effectively analyze medical records for warning signs of dementia and recommend patients for care can be critical to obtaining early diagnosis for dementia. In this project, we aim to use NLP to detect signs of cognitive impairment from unstructured clinician notes in electronic health records (EHR) by using machine and deep learning techniques. 
+Yet, dementia is not formally diagnosed or coded in claims data for over 50\% of older adults living with probable dementia. Tools that can efficiently and effectively analyze medical records for warning signs of dementia and recommend patients for follow up with a specialist can be critical to obtaining early diagnosis for dementia. We aim to use NLP to detect signs of cognitive impairment from unstructured clinician notes by using deep learning techniques. 
 
 \section{Related Works}
 \label{sec:RelatedWorks}
 
 \section{Dataset, Preprocessing, and Annotations}
+\label{sec:Dataset+Preprocessing+Annotations}
 
 \paragraph{Dataset}
 \label{sec:Dataset} Our gold-standard dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021) and had APOE genotype (biggest genetic risk factor for dementia) data available from the BioBank. Each patients' EHR record was then annotated by neurologists using a web-based annotation tool (UI Interface in Appendix A) as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither i.e., sequence has no information on patient’s cognition.
 
 \paragraph{Preprocessing}
-\label{sec:Preprocessing} For each patient in our gold-standard dataset, we extracted unstructured clinician notes, identified matches to dementia-related keywords (Appendix B), and constructed 800 character sequences from the note text around each of these matches. Our cohort of 16,428 patients had 279,224 sequences in total. 
+\label{sec:Preprocessing} For each patient in our gold-standard dataset, we extracted unstructured clinician notes, identified matches to dementia-related keywords (Appendix B), and constructed sequences from the note text around each of these matches (of length 800 characters). Our cohort of 16,428 patients had 279,224 sequences in total. 
 
 \paragraph{Annotations}
-\label{sec:Annotations} We initially assigned 5,000 sequences diversified by keyword matches from 5,000 unique patients for neurologist labeling. As the manual annotation of 279,000+ sequences in not feasible, we devised a scheme to expedite annotations known as "always patterns". An always pattern is defined as a phrase or regex expression that in any context indicates the phrase will be labeled with a particular class (i.e. yes, no, or neither). If an always pattern is inputted, all other sequences have language that matches with the phrase will be automatically labeled accordingly. % {List any other sequence assignment schemes} %
-Currently, 8,656 sequences have been annotated, 8,050 through always patterns and 606 manually. % {Will change} %
+\label{sec:Annotations} We initially assigned 5,000 sequences diversified by keyword matches from 5,000 unique patients for neurologist labeling. As the manual annotation of 279,000+ sequences in not feasible, we devised a scheme to expedite annotations known as "always patterns". An always pattern is defined as a phrase or regex expression that in any context indicates the phrase will be labeled with a particular class (i.e. yes, no, or neither). If an always pattern is inputted, all other sequences have language that matches with the phrase will be automatically labeled accordingly. Currently, 8,656 sequences have been annotated, 8,050 through always patterns and 606 manually. % {Will change} %
 
 The final dataset was split between train (95\%) and holdout test (5\%) sets, stratified across label and proportion of sequences annotated manually and through always patterns. % {Will change} % 
-Validation datasets were split from the train set using techniques described in the Methodology section. Table 2 shows demographics of the cohort of patients.  
+Validation datasets were split from the train set using techniques described in the Methodology section. Table 1 shows demographics of the cohort of patients.  
+
+%% Table 1 - Demographics of Dataset %%
+\begin{table*}[hbtp]
+\centering 
+    {\caption{Demographics of Data}} \\
+    {
+        
+        \begin{tabular}{lccc}
+        \toprule
+        \bfseries Characteristic & \bfseries (N = 16428) \\
+        \midrule
+        
+        \textbf{Age (years) mean (SD)} & \fseries 73.01 (7.96) \\ 
+        
+        \textbf{Gender Male, \emph n (\%)}  & \fseries 8740 (53.2)\\ 
+        
+        \textbf{Race, \emph n (\%)} \\ 
+            \hspace{10mm} White & 14896 (90.7) \\
+            \hspace{10mm} Other/Not Recorded & 608 (3.7) \\
+            \hspace{10mm} Black & 570 (3.5) \\
+            \hspace{10mm} Hispanic & 170 (1.0) \\
+            \hspace{10mm} Asian & 168 (1.0) \\
+            \hspace{10mm} Indigenous & 16 (0.01) \\
+            
+        \textbf{APOE Genotype, \emph n (\%)} \\ 
+            \hspace{10mm} {APOE ${\bm{\varepsilon}}$2 & 2028 (12.3)} \\
+            \hspace{10mm} {APOE ${\bm{\varepsilon}}$3 & 10177 (62.0)} \\
+            \hspace{10mm} {APOE ${\bm{\varepsilon}}$4 & 4223 (25.7)} \\
+            
+        \textbf{Average Speciality Visits (SD)} & 1.67 (4.6) \\ 
+        
+        \textbf{Average PCP Encounters (SD)} &  5.25 (5.63) \\ 
+        
+        % \textbf{Encounters AVG (SD)} & 14.55 (23.2) \\
+                
+        % \textbf{Keyword Matches AVG (SD)} & 26 (54.03) \\
+        
+        \bottomrule
+        \end{tabular}
+    }
+\end{table*}
 
 \section{Methodology}
 \label{sec:Methodology}  
-
-We built 4 models and compared performance to the baseline model. It is important to note that these models were trained on binary labels, despite annotators labeling sequences with 3 classes. This was done because our overall task was to classify if a patient had CI, not whether a sequence indicates CI. This means that a label of neither is not relevant, as a patient can only be classified as having or not having CI. In order to convert this problem to binary labels, we aggregated no and neither labels to class 0 and yes labels to class 1. 
+{We built 4 models and compared performance to the baseline model. It is important to note that these models were trained on binary labels, despite annotators labeling sequences with 3 classes. This was done because our overall task was to classify if a patient had CI, not whether a sequence indicates CI. % phrase better % 
+A label of neither does not pertain  patient can only be classified as having or not having CI. In order to convert this problem to binary labels, we aggregated no and neither labels to class 0 and yes labels to class 1. }
 
 \label{sec:Baseline}  
 \paragraph{(1) Baseline Model} We performed L1 regularized logistic regression where the cognitive concern label was regressed on the counts of medications, keyword counts, and ICD codes relevant to CI. The lambda value was selected through 10-fold Cross Validation (CV) to maximize the average area under the Receiver Operator Characteristic (ROC). % {To be implemented} %
@@ -132,13 +173,35 @@ We built 4 models and compared performance to the baseline model. It is importan
 \label{sec:TFIDF}  
 \paragraph{(2) Logistic Regression with TF-IDF Vectors} We performed TF-IDF (term frequency-inverse document frequency) vectorization on the annotated sequences and selected features based on a term's Pearson correlation coefficient with the outcome. L1 Regularized logistic regression was applied with the annotated cognitive impairment labels. We used different correlation coefficients as thresholds to select features and iterated over different lambda values to determine the optimal lambda value and correlation coefficient threshold. 
 
-\label{sec:Baseline+TFIDF}  
-\paragraph{(3) Model 1 + Model 2} % {TBD} % 
+% \label{sec:Baseline+TFIDF}  
+% \paragraph{(3) Model 1 + Model 2} % {TBD} % 
 
 \label{sec:Transformer}  
-\paragraph{(4) Transformer Based Sequence Classification Language Model} % {To be implemented} %
+\paragraph{(3)Transformer Based Sequence Classification Language Model} % {To be implemented} %
 
-% binary classification model stats - probability threshold of 0.89
+\section{Results}
+\label{sec:Results}  
+% talk abt performance
+% which patients are correctly classified for each model
+% compare conf mat's for each model
+% distribution of CI/not CI labels
+% talk about different patient aggregation scheme
+% address lack of not patient level labels
+% TFIDF might have lot of false positives b/c of use of vocab that doesn't discuss patient, deep learning will be able to use context
+% start with justification to aggregation to patient level
+% sensivity should hopefully improve, deep learning should reduce specificity b/c of use of contextual information
+% discuss if certain patients were predicted differently for all models
+% some ppl will be classified as 0, until deep learning, where it will be hopefully changed to 1
+% group of ppl who get 0 for baseline, prediction of 1 with tf-idf and deep
+% group of ppl who get 1 for tf-idf, 0 for deep learning b/c of high false positive rate, vocab cld be talking abt family member (tf-idf will address underdiagnosis, deep learning will address misdiagnosis better) 
+% tf-idf is easy to "trigger", deep learning will evaulate based on context
+% Talk about Stats
+% TF-IDF model struggles with understanding context of words around keyword match
+% Future plans include reducing false positives by gathering more annotated sequences and using deep learning natural language. Currently, many of our false positives are from the model identifying the presence of a keyword but struggling to understand the context around the keyword match; many of these contexts negate the presence of CI for the patient in question. Deep Learning can leverage contextual information, making it promising for this task.
+
+We evaluated each model using a prediction threshold to maximize the accuracy and calculated performance metrics based on that threshold. Model performance for each model in shown in Table 2. 
+
+% Table 2 - Results
 \begin{table*}[hbtp]
 %   {\caption{TF-IDF Vector Features Correlation}}
   {\begin{tabular}{lccccccc}
@@ -152,18 +215,8 @@ We built 4 models and compared performance to the baseline model. It is importan
  
 \end{table*}
 
-\section{Results}
-\label{sec:Results}  
-
-% Talk about Stats
-% TF-IDF model struggles with understanding context of words around keyword match
-% Future plans include reducing false positives by gathering more annotated sequences and using deep learning natural language. Currently, many of our false positives are from the model identifying the presence of a keyword but struggling to understand the context around the keyword match; many of these contexts negate the presence of CI for the patient in question. Deep Learning can leverage contextual information, making it promising for this task.
-
-We evaluated each model using a prediction threshold to maximize the accuracy and calculated performance metrics based on that threshold. Model performance for each model in shown in Table 2. 
-
 \section{Conclusion and Future Work} 
 \label{sec:ConclusionFutureWork} We applied innovative Machine Learning and Deep Learning NLP techniques to identify patients with CI in EHR. Our work can help combat the issues of underdiagnosis and misdiagnosis for dementia. % {More coming soon } %
-
 
 \clearpage
 \appendix
