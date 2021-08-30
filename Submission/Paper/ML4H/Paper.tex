@@ -3,6 +3,8 @@
  %\documentclass[gray]{jmlr} % test grayscale version
  %\documentclass[tablecaption=bottom]{jmlr}% journal article
  \documentclass[pmlr,twocolumn,10pt]{jmlr} % W&CP article
+ 
+ \let\SUP\textsuperscript
 
 % \usepackage{geometry}
 % \geometry{margins=0.1in,textwidth=7in}
@@ -116,7 +118,7 @@ Yet, dementia is not formally diagnosed or coded in claims data for over 50\% of
 \label{sec:Preprocessing} For each patient in our gold-standard dataset, we extracted unstructured clinician notes, identified matches to dementia-related keywords (Appendix B), and constructed sequences from the note text around each of these matches (of length 800 characters). Our cohort of 16,428 patients had 279,224 sequences in total. 
 
 \paragraph{Annotations}
-\label{sec:Annotations} We initially assigned 5,000 sequences diversified by keyword matches from 5,000 unique patients for neurologist labeling. As the manual annotation of 279,000+ sequences in not feasible, we devised a scheme to expedite annotations known as "always patterns". An always pattern is defined as a phrase or regex expression that in any context indicates the phrase will be labeled with a particular class (i.e. yes, no, or neither). If an always pattern is inputted, all other sequences have language that matches with the phrase will be automatically labeled accordingly. Currently, 8,656 sequences have been annotated, 8,050 through always patterns and 606 manually. % {Will change} %
+\label{sec:Annotations} We initially assigned 5,000 sequences diversified by keyword matches from 5,000 unique patients for neurologist labeling. In order to expedite annotations, we devised a scheme to known as "always patterns". An always pattern is defined as a phrase or regex expression that in any context indicates the phrase will be labeled with a particular class (i.e. yes, no, or neither). If an always pattern is inputted, all other sequences have language that matches with the phrase will be automatically labeled accordingly. Currently, 8,656 sequences have been annotated, 8,050 through always patterns and 606 manually. % {Will change} %
 
 The final dataset was split between train (95\%) and holdout test (5\%) sets, stratified across label and proportion of sequences annotated manually and through always patterns. % {Will change} % 
 Validation datasets were split from the train set using techniques described in the Methodology section. Table 1 shows demographics of the cohort of patients.  
@@ -177,7 +179,7 @@ A label of neither does not pertain  patient can only be classified as having or
 % \paragraph{(3) Model 1 + Model 2} % {TBD} % 
 
 \label{sec:Transformer}  
-\paragraph{(3)Transformer Based Sequence Classification Language Model} % {To be implemented} %
+\paragraph{(3) Transformer Based Sequence Classification Language Model} % {To be implemented} %
 
 \section{Results}
 \label{sec:Results}  
