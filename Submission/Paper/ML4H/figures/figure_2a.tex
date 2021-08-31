@@ -1,0 +1,38 @@
+  
+\documentclass[12pt]{article}
+
+%\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+%\usepackage{enumerate}
+\usepackage{natbib} %comment out if you do not have the package
+\usepackage{url} % not crucial - just used below for the URL 
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+%\pdfminorversion=4
+% NOTE: To produce blinded version, replace "0" with "1" below.
+\newcommand{\blind}{0}
+
+% DON'T change margins - should be 1 inch all around.
+\addtolength{\oddsidemargin}{-.5in}%
+\addtolength{\evensidemargin}{-1in}%
+\addtolength{\textwidth}{1in}%
+\addtolength{\textheight}{1.7in}%
+\addtolength{\topmargin}{-1in}%
+
+
+\begin{document}
+
+\begin{table}[hbtp]
+  {\begin{tabular}{lccc}
+    \toprule 
+    \bfseries  & \bfseries TF-IDF  & \bfseries Transformer \\ 
+    \bfseries Micro F1 &  0.839  & \bfseries __ \\ 
+    \bfseries Macro F1 &  0.814  & \bfseries __ \\ 
+    \bfseries Weighted F1 &  0.843  & \bfseries __ \\ 
+    \bottomrule
+  \end{tabular}}
+  {\caption{F1 Scores for TF-IDF, Transformer}}
+\end{table}
+
+\end{document}
