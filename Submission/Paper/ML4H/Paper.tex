@@ -20,6 +20,8 @@
  % Remove the next line if you don't require it.
 \usepackage{tabto}    
 \usepackage{graphicx}
+\graphicspath{ {images/} }
+
 \usepackage{natbib}
 \usepackage{url}
 
@@ -112,7 +114,9 @@ Yet, dementia is not formally diagnosed or coded in claims data for over 50\% of
 \label{sec:Dataset+Preprocessing+Annotations}
 
 \paragraph{Dataset}
-\label{sec:Dataset} Our gold-standard dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021) and had APOE genotype (biggest genetic risk factor for dementia) data available from the BioBank. Each patients' EHR record was then annotated by neurologists using a web-based annotation tool (UI Interface in Appendix A) as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither i.e., sequence has no information on patient’s cognition.
+\label{sec:Dataset} Our gold-standard dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021) and had APOE genotype (biggest genetic risk factor for dementia) data available from the BioBank. Each patients' EHR record was then annotated by neurologists using a web-based annotation tool (UI Interface in Appendix A) as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither i.e., sequence has no information on patient’s cognition. 
+% link
+Appendix C shows examples of example sequences for all 3 classes. 
 
 \paragraph{Preprocessing}
 \label{sec:Preprocessing} For each patient in our gold-standard dataset, we extracted unstructured clinician notes, identified matches to dementia-related keywords (Appendix B), and constructed sequences from the note text around each of these matches (of length 800 characters). Our cohort of 16,428 patients had 279,224 sequences in total. 
@@ -227,6 +231,8 @@ We evaluated each model using a prediction threshold to maximize the accuracy an
 \section{UI of Annotation Tool}
 Placeholder
 
+\newpage
+
 % Appendix B
 \section{Keywords} % wi
 \begin{table}[hbtp] 
@@ -262,5 +268,14 @@ Placeholder
         \end{tabular}
     }
 \end{table}
+
+\newpage 
+
+% Appendix C
+
+\label{sec:AppendixC}
+\section{Example Sequences} 
+\includegraphics[width = 15cm, height = 5cm]{Figure-1.png}
+\caption{Figure 1: Example Sequences}
 
 \end{document}
