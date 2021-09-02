@@ -170,20 +170,20 @@ Validation datasets were split from the train set using techniques described in 
 
 \section{Methodology}
 \label{sec:Methodology}  
-{We built 4 models and compared performance to the baseline model. It is important to note that these models were trained on binary labels, despite annotators labeling sequences with 3 classes. This was done because our overall task was to classify if a patient had CI, not whether a sequence indicates CI. % phrase better % 
-A label of neither does not pertain  patient can only be classified as having or not having CI. In order to convert this problem to binary labels, we aggregated no and neither labels to class 0 and yes labels to class 1. }
+% {We built 4 models and compared performance to the baseline model. It is important to note that these models were trained on binary labels, despite annotators labeling sequences with 3 classes. This was done because our overall task was to classify if a patient had CI, not whether a sequence indicates CI. % phrase better % 
+% A label of neither does not pertain  patient can only be classified as having or not having CI. In order to convert this problem to binary labels, we aggregated no and neither labels to class 0 and yes labels to class 1. }
 
-\label{sec:Baseline}  
-\paragraph{(1) Baseline Model} We performed L1 regularized logistic regression where the cognitive concern label was regressed on the counts of medications, keyword counts, and ICD codes relevant to CI. The lambda value was selected through 10-fold Cross Validation (CV) to maximize the average area under the Receiver Operator Characteristic (ROC). % {To be implemented} %
+% \label{sec:Baseline}  
+% \paragraph{(1) Baseline Model} We performed L1 regularized logistic regression where the cognitive concern label was regressed on the counts of medications, keyword counts, and ICD codes relevant to CI. The lambda value was selected through 10-fold Cross Validation (CV) to maximize the average area under the Receiver Operator Characteristic (ROC). % {To be implemented} %
 
 \label{sec:TFIDF}  
-\paragraph{(2) Logistic Regression with TF-IDF Vectors} We performed TF-IDF (term frequency-inverse document frequency) vectorization on the annotated sequences and selected features based on a term's Pearson correlation coefficient with the outcome. L1 Regularized logistic regression was applied with the annotated cognitive impairment labels. We used different correlation coefficients as thresholds to select features and iterated over different lambda values to determine the optimal lambda value and correlation coefficient threshold. 
+\paragraph{(1) Logistic Regression with TF-IDF Vectors} We performed TF-IDF (term frequency-inverse document frequency) vectorization on the annotated sequences and selected features based on a term's Pearson correlation coefficient with the outcome. L1 Regularized logistic regression was applied with the annotated cognitive impairment labels. We used different correlation coefficients as thresholds to select features and iterated over different lambda values to determine the optimal lambda value and correlation coefficient threshold. 
 
 % \label{sec:Baseline+TFIDF}  
 % \paragraph{(3) Model 1 + Model 2} % {TBD} % 
 
 \label{sec:Transformer}  
-\paragraph{(3) Transformer Based Sequence Classification Language Model} % {To be implemented} %
+\paragraph{(2) Transformer Based Sequence Classification Language Model} We utilized a pre-trained language model called Clinical-BERT, which was trained on the MIMIC II database containing EHR records from ICU patients. We used the implementation in the Huggingface Transformer and Simpletransformers packages. After text preprocessing, input texts were tokenized with the default tokenizer and converted to embeddings. The model was initialized with pre-trained parameters and later fine-tuned on our labeled training set. Hyperparameters were tuned on the held-out validation set for the cognitive impairment classification task.
 
 \section{Results}
 \label{sec:Results}  
