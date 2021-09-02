@@ -130,18 +130,13 @@ Validation datasets were split from the train set using techniques described in 
 %% Table 1 - Demographics of Dataset %%
 \begin{table*}[hbtp]
 \centering 
-    {\caption{Demographics of Data}} \\
     {
-        
         \begin{tabular}{lccc}
         \toprule
         \bfseries Characteristic & \bfseries (N = 16428) \\
         \midrule
-        
         \textbf{Age (years) mean (SD)} & \fseries 73.01 (7.96) \\ 
-        
         \textbf{Gender Male, \emph n (\%)}  & \fseries 8740 (53.2)\\ 
-        
         \textbf{Race, \emph n (\%)} \\ 
             \hspace{10mm} White & 14896 (90.7) \\
             \hspace{10mm} Other/Not Recorded & 608 (3.7) \\
@@ -149,22 +144,17 @@ Validation datasets were split from the train set using techniques described in 
             \hspace{10mm} Hispanic & 170 (1.0) \\
             \hspace{10mm} Asian & 168 (1.0) \\
             \hspace{10mm} Indigenous & 16 (0.01) \\
-            
         \textbf{APOE Genotype, \emph n (\%)} \\ 
             \hspace{10mm} {APOE ${\bm{\varepsilon}}$2 & 2028 (12.3)} \\
             \hspace{10mm} {APOE ${\bm{\varepsilon}}$3 & 10177 (62.0)} \\
             \hspace{10mm} {APOE ${\bm{\varepsilon}}$4 & 4223 (25.7)} \\
-            
         \textbf{Average Speciality Visits (SD)} & 1.67 (4.6) \\ 
-        
         \textbf{Average PCP Encounters (SD)} &  5.25 (5.63) \\ 
-        
         % \textbf{Encounters AVG (SD)} & 14.55 (23.2) \\
-                
         % \textbf{Keyword Matches AVG (SD)} & 26 (54.03) \\
-        
         \bottomrule
         \end{tabular}
+        {\caption{Demographics of Data}} \\
     }
 \end{table*}
 
@@ -205,7 +195,9 @@ Validation datasets were split from the train set using techniques described in 
 % TF-IDF model struggles with understanding context of words around keyword match
 % Future plans include reducing false positives by gathering more annotated sequences and using deep learning natural language. Currently, many of our false positives are from the model identifying the presence of a keyword but struggling to understand the context around the keyword match; many of these contexts negate the presence of CI for the patient in question. Deep Learning can leverage contextual information, making it promising for this task.
 
-We evaluated each model using a prediction threshold to maximize the accuracy and calculated performance metrics based on that threshold. Model performance for each model in shown in Table 2. 
+We evaluated each model using a prediction threshold to maximize the accuracy and calculated performance metrics based on that threshold. Model performance for each model in shown in Table 2. All performance metrics are based on the sequence level class assignments. % discuss sequence level stats (notes above)% 
+
+In order to obtain a patient level class assignment assignments from the models,  %discuss%
 
 % Table 2 - Results
 \begin{table}[hbtp]
@@ -216,11 +208,11 @@ We evaluated each model using a prediction threshold to maximize the accuracy an
     TF-IDF & 0.95 & 0.84 & 0.83 & 0.92 & 0.84 & 0.814 & 0.843 \\
     \bottomrule
   \end{tabular}}
-  {\caption{F1 Scores for TF-IDF, Transformer}}
+  {\caption{Model Performance}}
 \end{table}
 
 \section{Conclusion and Future Work} 
-\label{sec:ConclusionFutureWork} We applied innovative Machine Learning and Deep Learning NLP techniques to identify patients with CI in EHR. Our work can help combat the issues of underdiagnosis and misdiagnosis for dementia. % {More coming soon } %
+\label{sec:ConclusionFutureWork} We applied innovative Machine Learning and Deep Learning NLP techniques to identify patients with cognitive impairment in EHR. Our work can help combat the issues of underdiagnosis and misdiagnosis for dementia. % {More coming soon } %
 
 \clearpage
 \appendix
