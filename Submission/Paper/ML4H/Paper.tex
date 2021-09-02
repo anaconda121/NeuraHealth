@@ -208,18 +208,16 @@ A label of neither does not pertain  patient can only be classified as having or
 We evaluated each model using a prediction threshold to maximize the accuracy and calculated performance metrics based on that threshold. Model performance for each model in shown in Table 2. 
 
 % Table 2 - Results
-\begin{table*}[hbtp]
-%   {\caption{TF-IDF Vector Features Correlation}}
-  {\begin{tabular}{lccccccc}
+\begin{table}[hbtp]
+  {\begin{tabular}{lcccccccc}
     \toprule 
-    
-    \bfseries Model & \bfseries AUCROC & \bfseries ACC & \bfseries Sensitivity & \bfseries Specificity & \bfseries FP & \bfseries FN & \bfseries Prediction Threshold \\ 
-    Model 2 & 0.94 & 0.90 & 0.73 & 0.94 & __ & __ & 0.89 \\
-    
+    \bfseries Model & \bfseries AUC & \bfseries Accuracy & \bfseries Sensitivity & \bfseries Specificity & \bfseries Micro F1  & \bfseries Macro F1 & \bfseries Weighted F1 \\ 
+    \midrule
+    TF-IDF & 0.95 & 0.84 & 0.83 & 0.92 & 0.84 & 0.814 & 0.843 \\
     \bottomrule
   \end{tabular}}
- 
-\end{table*}
+  {\caption{F1 Scores for TF-IDF, Transformer}}
+\end{table}
 
 \section{Conclusion and Future Work} 
 \label{sec:ConclusionFutureWork} We applied innovative Machine Learning and Deep Learning NLP techniques to identify patients with CI in EHR. Our work can help combat the issues of underdiagnosis and misdiagnosis for dementia. % {More coming soon } %
