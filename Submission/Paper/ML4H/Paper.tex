@@ -140,7 +140,6 @@ Validation datasets were split from the train set using techniques described in 
 \floatconts
 {tab:table1}
 \centering 
-{\caption{Demographics of Data}} \\
     {
         \begin{tabular}{lccc}
         \toprule
@@ -165,7 +164,7 @@ Validation datasets were split from the train set using techniques described in 
         % \textbf{Keyword Matches AVG (SD)} & 26 (54.03) \\
         \bottomrule
         \end{tabular}
-
+        {\caption{Demographics of Data}} \\
     }
 \end{table*}
 
@@ -206,12 +205,12 @@ Validation datasets were split from the train set using techniques described in 
 % TF-IDF model struggles with understanding context of words around keyword match
 % Future plans include reducing false positives by gathering more annotated sequences and using deep learning natural language. Currently, many of our false positives are from the model identifying the presence of a keyword but struggling to understand the context around the keyword match; many of these contexts negate the presence of CI for the patient in question. Deep Learning can leverage contextual information, making it promising for this task.
 
-We evaluated each model using a prediction threshold to maximize the accuracy and calculated performance metrics based on that threshold. Model performance for each model in shown in Table 2. All performance metrics are based on the sequence level class assignments. % discuss sequence level stats (notes above)% 
+We evaluated each model using a prediction threshold to maximize the accuracy and calculated performance metrics based on that threshold. Model performance for each model in shown in \tableref{tab:table2}. All performance metrics are based on the sequence level class assignments. % discuss sequence level stats (notes above)% 
 
 In order to obtain a patient level class assignment assignments from the models,  %discuss%
 
 % Table 2 - Results
-\begin{table}[hbtp]
+\begin{table*}[hbtp]
 \floatconts
 {tab:table2}
   {\begin{tabular}{lcccccccc}
@@ -222,8 +221,45 @@ In order to obtain a patient level class assignment assignments from the models,
     \bottomrule
   \end{tabular}}
   {\caption{Model Performance}}
-\end{table}
+\end{table*}
 
+
+% Table 3 + 4 - Relation of Med/ICD Codes to Model Predictions
+\begin{table*}[hbtp]
+\floatconts
+{tab:table3}
+\centering 
+  {\begin{tabular}{cccccc}
+    \toprule 
+    \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries Med/ICD Code (\%)  \\ 
+    \midrule
+    \bfseries{APOE ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
+    \bfseries{APOE ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
+    \bfseries{APOE ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.18 & \fseries 0.82 & \fseries 0.17  \\
+    
+    \bottomrule
+  \end{tabular}}
+{\caption{Comparison between Other Indicators of Cognitive Impairment and TF-IDF}} \\
+\end{table*}
+
+\begin{table*}[hbtp]
+\floatconts
+{tab:table4}
+\centering 
+    {\begin{tabular}{cccccc}
+    \toprule 
+    \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries Med/ICD Code (\%) \\ 
+    \midrule
+    \bfseries{APOE ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
+    \bfseries{APOE ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
+    \bfseries{APOE ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.18 & \fseries 0.82 & \fseries 0.17  \\
+    
+    \bottomrule
+  \end{tabular}}
+  {\caption{Comparison between Other Indicators of Cognitive Impairment and Clinical-BERT}} \\
+\end{table*}
+
+%% Conclusion + Future Work %%
 \section{Conclusion and Future Work} 
 \label{sec:ConclusionFutureWork} We applied innovative Machine Learning and Deep Learning NLP techniques to identify patients with cognitive impairment in EHR. Our work can help combat the issues of underdiagnosis and misdiagnosis for dementia. % {More coming soon } %
 
@@ -241,9 +277,7 @@ Placeholder
 \begin{table}[hbtp] 
 \floatconts
 {tab:keywords}
-    {\caption{Keywords indicative of Cognitive Impairment}} \\
-    {
-        \begin{tabular}{lccc}
+    {\begin{tabular}{lccc}
         \toprule
         \bfseries Keyword & \bfseries Match Count\\
         \midrule
@@ -268,8 +302,9 @@ Placeholder
         \textbf{Pick's} & \fseries 41 \\ 
         
         \bottomrule
-        \end{tabular}
-    }
+        \end{tabular}}
+        {\caption{Keywords indicative of Cognitive Impairment}} \\
+
 \end{table}
 
 \newpage 
