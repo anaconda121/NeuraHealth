@@ -116,20 +116,31 @@ Yet, dementia is not formally diagnosed or coded in claims data for over 50\% of
 \paragraph{Dataset}
 \label{sec:Dataset} Our gold-standard dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021) and had APOE genotype (biggest genetic risk factor for dementia) data available from the BioBank. Each patients' EHR record was then annotated by neurologists using a web-based annotation tool (UI Interface in Appendix A) as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither i.e., sequence has no information on patient’s cognition. 
 % link
-Appendix C shows examples of example sequences for all 3 classes. 
+\figureref{fig:fig1} shows examples of example sequences for all 3 classes. 
+
+% Figure 1 - Example Sequences
+\begin{figure*}[h!]
+\label{fig:fig1}
+\centering 
+\includegraphics[width = 15cm, height = 5cm]{Figure-1.png}
+\caption{Example Sequences}
+\end{figure*}
 
 \paragraph{Preprocessing}
 \label{sec:Preprocessing} For each patient in our gold-standard dataset, we extracted unstructured clinician notes, identified matches to dementia-related keywords (Appendix B), and constructed sequences from the note text around each of these matches (of length 800 characters). Our cohort of 16,428 patients had 279,224 sequences in total. 
 
 \paragraph{Annotations}
-\label{sec:Annotations} We initially assigned 5,000 sequences diversified by keyword matches from 5,000 unique patients for neurologist labeling. In order to expedite annotations, we devised a scheme to known as "always patterns". An always pattern is defined as a phrase or regex expression that in any context indicates the phrase will be labeled with a particular class (i.e. yes, no, or neither). If an always pattern is inputted, all other sequences have language that matches with the phrase will be automatically labeled accordingly. Currently, 8,656 sequences have been annotated, 8,050 through always patterns and 606 manually. % {Will change} %
+\label{sec:Annotations} We initially assigned 5,000 sequences diversified by keyword matches from 5,000 unique patients for neurologist labeling. In order to expedite annotations, we devised a scheme to known as "always patterns". An always pattern is defined as a phrase or regex expression that in any context indicates the phrase will be labeled with a particular class (i.e. yes, no, or neither). If an always pattern is inputted, all other sequences have language that matches with the phrase will be automatically labeled accordingly.
 
 The final dataset was split between train (95\%) and holdout test (5\%) sets, stratified across label and proportion of sequences annotated manually and through always patterns. % {Will change} % 
-Validation datasets were split from the train set using techniques described in the Methodology section. Table 1 shows demographics of the cohort of patients.  
+Validation datasets were split from the train set using techniques described in the Methodology section. \tableref{tab:table1} shows demographics of the cohort of patients.  
 
 %% Table 1 - Demographics of Dataset %%
 \begin{table*}[hbtp]
+\floatconts
+{tab:table1}
 \centering 
+{\caption{Demographics of Data}} \\
     {
         \begin{tabular}{lccc}
         \toprule
@@ -154,7 +165,7 @@ Validation datasets were split from the train set using techniques described in 
         % \textbf{Keyword Matches AVG (SD)} & 26 (54.03) \\
         \bottomrule
         \end{tabular}
-        {\caption{Demographics of Data}} \\
+
     }
 \end{table*}
 
@@ -201,6 +212,8 @@ In order to obtain a patient level class assignment assignments from the models,
 
 % Table 2 - Results
 \begin{table}[hbtp]
+\floatconts
+{tab:table2}
   {\begin{tabular}{lcccccccc}
     \toprule 
     \bfseries Model & \bfseries AUC & \bfseries Accuracy & \bfseries Sensitivity & \bfseries Specificity & \bfseries Micro F1  & \bfseries Macro F1 & \bfseries Weighted F1 \\ 
@@ -226,8 +239,8 @@ Placeholder
 % Appendix B
 \section{Keywords} % wi
 \begin{table}[hbtp] 
-\floatconts  
-{tab:operatornames}
+\floatconts
+{tab:keywords}
     {\caption{Keywords indicative of Cognitive Impairment}} \\
     {
         \begin{tabular}{lccc}
@@ -263,9 +276,5 @@ Placeholder
 
 % Appendix C
 
-\label{sec:AppendixC}
-\section{Example Sequences} 
-\includegraphics[width = 15cm, height = 5cm]{Figure-1.png}
-\caption{Figure 1: Example Sequences}
 
 \end{document}
