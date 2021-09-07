@@ -21,7 +21,7 @@
 \usepackage{tabto}    
 \usepackage{graphicx}
 \graphicspath{ {images/} }
-
+\usepackage{float}
 \usepackage{natbib}
 \usepackage{url}
 
@@ -104,10 +104,10 @@ EHR, NLP, Dementia
 \section{Introduction}
 \label{sec:intro} The possibility of early diagnosis of dementia is important for improving clinical outcomes and patient management of dementia. Often, a diagnosis is given once patient has reached moderate dementia, but irreversible damage has already been done to the brain. 
 % https://www.dementiacarecentral.com/aboutdementia/facts/stages/ %
-Yet, dementia is not formally diagnosed or coded in claims data for over 50\% of older adults living with probable dementia. Tools that can efficiently and effectively analyze medical records for warning signs of dementia and recommend patients for follow up with a specialist can be critical to obtaining early diagnosis for dementia. We aim to use NLP to detect signs of cognitive impairment from unstructured clinician notes by using deep learning techniques. 
+Yet, dementia is not formally diagnosed or coded in claims data for over 50\% of older adults living with probable dementia. Tools that can efficiently and effectively analyze medical records for warning signs of dementia and recommend patients for follow up with a specialist can be critical to obtaining early diagnosis for dementia. We aim to use NLP to detect signs of cognitive impairment from unstructured clinician notes by using deep learning techniques. An overview of our project can be found in Appendix A. 
 
 \section{Related Works}
-\label{sec:RelatedWorks}
+\label{sec:RelatedWorks} 
 
 \section{Dataset, Preprocessing, and Annotations}
 \label{sec:Dataset+Preprocessing+Annotations}
@@ -121,7 +121,7 @@ Yet, dementia is not formally diagnosed or coded in claims data for over 50\% of
 \begin{figure*}[h!]
 \label{fig:fig1}
 \centering 
-\includegraphics[width = 15cm, height = 5cm]{Figure-1.png}
+\includegraphics[scale = 0.35]{Figure-1.png}
 \caption{Example Sequences}
 \end{figure*}
 
@@ -182,7 +182,7 @@ Validation datasets were split from the train set using techniques described in 
 % \paragraph{(3) Model 1 + Model 2} % {TBD} % 
 
 \label{sec:Transformer}  
-\paragraph{(2) Transformer Based Sequence Classification Language Model} We utilized a pre-trained language model called Clinical-BERT, which was trained on the MIMIC II database containing EHR records from ICU patients. We used the implementation in the Huggingface Transformer and Simpletransformers packages. After text preprocessing, input texts were tokenized with the default tokenizer and converted to embeddings. The model was initialized with pre-trained parameters and later fine-tuned on our labeled training set. Hyperparameters were tuned on the held-out validation set for the cognitive impairment classification task.
+\paragraph{(2) Transformer Based Sequence Classification Language Model} We utilized a pre-trained language model called Clinical-BERT, which was trained on the MIMIC II database containing EHR records from ICU patients. We used the implementation in the Huggingface Transformer and Simpletransformers packages. After text preprocessing, input texts were tokenized with the default tokenizer and converted to embeddings. The model was initialized with pre-trained parameters and later fine-tuned on our labeled training set. Optuna was used to perform a 20-trial study and tune the learning rate, adam epilson, and the number of train epochs on the held-out validation set. 
 
 \section{Results}
 \label{sec:Results}  
@@ -266,16 +266,23 @@ In order to obtain a patient level class assignment assignments from the models,
 \appendix
 
 % Appendix A
-\section{UI of Annotation Tool}
-Placeholder
+% Figure 2 - Overview
+\section{Overview}
+\label{fig:fig2}
+\begin{figure}[h]
+\floatplacement{figure*}[h]
+\centering 
+\includegraphics[scale = 0.14]{Overview.png}
+\caption{Overview}
+\end{figure}
 
-\newpage
+\clearpage
 
 % Appendix B
-\section{Keywords} % wi
+\section{Keywords} 
 \begin{table}[hbtp] 
 \floatconts
-{tab:keywords}
+{app:keywords}
     {\begin{tabular}{lccc}
         \toprule
         \bfseries Keyword & \bfseries Match Count\\
@@ -305,9 +312,30 @@ Placeholder
         {\caption{Keywords indicative of Cognitive Impairment}} \\
 
 \end{table}
-
-\newpage 
+\clearpage
 
 % Appendix C
+\section{Top TF-IDF Word Features}
+\begin{table}[hbtp]
+    {\begin{tabular}{cccc}
+    \toprule 
+    \bfseries Word & \bfseries Corr & \bfseries Word & \bfseries Corr &
+    \midrule
+    
+    \textbf{Intact} & \fseries 0.56 & \textbf{Experiences} & \fseries 0.36 \\
+    \textbf{Oriented} & \fseries 0.43 & \textbf{Associations} & \fseries 0.36 \\ 
+    \textbf{Concentration} & \fseries 0.42 & \textbf{Homicidal} & \fseries 0.36 \\ 
+    \textbf{Orientation} & \fseries 0.41 & \textbf{Observation} & \fseries 0.36 \\
+    \textbf{Sensorium} & \fseries 0.40 & \textbf{Knowledge} & \fseries 0.36 \\ 
+    \textbf{Perceptions} & \fseries 0.40 & \textbf{Abstract} & \fseries 0.36 \\
+    \textbf{Judgement} & \fseries 0.39 & \textbf{Suicidal} & \fseries 0.35 \\
+    \textbf{Fund} & \fseries 0.38 & \textbf{Attention} & \fseries 0.35 \\
+    \textbf{Insight } & \fseries 0.36 & \textbf{Content} & \fseries 0.34 \\ 
+    \textbf{Ideation} & \fseries 0.36 & \textbf{Thought} & \fseries 0.34  \\  
+    
+    \bottomrule
+  \end{tabular}}
+\end{table}
+
 
 \end{document}
