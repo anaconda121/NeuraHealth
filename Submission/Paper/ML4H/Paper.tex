@@ -79,7 +79,7 @@ M. Brandon Westover \SUP{1},
 Sudeshna Das\SUP{1},
 \centering \Email{
 \\[\bigskipamount] 
-\SUP{1}\{ttanish, 
+\SUP{1}\{ttyagi, 
 cmagdamo,
 anoori1,
 ...
@@ -214,32 +214,40 @@ In order to obtain a patient level class assignment assignments from the models,
 {tab:table2}
   {\begin{tabular}{lcccccccc}
     \toprule 
+    % add precision and recall, 
     \bfseries Model & \bfseries AUC & \bfseries Accuracy & \bfseries Sensitivity & \bfseries Specificity & \bfseries Micro F1  & \bfseries Macro F1 & \bfseries Weighted F1 \\ 
     \midrule
-    TF-IDF & 0.95 & 0.84 & 0.83 & 0.92 & 0.84 & 0.814 & 0.843 \\
+    TF-IDF & 0.95 & 0.84 & 0.83 & 0.92 & 0.84 & 0.81 & 0.84 \\
+    ClincialBERT & 0.98 & 0.93 & 0.91 & 0.96 & 0.93 & 0.92 & 0.93 \\
     \bottomrule
   \end{tabular}}
   {\caption{Model Performance}}
 \end{table*}
 
+% \begin{figure*}[h!]
+% \label{fig:fig2}
+% \centering 
+% \includegraphics[scale = 0.75]{tfidf_patient_predictions.png}
+% \caption{Patient Predictions for TF-IDF}
+% \end{figure*}
 
 % Table 3 + 4 - Relation of Med/ICD Codes to Model Predictions
-\begin{table*}[hbtp]
-\floatconts
-{tab:table3}
-\centering 
-  {\begin{tabular}{cccccc}
-    \toprule 
-    \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries Med/ICD Code (\%)  \\ 
-    \midrule
-    \bfseries{APOE ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
-    \bfseries{APOE ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
-    \bfseries{APOE ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.18 & \fseries 0.82 & \fseries 0.17  \\
+% \begin{table*}[hbtp]
+% \floatconts
+% {tab:table3}
+% \centering 
+%   {\begin{tabular}{cccccc}
+%     \toprule 
+%     \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries Med/ICD Code (\%)  \\ 
+%     \midrule
+%     \bfseries{APOE ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
+%     \bfseries{APOE ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
+%     \bfseries{APOE ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.18 & \fseries 0.82 & \fseries 0.17  \\
     
-    \bottomrule
-  \end{tabular}}
-{\caption{Comparison between Other Indicators of Cognitive Impairment and TF-IDF}} \\
-\end{table*}
+%     \bottomrule
+%   \end{tabular}}
+% {\caption{Comparison between Other Indicators of Cognitive Impairment and TF-IDF}} \\
+% \end{table*}
 
 \begin{table*}[hbtp]
 \floatconts
@@ -249,14 +257,21 @@ In order to obtain a patient level class assignment assignments from the models,
     \toprule 
     \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries Med/ICD Code (\%) \\ 
     \midrule
-    \bfseries{APOE ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
-    \bfseries{APOE ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.15 & \fseries 0.85 & \fseries 0.11  \\
-    \bfseries{APOE ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.18 & \fseries 0.82 & \fseries 0.17  \\
+    \bfseries{APOE ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
+    \bfseries{APOE ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
+    \bfseries{APOE ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.21 & \fseries 0.79 & \fseries 0.17  \\
     
     \bottomrule
   \end{tabular}}
   {\caption{Comparison between Other Indicators of Cognitive Impairment and Clinical-BERT}} \\
 \end{table*}
+
+\begin{figure*}[h!]
+\label{fig:fig2}
+\centering 
+\includegraphics[scale = 0.75]{bert_patient_predictions.png}
+\caption{Patient Level Predictions for ClinicalBERT}
+\end{figure*}
 
 %% Conclusion + Future Work %%
 \section{Conclusion and Future Work} 
@@ -270,7 +285,6 @@ In order to obtain a patient level class assignment assignments from the models,
 \section{Overview}
 \label{fig:fig2}
 \begin{figure}[h]
-\floatplacement{figure*}[h]
 \centering 
 \includegraphics[scale = 0.14]{Overview.png}
 \caption{Overview}
@@ -312,7 +326,7 @@ In order to obtain a patient level class assignment assignments from the models,
         {\caption{Keywords indicative of Cognitive Impairment}} \\
 
 \end{table}
-\clearpage
+% \clearpage
 
 % Appendix C
 \section{Top TF-IDF Word Features}
@@ -336,6 +350,7 @@ In order to obtain a patient level class assignment assignments from the models,
     \bottomrule
   \end{tabular}}
 \end{table}
+\clearpage
 
 
 \end{document}
