@@ -204,9 +204,7 @@ Validation datasets were split from the train set using techniques described in 
 % TF-IDF model struggles with understanding context of words around keyword match
 % Future plans include reducing false positives by gathering more annotated sequences and using deep learning natural language. Currently, many of our false positives are from the model identifying the presence of a keyword but struggling to understand the context around the keyword match; many of these contexts negate the presence of CI for the patient in question. Deep Learning can leverage contextual information, making it promising for this task.
 
-We evaluated each model using a prediction threshold to maximize the accuracy and calculated performance metrics based on that threshold. Model performance for each model in shown in \tableref{tab:table2}. All performance metrics are based on the sequence level class assignments. % discuss sequence level stats (notes above)% 
-
-In order to obtain a patient level class assignment assignments from the models,  %discuss%
+We evaulated each model based on sequence level class assignments. Model performance for each model in shown in \tableref{tab:table2}. TF-IDF achieved AUC of 0.95 and accuracy f 0.84. The 20 words with the highest correlation coefficients using TF-IDF word vectorization are shown in Appendix B. While TF-IDF was able to identify the presence of a keyword or always pattern in a sequence, it was unable to leverage the context around each keyword match, which occasionally would negate the presence of CI. This led to the model over-zealously predicting sequences as demonstrating CI. ClincalBERT was able to overcome these issues due to its high complexity transformer architecture, and achieved AUC of 0.98 and accuracy of 0.93.  
 
 % Table 2 - Results
 \begin{table*}[hbtp]
