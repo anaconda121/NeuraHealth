@@ -178,6 +178,7 @@ Validation datasets were split from the train set using techniques described in 
 \begin{table*}[hbtp]
 \floatconts
 {tab:table2}
+{\caption{Model Performance}}
 \centering
   {
   \begin{tabular}{lcccccccc}
@@ -190,7 +191,8 @@ Validation datasets were split from the train set using techniques described in 
     \bottomrule
   \end{tabular}
   }
-  {\caption{Model Performance}} \\
+
+  \label{tab:modelperf}
 \end{table*}
 
 \section{Methodology}
@@ -213,13 +215,14 @@ We developed two NLP models for the classification task and compared them to eac
 
 %  (not necessarily true, it just has the CAPACITY to do this but we haven't proved so Tanish -- How do we go about proving this?)
 
-We evaluated each model based on sequence level class assignments. Model performance for each model in shown in \tableref{tab:table2}. TF-IDF achieved AUC of 0.95 and accuracy of 0.84. The 20 words with the highest correlation coefficients using TF-IDF word vectorization are shown in Appendix \ref{app:app3}. While TF-IDF was able to identify the presence of a keyword or always pattern in a sequence, it was unable to leverage the order of words around each keyword match. The order of words often contained useful information regarding a patient's cognitive status, and on occasion would negate the presence of cognitive impairment. This led to the model over-zealously predict sequences as demonstrating cognitive impairment, resulting in a large count of false positives. ClinicalBERT was able to overcome these issues and leverage the meaning of the contexts due to its high complexity transformer architecture, resulting in an AUC of 0.98 and accuracy of 0.93. In order to generate accurate patient level class assignments, we applied ClinicalBERT to 186,730 sequences from the N = 13,941 unique patients that were not patient of our training/validation/set sets. With these sequence level predictions, we generated patient level class assignments by assigning patients a cognitive impairment label if their number of sequences predicted positive was greater than an empirically tuned threshold. We identified the most optimal threshold (from a range of 1 - 10) by comparing the percentage of patients being predicted as having cognitive impairment stratified by APOE allele to the percentages of patients with cognitive impairment related Meds/ICD codes stratified by APOE allele (MED/ICD code column in Table \ref{tab:bert}). Table \ref{tab:bert} shows the comparison of Med/ICD codes to ClinicalBERT patient level class assignments with a sequence threshold of 2. As shown, ClinicalBERT was able to identify a significant proportion of patients that went undetected by current clinical methods, highlighting the utility of such a tool in a clinical setting. 
+We evaluated each model based on sequence level class assignments. Model performance for each model in shown in Table \ref{tab:modelperf}. TF-IDF achieved AUC of 0.95 and accuracy of 0.84. The 20 words with the highest correlation coefficients using TF-IDF word vectorization are shown in Appendix \ref{app:app3}. While TF-IDF was able to identify the presence of a keyword or always pattern in a sequence, it was unable to leverage the order of words around each keyword match. The order of words often contained useful information regarding a patient's cognitive status, and on occasion would negate the presence of cognitive impairment. This led to the model over-zealously predict sequences as demonstrating cognitive impairment, resulting in a large count of false positives. ClinicalBERT was able to overcome these issues and leverage the meaning of the contexts due to its high complexity transformer architecture, resulting in an AUC of 0.98 and accuracy of 0.93. In order to generate accurate patient level class assignments, we applied ClinicalBERT to 186,730 sequences from the N = 13,941 unique patients that were not patient of our training/validation/set sets. With these sequence level predictions, we generated patient level class assignments by assigning patients a cognitive impairment label if their number of sequences predicted positive was greater than an empirically tuned threshold. We identified the most optimal threshold (from a range of 1 - 10) by comparing the percentage of patients being predicted as having cognitive impairment stratified by APOE allele to the percentages of patients with cognitive impairment related Meds/ICD codes stratified by APOE allele (MED/ICD code column in Table \tableref{tab:bert}). \tableref{tab:bert} shows the comparison of Med/ICD codes to ClinicalBERT patient level class assignments with a sequence threshold of 2. As shown, ClinicalBERT was able to identify a significant proportion of patients that went undetected by current clinical methods, highlighting the utility of such a tool in a clinical setting. 
 
 % \section{Assessment of ClinicalBERT Patient Level Class Assignments} 
 
 \begin{table*}[hbtp]
 \floatconts
-
+{tab:bert}
+{\caption{Comparison between Other Indicators of Cognitive Impairment and ClinicalBERT}}
 \centering 
     {\begin{tabular}{cccccc}
 
@@ -232,8 +235,6 @@ We evaluated each model based on sequence level class assignments. Model perform
     
     \bottomrule
   \end{tabular}}
-  \caption{Comparison between Other Indicators of Cognitive Impairment and ClinicalBERT}
-\label{tab:bert}
 \end{table*}
 
 \begin{figure*}[h!]
