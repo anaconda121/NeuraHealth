@@ -154,6 +154,7 @@ performed phenotyping for diseases such as Attention Deficit Hyperactivity Disor
 \label{sec:Preprocessing} For each patient in our dataset, we extracted unstructured clinician notes, identified matches to 18 dementia-related keywords (Appendix \ref{app:keywords}, including those related to memory, cognition, neuropsychological tests, and dementia diagnoses. We constructed sequences from the note text spanning each of these matches (of length 800 characters). Our cohort of 16,428 patients had 279,224 sequences with dementia-related keywords in total.
 
 \begin{table}[htb]
+{\caption{Demographics of Data}}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lccc}
         \toprule
@@ -228,37 +229,50 @@ We developed two NLP models for the classification task and compared them to eac
 
 We evaluated each model based on sequence level class assignments. Model performance for each model on the held-out test set are shown in Table \ref{tab:modelperf}. To compute each metric, we used the threshold that maximized accuracy. The TF-IDF model achieved an AUC of 0.95 and accuracy of 0.84. The 20 words with the highest correlation coefficients using TF-IDF word vectorization are shown in Appendix \ref{app:app3}. While TF-IDF was able to identify the presence of a keyword or always pattern in a sequence, it was unable to the leverage the context around each keyword match. The context of the keywords and the agents within the sentence often contained useful information regarding a patient's cognitive status. For example, the sentence "Patient is caregiver for wife who has dementia" has the keyword dementia, but does not pertain to the patient's cognitive diagnosis. This led the baseline TF-IDF model to incorrectly predict sequences as evidence of cognitive impairment, resulting in a large count of false positives.
 
+\begin{figure}[htb]
+\caption{UMAP Clustering of ClinicalBert Embeddings}
+\resizebox{\columnwidth}{!}{%
+\label{fig:fig2}
+\centering 
+\includegraphics[width=.75\linewidth]{umap (1).png}
+
+}
+\end{figure}
+
 ClinicalBERT, with its more complex architecture, was able to leverage the context of the keyword matches within the sequences and overcome these issues. Indeed, using a small dataset of manually annotated sequences (n=150) which did not match an always-pattern, the ClinicalBERT embeddings were able to able accurately discriminate between all three classes (see Appendix). The fine-tuned ClinicalBERT model achieved an AUC of 0.98 and substantially improved accuracy to 0.93 (specificity of 0.96, sensitivity of 0.91, micro F1 of 0.93, macro F1 of 0.92, and weighted F1 of 0.93). 
 
 In order to generate patient level class assignments, we applied ClinicalBERT to all 186,730 sequences from the N = 13,941 unique patients that were not patient of our training/validation/set sets. With these sequence level predictions, we generated patient level class assignments by assigning patients a cognitive impairment label if their number of sequences predicted positive was greater than an empirically tuned threshold. We identified the most optimal threshold (from a range of 1 - 10) by comparing the percentage of patients being predicted as having cognitive impairment stratified by APOE allele to the percentages of patients with cognitive impairment related Meds/ICD codes stratified by APOE allele (MED/ICD code column in \tableref{tab:bert}). \tableref{tab:bert} shows the comparison of Med/ICD codes to ClinicalBERT patient level class assignments with a sequence threshold of 2. As shown, ClinicalBERT was able to identify a significant proportion of patients that went undetected by current clinical methods, highlighting the utility of such a tool in a clinical setting. 
 
 % \section{Assessment of ClinicalBERT Patient Level Class Assignments} 
-
-\begin{table*}[hbtp]
-\centering 
-\floatconts
-{tab:bert}
+\begin{table}[htb]
 {\caption{Comparison between Other Indicators of Cognitive Impairment and ClinicalBERT}}
-
-    {\begin{tabular}{cccccc}
+\resizebox{\columnwidth}{!}{%
+{\begin{tabular}{cccccc}
 
     \toprule 
-    \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries Med/ICD Code (\%) \\ 
+    \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries M/I (\%) \\ 
     \midrule
     \bfseries{APOE ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
     \bfseries{APOE ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
     \bfseries{APOE ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.21 & \fseries 0.79 & \fseries 0.17  \\
     
     \bottomrule
-  \end{tabular}}
-\end{table*}
+  \end{tabular}} 
+}
 
-\begin{figure*}[h!]
+\bfseries M/I = Med/ICD Code 
+\end{table}
+
+
+\begin{figure}[htb]
+\caption{Confusion Matrix Patient Level Prediction Counts for ClinicalBERT}
+\resizebox{\columnwidth}{!}{%
 \label{fig:fig2}
 \centering 
 \includegraphics[scale = 0.75]{bert_patient_predictions.png}
-\caption{Confusion Matrix Patient Level Prediction Counts for ClinicalBERT}
-\end{figure*}
+
+}
+\end{figure}
 
 %% Conclusion + Future Work %%
 \section{Conclusion and Future Work} 
