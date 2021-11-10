@@ -137,7 +137,7 @@ sdas5\}
 \maketitle
 
 \begin{abstract}
-\hspace{10mm} Dementia is a neurodegenerative disorder that causes cognitive decline and affects more than 50 million people worldwide. Dementia is under-diagnosed by healthcare professionals — only one in four people who suffer from dementia are diagnosed. Even when a diagnosis is made, it may not be entered as a structured International Classification of Diseases (ICD) diagnosis code in a patient’s charts. Indeed, information relevant to cognitive impairment (CI) is often found within electronic health records (EHR) but manual review of clinician notes by experts is both time consuming and often prone to errors. Automated mining of these notes presents an opportunity to label patients with cognitive impairment in EHR data. We developed natural language processing (NLP) tools to identify patients with cognitive impairment and demonstrate that linguistic context enhances performance for the classification task. We fine-tuned our attention based deep learning model, which can learn from complex language structures, and substantially improved accuracy (0.93) relative to a baseline TF-IDF (term frequency-inverse document frequency) NLP model (0.84). Further, we show that deep learning NLP can successfully identify dementia patients without dementia-related ICD codes or medications.
+\hspace{10mm} Dementia is a neurodegenerative disorder that causes cognitive decline and affects more than 50 million people worldwide. Dementia is underdiagnosed by healthcare professionals — only one in four people who suffer from dementia are diagnosed. Even when a diagnosis is made, it may not be entered as a structured International Classification of Diseases (ICD) diagnosis code in a patient’s charts. Indeed, information relevant to cognitive impairment (CI) is often found within electronic health records (EHR) but manual review of clinician notes by experts is both time consuming and often prone to errors. Automated mining of these notes presents an opportunity to label patients with cognitive impairment in EHR data. We developed natural language processing (NLP) tools to identify patients with cognitive impairment and demonstrate that linguistic context enhances performance for the classification task. We fine-tuned our attention based deep learning model, which can learn from complex language structures, and substantially improved accuracy (0.93) relative to a baseline TF-IDF (term frequency-inverse document frequency) NLP model (0.84). Further, we show that deep learning NLP can successfully identify dementia patients without dementia-related ICD codes or medications.
 \end{abstract}
 
 \begin{keywords}
@@ -145,7 +145,7 @@ EHR, NLP, Dementia
 \end{keywords}
 
 \section{Introduction}
-\label{sec:intro} Dementia is the most common neurodegenerative disease affecting older adults, progressing from mild cognitive impairment (MCI) to mild, moderate, and severe dementia. Dementia is under-diagnosed: dementia is not formally diagnosed or coded in claims data for over 50\% of older adults living with probable dementia. Often, a diagnosis is given once patient has reached moderate dementia, and irreversible damage has already been done to the brain.  
+\label{sec:intro} Dementia is the most common neurodegenerative disease affecting older adults, progressing from mild cognitive impairment (MCI) to mild, moderate, and severe dementia. Dementia is underdiagnosed \citep{AlzheimerAssociation}: dementia is not formally diagnosed or coded in claims data for over 50\% of older adults living with probable dementia. Often, a diagnosis is given once patient has reached moderate dementia, and irreversible damage has already been done to the brain.  
 % https://www.dementiacarecentral.com/aboutdementia/facts/stages/ %
 The early detection of the first signs of cognitive impairment, however, is important for improving clinical outcomes and patient management. Tools that can efficiently and effectively analyze medical records for warning signs of dementia and recommend patients for follow up with a specialist can be critical to obtaining an early diagnosis for dementia. We aim to use NLP to detect signs of cognitive impairment from unstructured clinician notes by using deep learning techniques. Such a tool could also
 be useful in recruiting into clinical trials as well as a
@@ -161,7 +161,7 @@ performed phenotyping for diseases such as Attention Deficit Hyperactivity Disor
 \label{sec:Dataset+Preprocessing+Annotations}
 
 \paragraph{Dataset}
-\label{sec:Dataset} Our dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021), had APOE genotypes—the biggest genetic risk factor for Alzheimer's disease  \citep{mahley2000apolipoprotein}—available from the MGB BioBank, and at least one clinician note with a dementia-related keyword. \tableref{tab:table1} shows demographics of the cohort of patients.   
+\label{sec:Dataset} Our dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare \citep{jpm6010011} (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021), had \textit{APOE} genotypes—the biggest genetic risk factor for Alzheimer's disease  \citep{mahley2000apolipoprotein}—available from the MGB BioBank, and at least one clinician note with a dementia-related keyword. \tableref{tab:table1} shows demographics of the cohort of patients.   
 
 \paragraph{Preprocessing}
 \label{sec:Preprocessing} For each patient in our dataset, we extracted unstructured clinician notes, identified matches to 18 dementia-related keywords (Appendix \ref{app:keywords}, including those related to memory, cognition, neuropsychological tests, and dementia diagnoses. We constructed sequences from the note text spanning each of these matches (of length 800 characters). Our cohort of 16,428 patients had 279,224 sequences with dementia-related keywords in total.
@@ -170,7 +170,7 @@ performed phenotyping for diseases such as Attention Deficit Hyperactivity Disor
 \floatconts
 {tab:table1}
 {\caption{Demographics of Data}}
-\resizebox{\columnwidth}{!}{%
+\resizebox{\columnwidth}{}{%
 \begin{tabular}{lccc}
         \toprule
         \bfseries Characteristic & \bfseries (N = 16428) \\
@@ -184,10 +184,10 @@ performed phenotyping for diseases such as Attention Deficit Hyperactivity Disor
             \hspace{10mm} Hispanic & 170 (1.0) \\
             \hspace{10mm} Asian & 168 (1.0) \\
             \hspace{10mm} Indigenous & 16 (0.01) \\
-        \textbf{APOE Genotype, \emph n (\%)} \\ 
-            \hspace{10mm} {APOE ${\bm{\varepsilon}}$2 & 2028 (12.3)} \\
-            \hspace{10mm} {APOE ${\bm{\varepsilon}}$3 & 10177 (62.0)} \\
-            \hspace{10mm} {APOE ${\bm{\varepsilon}}$4 & 4223 (25.7)} \\
+        \textbf{\textit{APOE} Genotype, \emph n (\%)} \\ 
+            \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$2 & 2028 (12.3)} \\
+            \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$3 & 10177 (62.0)} \\
+            \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$4 & 4223 (25.7)} \\
         \textbf{Average Speciality Visits (SD)} & 1.67 (4.6) \\ 
         \textbf{Average PCP Encounters (SD)} &  5.25 (5.63) \\ 
         % \textbf{Encounters AVG (SD)} & 14.55 (23.2) \\
@@ -198,7 +198,7 @@ performed phenotyping for diseases such as Attention Deficit Hyperactivity Disor
 \end{table}
 
 \paragraph{Annotations}
-\label{sec:Annotations} A subset of sequences was annotated for indication of cognitive impairments. We defined cognitive impairment as evidence of MCI, where one cognitive domain is involved, or dementia, where more than one cognitive domain is involved and activities of daily living are affected. Concern from the family of the patient or the patient was not considered as cognitive impairment. Experts annotated sequences using a web-based annotation tool (Appendix \ref{app:slat}) and labeled them as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither (NTR) i.e., sequence has no information on patient’s cognition. Appendix \ref{app:examples} shows examples of example sequences for all 3 classes.
+\label{sec:Annotations} A subset of sequences was annotated for indication of cognitive impairments. We defined cognitive impairment as evidence of MCI, where one cognitive domain is involved, or dementia, where more than one cognitive domain is involved and activities of daily living are affected. Concern from the family of the patient or the patient was not considered as cognitive impairment. Experts annotated sequences using a web-based annotation tool (Appendix \ref{app:slat}) and labeled them as 1) Yes, i.e., patient has CI; 2) No i.e., Patient does not have CI; and 3) Neither (NTR) i.e., sequence has no information on patient’s cognition. Appendix \ref{app:examples} shows example sequences for all 3 classes.
 
 We assigned 5,000 diverse sequences containing at least one match to every keyword from 5,000 unique patients for labeling. In order to expedite annotations, we utilized an “always pattern" scheme. An always pattern is defined as a phrase or regex expression that in any context indicates the phrase will be labeled with a particular class (i.e. yes, no, or neither). Once an always pattern is defined, all other sequences that match the pattern are automatically labeled with that always pattern's class. For examples of always patterns for all three classes (Yes, No, Neither), see Appendix \ref{app:examples}. 
 
@@ -230,10 +230,10 @@ The final dataset of 8,656 annotated sequences from N = 2,487 unique patients wa
 We developed two NLP models for the classification task and compared them to each other.
 
 \label{sec:TFIDF}  
-\paragraph{(1) Logistic Regression with TF-IDF Vectors} We performed TF-IDF (term frequency-inverse document frequency) vectorization on the annotated sequences and selected features based on a term's Pearson correlation coefficient with the outcome. L1 Regularized logistic regression \citep{tibshirani1996regression} was applied with the annotated cognitive impairment labels. We used 10-fold cross validation to determine the optimal lambda value and correlation coefficient threshold to select features. 
+\paragraph{(1) Logistic Regression with TF-IDF Vectors} We performed TF-IDF (term frequency-inverse document frequency) vectorization on the annotated sequences and selected features based on a term's Pearson correlation coefficient with the cognitive impairment outcome. L1 Regularized logistic regression \citep{tibshirani1996regression} was applied with the annotated cognitive impairment labels. We used 10-fold cross validation to determine the optimal lambda value and correlation coefficient threshold to select features. 
 
 \label{sec:Transformer}  
-\paragraph{(2) Transformer Based Sequence Classification Language Model} We utilized a pre-trained language model called ClinicalBERT \citep{alsentzer2019publicly}, which was trained on the MIMIC II \citep{saeed2011multiparameter} database containing EHR records from ICU patients. We used the implementation in the Huggingface Transformers \citep{Wolf2019HuggingFacesTS} and Simpletransformers \citep{simple2020thilina} packages. After text preprocessing, input texts were tokenized with the default tokenizer and converted to embeddings. The model was initialized with pre-trained parameters and later fine-tuned on our labeled training set. Optuna \citep{akiba2019optuna} was used to perform a 20-trial study and tune the learning rate, adam epilson, and the number of train epochs on the held-out validation set to maximize AUC. An early stopping rule was used to prevent overfitting by ensuring that training stopped if the loss did not change substantially over 3 epochs.
+\paragraph{(2) Transformer Based Sequence Classification Language Model} We utilized a pre-trained language model called ClinicalBERT \citep{alsentzer2019publicly}, which was trained on the MIMIC II \citep{saeed2011multiparameter} database containing EHR records from ICU patients. We used the implementation in the Huggingface Transformers \citep{Wolf2019HuggingFacesTS} and Simpletransformers \citep{simple2020thilina} packages. After text preprocessing, input texts were tokenized with the default tokenizer and converted to embeddings. The model was initialized with pre-trained parameters and later fine-tuned on our labeled training set. Optuna \citep{akiba2019optuna} was used to perform a 20-trial study and tune the learning rate, Adam epilson, and the number of train epochs on the held-out validation set to maximize AUC. An early stopping rule was used to prevent overfitting by ensuring that training stopped if the loss did not change substantially over 3 epochs.
 
 \section{Results}
 \label{sec:Results}  
@@ -248,17 +248,18 @@ We evaluated each model based on sequence level class assignments. Model perform
 \floatconts
 {fig:umap}
 {\caption{UMAP Clustering of ClinicalBert Embeddings}}
+\centering 
 % \label{fig:umap}
 \resizebox{\columnwidth}{!}{%
 % \label{fig:umap}
-\centering 
-\includegraphics[width=.95\linewidth]{UMAP Figure 2 Final.png}
+
+\includegraphics[width=.75\linewidth]{UMAP Figure 2 Final.png}
 }
 \end{figure}
 
 ClinicalBERT, with its more complex architecture, was able to leverage the context of the keyword matches within the sequences and overcome these issues. Indeed, using a small dataset of manually annotated sequences (n=150) which did not match an always-pattern, the ClinicalBERT embeddings were able to able accurately discriminate between all three classes (see Figure \ref{fig:umap}). The fine-tuned ClinicalBERT model achieved an AUC of 0.98 and substantially improved accuracy to 0.93 (specificity of 0.96, sensitivity of 0.91, micro F1 of 0.93, macro F1 of 0.92, and weighted F1 of 0.93). 
 
-In order to generate patient level class assignments, we applied ClinicalBERT to all 186,730 sequences from the N = 13,941 unique patients that were not patient of our training/validation/set sets. With these sequence level predictions, we generated patient level class assignments by assigning patients a cognitive impairment label if their number of sequences predicted positive was greater than an empirically tuned threshold. We identified the most optimal threshold (from a range of 1 - 10) by comparing the percentage of patients being predicted as having cognitive impairment stratified by APOE allele to the percentages of patients with cognitive impairment related Meds/ICD codes stratified by APOE allele (M/I code column in \tableref{tab:bert}). \tableref{tab:bert} shows the comparison of Med/ICD codes to ClinicalBERT patient level class assignments with a sequence threshold of 2. As shown, ClinicalBERT was able to identify a significant proportion of patients that went undetected by current clinical methods, highlighting the utility of such a tool in a clinical setting. 
+In order to generate patient level class assignments, we applied ClinicalBERT to all 186,730 sequences from the N = 13,941 unique patients that were not patient of our training/validation/set sets. With these sequence level predictions, we generated patient level class assignments by assigning patients a cognitive impairment label if their number of sequences predicted positive was greater than an empirically tuned threshold. We identified the most optimal threshold (from a range of 1 - 10) by comparing the percentage of patients being predicted as having cognitive impairment stratified by \textit{APOE} allele to the percentages of patients with cognitive impairment related Meds/ICD codes stratified by \textit{APOE} allele (M/I code column in \tableref{tab:bert}). \tableref{tab:bert} shows the comparison of Med/ICD codes to ClinicalBERT patient level class assignments with a sequence threshold of 2. As shown, ClinicalBERT was able to identify a significant proportion of patients that went undetected by current clinical methods, highlighting the utility of such a tool in a clinical setting. 
 
 % \section{Assessment of ClinicalBERT Patient Level Class Assignments} 
 \begin{table}[htb]
@@ -272,9 +273,9 @@ In order to generate patient level class assignments, we applied ClinicalBERT to
     \toprule 
     \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries M/I (\%) \\ 
     \midrule
-    \bfseries{APOE ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
-    \bfseries{APOE ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
-    \bfseries{APOE ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.21 & \fseries 0.79 & \fseries 0.17  \\
+    \bfseries{\textit{APOE} ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
+    \bfseries{\textit{APOE} ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
+    \bfseries{\textit{APOE} ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.21 & \fseries 0.79 & \fseries 0.17  \\
     
     \bottomrule
   \end{tabular}} 
@@ -289,14 +290,14 @@ In order to generate patient level class assignments, we applied ClinicalBERT to
 \resizebox{\columnwidth}{!}{%
 \label{fig:fig2}
 \centering 
-\includegraphics[scale = 0.95]{Confusion Matrix Figure 3.png}
+\includegraphics[scale=0.5]{Confusion Matrix Figure 3.png}
 
 }
 \end{figure}
 
 %% Conclusion + Future Work %%
 \section{Conclusion and Future Work} 
-\label{sec:ConclusionFutureWork} We applied NLP algorithms to identify patients with cognitive impairment in EHR and compared a baseline TF-IDF model with an attention based deep learning model on performance of sequence level class assignment predictions. Our work can help address the under-diagnosis of dementia and alert primary care physcians to do a formal cognitive evaluation or refer to specialists. Such a tool can be used to generate cohorts for dementia research studies to identify risk and protective factors of dementia as well as recruit patients into observational studies or clinical trials. 
+\label{sec:ConclusionFutureWork} We applied NLP algorithms to identify patients with cognitive impairment in EHR and compared a baseline TF-IDF model with an attention based deep learning model on performance of sequence level class assignment predictions. Our work can help address the underdiagnosis of dementia and alert primary care physcians to do a formal cognitive evaluation or refer to specialists. Such a tool can be used to generate cohorts for dementia research studies to identify risk and protective factors of dementia as well as recruit patients into observational studies or clinical trials. 
 
 The deep learning model's performance was significantly better than the TF-IDF model as it was able to fully leverage the context of sequences. Our work illustrates the need of more complex, expressive language models for the nuanced task of detecting dementia in electronic health records.
 
