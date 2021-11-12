@@ -26,7 +26,6 @@
 \usepackage{natbib}
 \usepackage{url}
 \usepackage{textcomp}
-\usepackage{pdfpages}
 % \usepackage{syntonly}
 % \syntaxonly
 
@@ -299,7 +298,7 @@ In order to generate patient level class assignments, we applied ClinicalBERT to
 \resizebox{\columnwidth}{!}{%
 \label{fig:fig2}
 \centering 
-\includegraphics[scale=0.5]{Confusion Matrix Figure 3.png}
+\includegraphics[scale=0.5]{bert_patient_predictions.png}
 
 }
 \end{figure}
@@ -402,9 +401,9 @@ We used the sequence level class assignments of the deep learning model to gener
 % Appendix E
 \section{Top TF-IDF Word Features} \label{app:app3}
 \begin{table}[hbtp]
-    {\begin{tabular}{cccc}
+    \begin{tabular}{lcccc}
     \toprule 
-    \bfseries Word & \bfseries Corr & \bfseries Word & \bfseries Corr &
+    \bfseries Word & \bfseries Corr & \bfseries Word & \bfseries Corr \\
     \midrule
     
     \bfseries Intact &  0.56 & \bfseries Experiences & 0.36 \\
@@ -419,7 +418,7 @@ We used the sequence level class assignments of the deep learning model to gener
     \bfseries Ideation &  0.36 & \bfseries Thought & 0.34  \\  
     
     \bottomrule
-  \end{tabular}}
+  \end{tabular}
   {\caption{Top 20 TF-IDF Word Features and their Correlation Coefficient}}
 \end{table}
 
