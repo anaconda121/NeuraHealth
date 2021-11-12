@@ -19,11 +19,14 @@
  % (it provides \toprule, \midrule and \bottomrule).
  % Remove the next line if you don't require it.
 \usepackage{tabto}    
+\usepackage{bm}
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 \usepackage{float}
 \usepackage{natbib}
 \usepackage{url}
+% \usepackage{syntonly}
+% \syntaxonly
 
 \usepackage{booktabs}
  % The siunitx package is used by this sample document
@@ -166,34 +169,36 @@ performed phenotyping for diseases such as Attention Deficit Hyperactivity Disor
 \paragraph{Preprocessing}
 \label{sec:Preprocessing} For each patient in our dataset, we extracted unstructured clinician notes, identified matches to 18 dementia-related keywords (Appendix \ref{app:keywords}, including those related to memory, cognition, neuropsychological tests, and dementia diagnoses. We constructed sequences from the note text spanning each of these matches (of length 800 characters). Our cohort of 16,428 patients had 279,224 sequences with dementia-related keywords in total.
 
+
 \begin{table}[htb]
 \floatconts
 {tab:table1}
 {\caption{Demographics of Data}}
-\resizebox{\columnwidth}{}{%
-\begin{tabular}{lccc}
-        \toprule
-        \bfseries Characteristic & \bfseries (N = 16428) \\
-        \midrule
-        \textbf{Age (years) mean (SD)} & \fseries 73.01 (7.96) \\ 
-        \textbf{Gender Male, \emph n (\%)}  & \fseries 8740 (53.2)\\ 
-        \textbf{Race, \emph n (\%)} \\ 
-            \hspace{10mm} White & 14896 (90.7) \\
-            \hspace{10mm} Other/Not Recorded & 608 (3.7) \\
-            \hspace{10mm} Black & 570 (3.5) \\
-            \hspace{10mm} Hispanic & 170 (1.0) \\
-            \hspace{10mm} Asian & 168 (1.0) \\
-            \hspace{10mm} Indigenous & 16 (0.01) \\
-        \textbf{\textit{APOE} Genotype, \emph n (\%)} \\ 
-            \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$2 & 2028 (12.3)} \\
-            \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$3 & 10177 (62.0)} \\
-            \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$4 & 4223 (25.7)} \\
-        \textbf{Average Speciality Visits (SD)} & 1.67 (4.6) \\ 
-        \textbf{Average PCP Encounters (SD)} &  5.25 (5.63) \\ 
-        % \textbf{Encounters AVG (SD)} & 14.55 (23.2) \\
-        % \textbf{Keyword Matches AVG (SD)} & 26 (54.03) \\
-        \bottomrule
-\end{tabular}
+\centering
+\resizebox{\columnwidth}{!}{
+        \begin{tabular}{lccc}
+            \toprule
+            \bfseries Characteristic & \bfseries (N = 16428) \\
+            \midrule
+            \bfseries Age (years) mean (SD) & 73.01 (7.96) \\ 
+            \bfseries Gender Male, \emph n (\%) & 8740 (53.2)\\ 
+            \bfseries Race, \emph n (\%) \\ 
+                \hspace{10mm} White & 14896 (90.7) \\
+                \hspace{10mm} Other/Not Recorded & 608 (3.7) \\
+                \hspace{10mm} Black & 570 (3.5) \\
+                \hspace{10mm} Hispanic & 170 (1.0) \\
+                \hspace{10mm} Asian & 168 (1.0) \\
+                \hspace{10mm} Indigenous & 16 (0.01) \\
+            \bfseries \textit{APOE} Genotype, \emph n (\%) \\ 
+                \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$2 & 2028 (12.3)} \\
+                \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$3 & 10177 (62.0)} \\
+                \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$4 & 4223 (25.7)} \\
+            \bfseries{Average Speciality Visits (SD)} & 1.67 (4.6) \\ 
+            \bfseries{Average PCP Encounters (SD)} &  5.25 (5.63) \\ 
+            % \bfseries{Encounters AVG (SD)} & 14.55 (23.2) \\
+            % \bfseries{Keyword Matches AVG (SD)} & 26 (54.03) \\
+            \bottomrule
+        \end{tabular}
 }
 \end{table}
 
@@ -273,12 +278,14 @@ In order to generate patient level class assignments, we applied ClinicalBERT to
     \toprule 
     \bfseries  & \bfseries Count & \bfseries Yes (\%) & \bfseries No/Ntr (\%)  & \bfseries M/I (\%) \\ 
     \midrule
-    \bfseries{\textit{APOE} ${\bm{\varepsilon}}$2} & \fseries 1754 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
-    \bfseries{\textit{APOE} ${\bm{\varepsilon}}$3} & \fseries 8751 & \fseries 0.17 & \fseries 0.83 & \fseries 0.11  \\
-    \bfseries{\textit{APOE} ${\bm{\varepsilon}}$4} & \fseries 3436 & \fseries 0.21 & \fseries 0.79 & \fseries 0.17  \\
+    \bfseries \textit{APOE} ${\bm{\varepsilon}}$2 & 1754 & 0.17 & 0.83 & 0.11  \\
+    \bfseries \textit{APOE} ${\bm{\varepsilon}}$3 & 8751 & 0.17 & 0.83 & 0.11  \\
+    \bfseries \textit{APOE} ${\bm{\varepsilon}}$4 & 3436 & 0.21 & 0.79 & 0.17  \\
     
     \bottomrule
-  \end{tabular}} 
+  \end{tabular}
+}
+  
 }
 
 \bfseries M/I = Med/ICD Code 
@@ -359,32 +366,33 @@ We used the sequence level class assignments of the deep learning model to gener
 \begin{table}[hbtp] 
 \floatconts
 {app:keywords}
-    {\begin{tabular}{lccc}
+    \begin{tabular}{lccc}
         \toprule
         \bfseries Keyword & \bfseries Match Count\\
         \midrule
         
-        \textbf{Memory} & \fseries 109218 \\ 
-        \textbf{Cognition}  & \fseries 87655 \\ 
-        \textbf{Dementia} & \fseries 51034 \\ 
-        \textbf{Cerebral} & \fseries 45886 \\ 
-        \textbf{Cerebrovascular} & \fseries 36370 \\ 
-        \textbf{Cerebellar} & \fseries 26863 \\
-        \textbf{Cognitive Impairment} & \fseries 20267 \\ 
-        \textbf{Alzheimer} & \fseries 20581 \\ 
-        \textbf{MOCA} & \fseries 9767 \\ 
-        \textbf{Neurocognitive} & \fseries 7711 \\ 
-        \textbf{MCI} & \fseries 3889 \\ 
-        \textbf{Amnesia} & \fseries 3695 \\ 
-        \textbf{AD} & \fseries 2673 \\ 
-        \textbf{Lewy} & \fseries 2561 \\ 
-        \textbf{MMSE} & \fseries 2134 \\ 
-        \textbf{LBD} & \fseries 224 \\ 
-        \textbf{Corticobasal} & \fseries 147 \\ 
-        \textbf{Pick's} & \fseries 41 \\ 
+        \bfseries Memory & 109218 \\ 
+        \bfseries Cognition  & 87655 \\ 
+        \bfseries Dementia & 51034 \\ 
+        \bfseries Cerebral & 45886 \\ 
+        \bfseries Cerebrovascular & 36370 \\ 
+        \bfseries Cerebellar & 26863 \\
+        \bfseries Cognitive Impairment & 20267 \\ 
+        \bfseries Alzheimer & 20581 \\ 
+        \bfseries MOCA & 9767 \\ 
+        \bfseries Neurocognitive & 7711 \\ 
+        \bfseries MCI & 3889 \\ 
+        \bfseries Amnesia & 3695 \\ 
+        \bfseries AD & 2673 \\ 
+        \bfseries Lewy & 2561 \\ 
+        \bfseries MMSE & 2134 \\ 
+        \bfseries LBD & 224 \\ 
+        \bfseries Corticobasal & 147 \\ 
+        \bfseries Pick's & 41 \\ 
         
         \bottomrule
-        \end{tabular}}
+        \end{tabular}
+        
         {\caption{Keywords indicative of Cognitive Impairment}} \\
 \end{table}
 
@@ -396,16 +404,16 @@ We used the sequence level class assignments of the deep learning model to gener
     \bfseries Word & \bfseries Corr & \bfseries Word & \bfseries Corr &
     \midrule
     
-    \textbf{Intact} & \fseries 0.56 & \textbf{Experiences} & \fseries 0.36 \\
-    \textbf{Oriented} & \fseries 0.43 & \textbf{Associations} & \fseries 0.36 \\ 
-    \textbf{Concentration} & \fseries 0.42 & \textbf{Homicidal} & \fseries 0.36 \\ 
-    \textbf{Orientation} & \fseries 0.41 & \textbf{Observation} & \fseries 0.36 \\
-    \textbf{Sensorium} & \fseries 0.40 & \textbf{Knowledge} & \fseries 0.36 \\ 
-    \textbf{Perceptions} & \fseries 0.40 & \textbf{Abstract} & \fseries 0.36 \\
-    \textbf{Judgement} & \fseries 0.39 & \textbf{Suicidal} & \fseries 0.35 \\
-    \textbf{Fund} & \fseries 0.38 & \textbf{Attention} & \fseries 0.35 \\
-    \textbf{Insight } & \fseries 0.36 & \textbf{Content} & \fseries 0.34 \\ 
-    \textbf{Ideation} & \fseries 0.36 & \textbf{Thought} & \fseries 0.34  \\  
+    \bfseries{Intact} & \fseries 0.56 & \bfseries{Experiences} & \fseries 0.36 \\
+    \bfseries{Oriented} & \fseries 0.43 & \bfseries{Associations} & \fseries 0.36 \\ 
+    \bfseries{Concentration} & \fseries 0.42 & \bfseries{Homicidal} & \fseries 0.36 \\ 
+    \bfseries{Orientation} & \fseries 0.41 & \bfseries{Observation} & \fseries 0.36 \\
+    \bfseries{Sensorium} & \fseries 0.40 & \bfseries{Knowledge} & \fseries 0.36 \\ 
+    \bfseries{Perceptions} & \fseries 0.40 & \bfseries{Abstract} & \fseries 0.36 \\
+    \bfseries{Judgement} & \fseries 0.39 & \bfseries{Suicidal} & \fseries 0.35 \\
+    \bfseries{Fund} & \fseries 0.38 & \bfseries{Attention} & \fseries 0.35 \\
+    \bfseries{Insight } & \fseries 0.36 & \bfseries{Content} & \fseries 0.34 \\ 
+    \bfseries{Ideation} & \fseries 0.36 & \bfseries{Thought} & \fseries 0.34  \\  
     
     \bottomrule
   \end{tabular}}
