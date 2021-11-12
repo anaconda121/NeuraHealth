@@ -25,6 +25,8 @@
 \usepackage{float}
 \usepackage{natbib}
 \usepackage{url}
+\usepackage{textcomp}
+\usepackage{pdfpages}
 % \usepackage{syntonly}
 % \syntaxonly
 
@@ -190,9 +192,9 @@ performed phenotyping for diseases such as Attention Deficit Hyperactivity Disor
                 \hspace{10mm} Asian & 168 (1.0) \\
                 \hspace{10mm} Indigenous & 16 (0.01) \\
             \bfseries \textit{APOE} Genotype, \emph n (\%) \\ 
-                \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$2 & 2028 (12.3)} \\
-                \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$3 & 10177 (62.0)} \\
-                \hspace{10mm} {\textit{APOE} ${\bm{\varepsilon}}$4 & 4223 (25.7)} \\
+                \hspace{10mm} \textit{APOE} ${\bm{\varepsilon}}$2 & 2028 (12.3) \\
+                \hspace{10mm} \textit{APOE} ${\bm{\varepsilon}}$3 & 10177 (62.0) \\
+                \hspace{10mm} \textit{APOE} ${\bm{\varepsilon}}$4 & 4223 (25.7) \\
             \bfseries Average Speciality Visits (SD) & 1.67 (4.6) \\ 
             \bfseries Average PCP Encounters (SD) &  5.25 (5.63) \\ 
             % \bfseriesEncounters AVG (SD)} & 14.55 (23.2) \\
@@ -366,13 +368,15 @@ We used the sequence level class assignments of the deep learning model to gener
 \begin{table}[hbtp] 
 \floatconts
 {app:keywords}
-    \begin{tabular}{lccc}
+{\caption{Keywords indicative of Cognitive Impairment}}
+\centering
+    \begin{tabular}{lcc}
         \toprule
-        \bfseries Keyword & \bfseries Match Count\\
+        \bfseries Keyword & \bfseries Match Count \\
         \midrule
         
         \bfseries Memory & 109218 \\ 
-        \bfseries Cognition  & 87655 \\ 
+        \bfseries Cognition & 87655 \\ 
         \bfseries Dementia & 51034 \\ 
         \bfseries Cerebral & 45886 \\ 
         \bfseries Cerebrovascular & 36370 \\ 
@@ -388,12 +392,11 @@ We used the sequence level class assignments of the deep learning model to gener
         \bfseries MMSE & 2134 \\ 
         \bfseries LBD & 224 \\ 
         \bfseries Corticobasal & 147 \\ 
-        \bfseries Pick's & 41 \\ 
+        \bfseries Picks & 41 \\ 
         
         \bottomrule
         \end{tabular}
         
-        {\caption{Keywords indicative of Cognitive Impairment}} \\
 \end{table}
 
 % Appendix E
