@@ -2,6 +2,7 @@
  % proceedings
  %\documentclass[gray]{jmlr} % test grayscale version
  %\documentclass[tablecaption=bottom]{jmlr}% journal article
+ %\pdfoutput=1
  \documentclass[pmlr,twocolumn,10pt]{jmlr} % W&CP article
  
  \let\SUP\textsuperscript
@@ -133,7 +134,8 @@ mwestover,
 sdas5\}
 @mgh.harvard.edu}
 \centering
-\begin{center}\addr Massachusetts General Hospital, Boston, MA\end{center}
+\begin{center}\addr Massachusetts General Hospital and McCance Center for Brain Health, Boston, MA 
+\end{center}
 }
 
 \begin{document}
@@ -165,7 +167,7 @@ performed phenotyping for diseases such as Attention Deficit Hyperactivity Disor
 \label{sec:Dataset+Preprocessing+Annotations}
 
 \paragraph{Dataset}
-\label{sec:Dataset} Our dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare \citep{jpm6010011} (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021), had \textit{APOE} genotypes—the biggest genetic risk factor for Alzheimer's disease  \citep{mahley2000apolipoprotein}—available from the MGB BioBank, and at least one clinician note with a dementia-related keyword. \tableref{tab:table1} shows demographics of the cohort of patients.   
+\label{sec:Dataset} Our dataset consisted of a cohort (N = 16,428) of patients from the Mass General Brigham (MGB) HealthCare  (formerly Partner's Healthcare, comprising two major academic hospitals, community hospitals, and community health centers in the Boston area) system who were older than 60 years (as of July 13, 2021), had \textit{APOE} genotypes—the biggest genetic risk factor for Alzheimer's disease  \citep{mahley2000apolipoprotein}—available from the MGB BioBank, and at least one clinician note with a dementia-related keyword. \tableref{tab:table1} shows demographics of the cohort of patients.   
 
 \paragraph{Preprocessing}
 \label{sec:Preprocessing} For each patient in our dataset, we extracted unstructured clinician notes, identified matches to 18 dementia-related keywords (Appendix \ref{app:keywords}, including those related to memory, cognition, neuropsychological tests, and dementia diagnoses. We constructed sequences from the note text spanning each of these matches (of length 800 characters). Our cohort of 16,428 patients had 279,224 sequences with dementia-related keywords in total.
@@ -239,7 +241,7 @@ We developed two NLP models for the classification task and compared them to eac
 \paragraph{(1) Logistic Regression with TF-IDF Vectors} We performed TF-IDF (term frequency-inverse document frequency) vectorization on the annotated sequences and selected features based on a term's Pearson correlation coefficient with the cognitive impairment outcome. L1 Regularized logistic regression \citep{tibshirani1996regression} was applied with the annotated cognitive impairment labels. We used 10-fold cross validation to determine the optimal lambda value and correlation coefficient threshold to select features. 
 
 \label{sec:Transformer}  
-\paragraph{(2) Transformer Based Sequence Classification Language Model} We utilized a pre-trained language model called ClinicalBERT \citep{alsentzer2019publicly}, which was trained on the MIMIC II \citep{saeed2011multiparameter} database containing EHR records from ICU patients. We used the implementation in the Huggingface Transformers \citep{Wolf2019HuggingFacesTS} and Simpletransformers \citep{simple2020thilina} packages. After text preprocessing, input texts were tokenized with the default tokenizer and converted to embeddings. The model was initialized with pre-trained parameters and later fine-tuned on our labeled training set. Optuna \citep{akiba2019optuna} was used to perform a 20-trial study and tune the learning rate, Adam epilson, and the number of train epochs on the held-out validation set to maximize AUC. An early stopping rule was used to prevent overfitting by ensuring that training stopped if the loss did not change substantially over 3 epochs.
+\paragraph{(2) Transformer Based Sequence Classification Language Model} We utilized a pre-trained language model called ClinicalBERT \citep{alsentzer-etal-2019-publicly}, which was trained on the MIMIC II \citep{saeed2011multiparameter} database containing EHR records from ICU patients. We used the implementation in the Huggingface Transformers \citep{Wolf2019HuggingFacesTS} and Simpletransformers \citep{simple2020thilina} packages. After text preprocessing, input texts were tokenized with the default tokenizer and converted to embeddings. The model was initialized with pre-trained parameters and later fine-tuned on our labeled training set. Optuna \citep{akiba2019optuna} was used to perform a 20-trial study and tune the learning rate, Adam epilson, and the number of train epochs on the held-out validation set to maximize AUC. An early stopping rule was used to prevent overfitting by ensuring that training stopped if the loss did not change substantially over 3 epochs.
 
 \section{Results}
 \label{sec:Results}  
@@ -298,7 +300,7 @@ In order to generate patient level class assignments, we applied ClinicalBERT to
 \resizebox{\columnwidth}{!}{%
 \label{fig:fig2}
 \centering 
-\includegraphics[scale=0.5]{bert_patient_predictions.png}
+\includegraphics[scale=0.5]{Confusion_Matrix.png}
 
 }
 \end{figure}
