@@ -27,6 +27,8 @@ Modeling/Storage/Model/
 *.gz
 *.ppt
 Submission/HSRC/HSRC Application 2021_files/
+*.pt
+*.bin
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
