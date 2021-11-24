@@ -1,2 +1,0 @@
-| Patient Id      | Content | Label        | 
-| :---            |   :----:|         ---: |     
