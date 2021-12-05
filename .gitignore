@@ -22,9 +22,11 @@
 *.pt
 *.bin
 
-#project-specific files and directories
+# project-specific files and directories
 Submission/HSRC/HSRC Application 2021_files/
 TF-IDF Analysis.ipynb
+Modeling-Data/
+Documentation/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

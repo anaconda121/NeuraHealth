@@ -1,0 +1,127 @@
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Akiba et~al.(2019)Akiba, Sano, Yanase, Ohta, and
+  Koyama]{akiba2019optuna}
+Takuya Akiba, Shotaro Sano, Toshihiko Yanase, Takeru Ohta, and Masanori Koyama.
+\newblock Optuna: A next-generation hyperparameter optimization framework.
+\newblock In \emph{Proceedings of the 25th ACM SIGKDD international conference
+  on knowledge discovery \& data mining}, pages 2623--2631, 2019.
+
+\bibitem[Alsentzer et~al.(2019)Alsentzer, Murphy, Boag, Weng, Jindi, Naumann,
+  and McDermott]{alsentzer-etal-2019-publicly}
+Emily Alsentzer, John Murphy, William Boag, Wei-Hung Weng, Di~Jindi, Tristan
+  Naumann, and Matthew McDermott.
+\newblock Publicly available clinical {BERT} embeddings.
+\newblock In \emph{Proceedings of the 2nd Clinical Natural Language Processing
+  Workshop}, pages 72--78, Minneapolis, Minnesota, USA, June 2019. Association
+  for Computational Linguistics.
+\newblock \doi{10.18653/v1/W19-1909}.
+\newblock URL \url{https://aclanthology.org/W19-1909}.
+
+\bibitem[AlzheimerAssociation(2021)]{AlzheimerAssociation}
+AlzheimerAssociation.
+\newblock 2021 alzheimer’s disease facts and figures.
+\newblock 2021.
+
+\bibitem[Devlin et~al.(2018)Devlin, Chang, Lee, and Toutanova]{devlin2018bert}
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock \emph{arXiv preprint arXiv:1810.04805}, 2018.
+
+\bibitem[Glicksberg et~al.(2018)Glicksberg, Miotto, Johnson, Shameer, Li, Chen,
+  and Dudley]{glicksberg2018automated}
+Benjamin~S Glicksberg, Riccardo Miotto, Kipp~W Johnson, Khader Shameer, Li~Li,
+  Rong Chen, and Joel~T Dudley.
+\newblock Automated disease cohort selection using word embeddings from
+  electronic health records.
+\newblock In \emph{PACIFIC SYMPOSIUM ON BIOCOMPUTING 2018: Proceedings of the
+  Pacific Symposium}, pages 145--156. World Scientific, 2018.
+
+\bibitem[Mahley and Rall~Jr(2000)]{mahley2000apolipoprotein}
+Robert~W Mahley and Stanley~C Rall~Jr.
+\newblock Apolipoprotein e: far more than a lipid transport protein.
+\newblock \emph{Annual review of genomics and human genetics}, 1\penalty0
+  (1):\penalty0 507--537, 2000.
+
+\bibitem[McInnes et~al.(2018)McInnes, Healy, and Melville]{mcinnes2018umap}
+Leland McInnes, John Healy, and James Melville.
+\newblock Umap: Uniform manifold approximation and projection for dimension
+  reduction.
+\newblock \emph{arXiv preprint arXiv:1802.03426}, 2018.
+
+\bibitem[Mikolov et~al.(2013)Mikolov, Sutskever, Chen, Corrado, and
+  Dean]{mikolov2013distributed}
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg~S Corrado, and Jeff Dean.
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  3111--3119, 2013.
+
+\bibitem[Pennington et~al.(2014)Pennington, Socher, and
+  Manning]{pennington2014glove}
+Jeffrey Pennington, Richard Socher, and Christopher~D Manning.
+\newblock Glove: Global vectors for word representation.
+\newblock In \emph{Proceedings of the 2014 conference on empirical methods in
+  natural language processing (EMNLP)}, pages 1532--1543, 2014.
+
+\bibitem[Peters et~al.(2018)Peters, Neumann, Iyyer, Gardner, Clark, Lee, and
+  Zettlemoyer]{peters2018deep}
+Matthew~E Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark,
+  Kenton Lee, and Luke Zettlemoyer.
+\newblock Deep contextualized word representations.
+\newblock \emph{arXiv preprint arXiv:1802.05365}, 2018.
+
+\bibitem[Rajapakse(2020)]{simple2020thilina}
+Thilina Rajapakse.
+\newblock Simple transformers, 2020.
+\newblock URL \url{https://simpletransformers.ai/}.
+
+\bibitem[Rajkomar et~al.(2018)Rajkomar, Oren, Chen, Dai, Hajaj, Hardt, Liu,
+  Liu, Marcus, Sun, et~al.]{rajkomar2018scalable}
+Alvin Rajkomar, Eyal Oren, Kai Chen, Andrew~M Dai, Nissan Hajaj, Michaela
+  Hardt, Peter~J Liu, Xiaobing Liu, Jake Marcus, Mimi Sun, et~al.
+\newblock Scalable and accurate deep learning with electronic health records.
+\newblock \emph{NPJ Digital Medicine}, 1\penalty0 (1):\penalty0 1--10, 2018.
+
+\bibitem[Saeed et~al.(2011)Saeed, Villarroel, Reisner, Clifford, Lehman, Moody,
+  Heldt, Kyaw, Moody, and Mark]{saeed2011multiparameter}
+Mohammed Saeed, Mauricio Villarroel, Andrew~T Reisner, Gari Clifford, Li-Wei
+  Lehman, George Moody, Thomas Heldt, Tin~H Kyaw, Benjamin Moody, and Roger~G
+  Mark.
+\newblock Multiparameter intelligent monitoring in intensive care ii
+  (mimic-ii): a public-access intensive care unit database.
+\newblock \emph{Critical care medicine}, 39\penalty0 (5):\penalty0 952, 2011.
+
+\bibitem[Tibshirani(1996)]{tibshirani1996regression}
+Robert Tibshirani.
+\newblock Regression shrinkage and selection via the lasso.
+\newblock \emph{Journal of the Royal Statistical Society: Series B
+  (Methodological)}, 58\penalty0 (1):\penalty0 267--288, 1996.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez,
+  Kaiser, and Polosukhin]{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, {\L}ukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  5998--6008, 2017.
+
+\bibitem[Wolf et~al.(2019)Wolf, Debut, Sanh, Chaumond, Delangue, Moi, Cistac,
+  Rault, Louf, Funtowicz, Davison, Shleifer, von Platen, Ma, Jernite, Plu, Xu,
+  Scao, Gugger, Drame, Lhoest, and Rush]{Wolf2019HuggingFacesTS}
+Thomas Wolf, Lysandre Debut, Victor Sanh, Julien Chaumond, Clement Delangue,
+  Anthony Moi, Pierric Cistac, Tim Rault, Rémi Louf, Morgan Funtowicz, Joe
+  Davison, Sam Shleifer, Patrick von Platen, Clara Ma, Yacine Jernite, Julien
+  Plu, Canwen Xu, Teven~Le Scao, Sylvain Gugger, Mariama Drame, Quentin Lhoest,
+  and Alexander~M. Rush.
+\newblock Huggingface's transformers: State-of-the-art natural language
+  processing.
+\newblock \emph{ArXiv}, abs/1910.03771, 2019.
+
+\end{thebibliography}
