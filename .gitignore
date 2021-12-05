@@ -1,4 +1,4 @@
-# project-specific
+# project-specific file types
 *.csv
 *.png
 *.pdf
@@ -11,23 +11,20 @@
 *.sqlite3
 *.sqlite3-journal
 *.pptx
-Data_Upload/
-Preparation/
 *.tmp
 *.docx
-UMAP Test.ipynb
-Mia_*.ipynb 
 *.toc
 *.aux
 *.pkl
-Example-Code/
 *.sav
-Modeling/Storage/Model/
 *.gz
 *.ppt
-Submission/HSRC/HSRC Application 2021_files/
 *.pt
 *.bin
+
+#project-specific files and directories
+Submission/HSRC/HSRC Application 2021_files/
+TF-IDF Analysis.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
