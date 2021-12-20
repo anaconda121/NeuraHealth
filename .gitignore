@@ -1,11 +1,11 @@
 # project-specific file types
 *.csv
-*.png
-*.pdf
+#*.png
+#*.pdf
 *.txt
-*.jpeg
-*.jpg
-*.svg
+#*.jpeg
+#*.jpg
+#*.svg
 *.p
 *.csv
 *.sqlite3
@@ -27,6 +27,10 @@ Submission/HSRC/HSRC Application 2021_files/
 TF-IDF Analysis.ipynb
 Modeling-Data/
 Documentation/
+HSRC/
+Submission/ML4H Paper/Figures
+Submission/Model ISEF Papers
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
