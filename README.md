@@ -25,4 +25,6 @@ With 55 million dementia patients worldwide and growing rapidly at the rate of o
 	* ```ML4H-Paper/```  -  Houses all files used in the preparation of my [accepted Extended Abstract paper subsmission](https://arxiv.org/abs/2111.09115) (30 accepted out of over 500 submissions) for the [ML4H Conference](https://ml4health.github.io/2021/papers.html) 
 	* ```ML4H-Presentation/```  - Houses all files used in the preparation of my poster  presentation for the [ML4H Conference](https://ml4health.github.io/2021/papers.html) on December 5th, 2021 
 
+Each folder will also contain a ```README.md``` file that goes into further detail regarding its contents. 
+
 **Note**: All folders named "Old" house code that was created during previous iterations of the project. All files in these folders are not relevant to the material discussed in the paper and do not need to be examined. Thank you!
