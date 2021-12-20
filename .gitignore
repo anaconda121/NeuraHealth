@@ -10,7 +10,7 @@
 *.csv
 *.sqlite3
 *.sqlite3-journal
-*.pptx
+#*.pptx
 *.tmp
 *.docx
 *.toc
@@ -30,6 +30,7 @@ Documentation/
 HSRC/
 Submission/ML4H Paper/Figures
 Submission/Model ISEF Papers
+Submission/Martinos-Symposium
 
 
 # Byte-compiled / optimized / DLL files
