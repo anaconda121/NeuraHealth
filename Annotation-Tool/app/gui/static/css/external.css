@@ -1,0 +1,266 @@
+/* CSS FROM BOOTSTRAP */
+
+span.note-keyword {
+  /* padding: 0.2em; */
+  background-color:#FFF870;
+  border-radius: 5px;
+}
+
+span.keyword {
+    /* padding: 0.2em; */
+    background-color: #FFF870;
+    border-radius: 5px;
+}
+
+span.note-adl {
+  /* padding: 0.2em; */
+  background-color: #85FAFE;
+  border-radius: 5px;
+}
+
+span.adl {
+    /* padding: 0.2em; */
+    background-color: #85FAFE;
+    border-radius: 5px;
+}
+
+span.redact {
+  background-color: #DDDDDD;
+  color: #DDDDDD;
+  border-radius: 5px;
+}
+
+/* CSS FOR ALERT MESSAGES FROM BOOTSTRAP */
+
+.alert {
+    position: absolute;
+    padding: 0.5rem 0.5rem;
+    /* margin-top: 2rem;
+    margin-left: 2rem;
+    width: 30%; */
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    display: inline-block;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    opacity: 1;
+    transition: opacity 0.6s;
+  }
+  
+  .alert-dismissible {
+    padding-right: 3rem;
+  }
+  
+  .alert-dismissible .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: 1.25rem 1.25rem;
+  }
+  
+  .alert-primary {
+    color: #084298;
+    background-color: #cfe2ff;
+    border-color: #b6d4fe;
+  }
+  
+  .alert-secondary {
+    color: #41464b;
+    background-color: #e2e3e5;
+    border-color: #d3d6d8;
+  }
+  
+  .alert-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+  }
+  
+  .alert-info {
+    color: #055160;
+    background-color: #cff4fc;
+    border-color: #b6effb;
+  }
+  
+  .alert-warning {
+    color: #664d03;
+    background-color: #fff3cd;
+    border-color: #ffecb5;
+  }
+  
+  .alert-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+  }
+  
+  .alert-light {
+    color: #636464;
+    background-color: #fefefe;
+    border-color: #fdfdfe;
+  }
+  
+  .alert-dark {
+    color: #141619;
+    background-color: #d3d3d4;
+    border-color: #bcbebf;
+  }
+
+
+  
+  .btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    color: #000;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    border: 0;
+    border-radius: 0.25rem;
+    opacity: 0.5;
+  }
+  
+  .btn-close:hover {
+    color: #000;
+    text-decoration: none;
+    opacity: 0.75;
+  }
+  
+  /* .btn-close:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    opacity: 1;
+  } */
+  
+  /* .btn-close:disabled, .btn-close.disabled {
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    opacity: 0.25;
+  } */
+
+
+/* from https://code-boxx.com/simple-pure-css-timeline/ */
+
+.timeline {
+  max-height: 1000px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+/* [CONTAINER] */
+.vtl {
+  /* Relative is necessary to properly position the child elements within */
+  position: relative;
+  /* More space for the vertical line to the left */
+  padding: 10px 10px 10px 50px;
+}
+
+/* [VERTICAL LINE] */
+.vtl::before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  background-color: #78698C;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+}
+
+/* [EVENT WRAPPER] */
+div.ewrap {
+  padding: 10px 0;
+  position: relative;
+  width: 100%;
+}
+
+/* [EVENT ITSELF] */
+div.event {
+  padding: 20px 30px;
+  /* background-color: #d1e7dd; */
+  position: relative;
+  border-radius: 6px;
+}
+
+/* [THE DATE & TEXT] */
+strong.date {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+p.text {
+  margin: 0;
+}
+
+a.timeline {
+  color: #3B3C40;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.timeline:hover {
+  color: #3B3C40;
+}
+
+/* [ADD SPEECH BUBBLE TRIANGLE] */
+div.ewrap::before {
+  content: '';
+  border: 10px solid transparent;
+  /* border-right-color: #d1e7dd; */
+  border-right-color: var(--my-color-var);
+  border-left: 0;
+  position: absolute;
+  top: 20%;
+  left: -10px;
+}
+
+/* [ADD CIRCLE ON VERTICAL LINE] */
+div.ewrap::after {
+  content: '';
+  background: #fff;
+  border: 4px solid #78698C;
+  width: 16px;
+  height: 16px;
+  border-radius: 20px;
+  position: absolute;
+  top: 20%;
+  left: -44px;
+}
+
+
+/* TIMELINE TABULATION
+.tab-pane { 
+  display: none;
+}
+
+.tab-pane.active { 
+  display: block; 
+}
+
+.nav {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.nav li {
+  display: inline-flex;
+  border: 2px solid #78698C;
+  margin: 2px;
+}
+
+.nav li a{
+  background-color: white;
+  text-decoration: none;
+  padding: 10px;
+  transition: all .3s ease-in-out;
+  border-bottom: 1px solid transparent;
+}
+
+.nav li.active::after {
+  content: "";
+} */

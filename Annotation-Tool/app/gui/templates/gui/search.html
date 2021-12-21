@@ -1,0 +1,107 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load notes_filter %}
+
+{% block content %}
+
+<div class="seven columns card">
+
+    <div class="bg-white">
+        <div class="padding-top-bot">
+            <h4>Search Dashboard</h4>
+
+            <form action="{% url 'search:searchposts' %}" method="GET" value="{{request.GET.q}}">
+                Search
+                <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search posts"/>
+                <input type="submit" name="submit" value="Search"/>
+            </form>
+            
+            {% if submitbutton == 'Search' and request.GET.q != '' %}
+            {% if results %}
+            <h1>Results for <b>{{ request.GET.q }}</b></h1>
+
+            {% for result in results %}
+                
+            {{result.title}}
+
+            {{result.content}}
+            
+            {% endfor %}
+                
+            {% else %}
+            
+            No search results for this query.
+            
+            {% endif %}
+            {% endif %}
+                
+
+        </div>
+    </div>
+
+    <div class="bg-white inside-bottom">
+        <div class="padding-top-bot">
+            <h4>Consensus Conference</h4>
+            <p style = "padding-bottom: 20px;">Welcome to the NLP Annotator Tool. Please select patients to annotate below.</p>
+
+            {% if no_notes %}
+            <p style = "padding-bottom: 20px; color: red; font-weight: 800;">No patients are currently assigned. Please use the form on the right to request additional patients to annotate.</p>
+            {% endif %}
+
+            {% for patient in patientDB %}
+
+            <button class="collapsible">
+                Patient #{{patient.PatientID}} - {{patient|get_age:noteDB}}, {{patient|get_sex}}
+            </button>
+            <div class="content">
+                <table class = "tablesorter" style = "width: 100%" >
+                    <thead>
+                        <tr>
+                            <th>Link</th>
+                            <th>Date</th>
+                            <th>Encounter Type</th>
+                            <th>Provider</th>
+                            <th>Department</th>
+                            <th>Keywords</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for note in noteDB|filter_note:patient.PatientID %}
+                        <tr style="background-color: {{note|fill_table}};">
+                            <td><a href="/annotate/{{note.PatientID}}/{{note.LocalNoteID}}">{{note.LocalNoteID}}</a></td>
+                            <td>{{note.ContactDTS}}</td>
+                            <td>{{note.EncounterTypeDSC}}</td>
+                            <td>{{note.ProviderNM}}</td>
+                            <td>{{note.PrimaryDepartmentDSC}}</td>
+                            <td>{{note.KeywordCount}}</td>
+                        </tr>                   
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <span class="consensus-actor">Sent to consensus by {{patient.ConsensusActor}}.</span>
+            <br>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="three columns card-left">
+
+    <div class="bg-white">
+        <h4>Welcome</h4>
+        <p>Notes sent to consensus are accessible by all annotators. Consensus conferences can be used to review conflicting or challenging notes, as well as flag notes with known issues.</p>
+    </div>
+
+    <div class="bg-white inside-bottom">
+        <h4>About</h4>
+        <p>The NLP Annotator Tool was developed by the <a href="https://www.massgeneral.org/neurology/research/mind-data-science-lab" target="_blank">MIND Data Science Lab</a> at MassGeneral Hospital.</p>
+    </div>
+
+</div>
+
+{% endblock content %}
