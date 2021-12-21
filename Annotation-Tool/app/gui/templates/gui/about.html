@@ -1,0 +1,100 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load notes_filter %}
+
+{% block content %}
+
+<div class="nine columns card">
+
+    <div class="bg-white">
+
+        <div class="padding-top-bot">
+            <h4>Standard Operating Procedure (SOP)</h4>
+
+            <p style = "padding-top: 20px;">We are annotating binary cognitive concern over the calendar years 2017-2018. We aim to answer two questions:</p>
+
+            <p style = "padding-top: 20px;"><b>1. Is there any documented suspicion/concern of memory or cognitive decline?</b></p>
+
+            <span style = "text-decoration: underline;">Options:</span>
+            <ul>
+                <li>No Cognitive Concern</li>
+                <li>Cognitive Concern</li>
+                <li>Undetermined</li>
+            </ul>
+
+            <p>Cognitive concern could be relayed from (1) <span style = "text-decoration: underline;">patients</span> (e.g., "patient complains of memory problems"), (2) <span style = "text-decoration: underline;">family members and friends</span> (e.g., "sister says she is worried about the patient’s memory"), or 3. <span style = "text-decoration: underline;">providers</span> in the notes, phone logs, indications for imaging procedures or other tests, etc.</p>
+
+            <p>To annotate as "no cognitive concern," there should at least be implicit evidence of no cognitive concerns (e.g., they are still working, clearly managing their own care or hobbies, can follow complicated instructions, or have annual wellness or specialist notes with multisystem assessment and no mention of a cognitive concern). If a cognition test was performed with an explicit note of intact cognition, then even better. Alert and oriented alone is not sufficient.</p>
+
+            <p>Choose undetermined if sufficient information in the EHR is not available.</p>
+
+            <p style = "padding-top: 20px;"><b>2. What is the stage of cognitive impairment?</b></p>
+
+            <span style = "text-decoration: underline;">Options:</span>
+            <ul>
+                <li>No Cognitive Impairment</li>
+                <li><span style = "text-decoration: underline;">C</span>ognitive <span style = "text-decoration: underline;">I</span>mpairment <span style = "text-decoration: underline;">N</span>ot <span style = "text-decoration: underline;">D</span>ementia (CIND)</li>
+                <ul>
+                    <li><span style = "text-decoration: underline;">S</span>ubjective <span style = "text-decoration: underline;">C</span>ognitive <span style = "text-decoration: underline;">C</span>oncern (SCC)</li>
+                    <li><span style = "text-decoration: underline;">M</span>ild <span style = "text-decoration: underline;">C</span>ognitive <span style = "text-decoration: underline;">I</span>mpairment (MCI)</li>
+                    <li>Undetermined</li>
+                </ul>
+                <li>Dementia</li>
+                <ul>
+                    <li>Mild</li>
+                    <li>Moderate</li>
+                    <li>Severe</li>
+                    <li>Undetermined</li>
+                </ul>
+            </ul>
+
+            <p>If cognitive concerns are present, then label the stage of impairment as either CIND (<span style = "text-decoration: underline;">C</span>ognitive <span style = "text-decoration: underline;">I</span>mpairment <span style = "text-decoration: underline;">N</span>ot <span style = "text-decoration: underline;">D</span>ementia) or Dementia.</p>
+
+            <p>The stage of dementia is determined by activities of daily living (i.e. IADLs/ADLs). Explicit documentation of dementia by a provider in the EHR is not necessary (e.g., impairment in one or more cognitive/functional impairments that interferes with independence might be independently documented by different providers who remain unaware of the "big picture" or "progression").</p>
+
+            <p>If there is no evidence of dementia, choose CIND. If there is at least minimal normal cognitive testing, choose SCC, otherwise choose MCI. If there is no cognitive testing, choose undetermined.</p>
+
+            <img src = "{%  static  'img/nat-flowchart.svg'  %}" alt="NLP annotator flowchart." height="800" style="margin-left: auto; margin-right: auto; display: block; padding-top: 40px;">
+
+        </div>
+
+    </div>
+
+
+    <div class="nine columns card-bottom" style="width: 50%;">
+
+        <div class="bg-white inside-bottom">
+            <div class="padding-top-bot">
+                <h4>Team</h4>
+
+                <p>The NLP Annotator Tool was developed by the <a href="https://www.massgeneral.org/neurology/research/mind-data-science-lab" target="_blank">MIND Data Science Lab</a> at Massachusetts General Hospital.</p>
+
+                <p><b>Core Developers:</b> <a href="mailto:ANOORI1@mgh.harvard.edu">Ayush Noori</a> and <a href="mailto:CMAGDAMO@mgh.harvard.edu">Colin Magdamo</a></p>
+
+                <p><b>Principal Investigator:</b> <a href="mailto:SDAS5@mgh.harvard.edu">Dr. Sudeshna Das</a></p>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="nine columns card-btm-right" style="width: 50%;">
+    
+        <div class="bg-white inside-bottom">
+            <div class="padding-top-bot">
+                <h4>Contact</h4>
+
+                <p>Please use the link below to contact our team or request new features.</p>
+
+                <div style="text-align: center; padding-top: 10px;"><a href="mailto:SDAS5@mgh.harvard.edu?cc=ANOORI1@mgh.harvard.edu;CMAGDAMO@mgh.harvard.edu &subject=NLP Annotator Tool &body={{email_form}}"><button class="small-button">Contact</button></a></div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock content %}

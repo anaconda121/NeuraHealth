@@ -1,0 +1,44 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load notes_filter %}
+
+{% block content %}
+
+<div class="five columns card">
+
+    <div class="bg-white">
+        <div class="padding-top-bot">
+            <h4>Error</h4>
+
+            <p>Oops! It looks like you have reached this page in error. We apologize for the snafu. Please click the link below to return to the home page.</p>
+
+            <p><b>Error Code:</b> {{exception}}</p>
+
+            <div style="text-align: center; padding-top: 10px;"><a href="/home"><button class="small-button">Home</button></a></div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="five columns card-left">
+
+    <div class="bg-white">
+        <div class="padding-top-bot">
+            <h4>Contact</h4>
+
+            <p>Please use the links below to contact our team regarding this error.</p>
+
+            <p><b>Core Developers:</b> <a href="mailto:ANOORI1@mgh.harvard.edu">Ayush Noori</a> and <a href="mailto:CMAGDAMO@mgh.harvard.edu">Colin Magdamo</a></p>
+
+            <p><b>Principal Investigator:</b> <a href="mailto:SDAS5@mgh.harvard.edu">Dr. Sudeshna Das</a></p>
+
+            <div style="text-align: center; padding-top: 10px;"><a href="mailto:SDAS5@mgh.harvard.edu?cc=ANOORI1@mgh.harvard.edu;CMAGDAMO@mgh.harvard.edu &subject=NLP Annotator Tool &body={{email_form}}"><button class="small-button">Contact</button></a></div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
