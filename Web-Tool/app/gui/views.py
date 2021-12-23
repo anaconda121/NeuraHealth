@@ -5,6 +5,10 @@ from django.shortcuts import render
 import pandas as pd
 import regex as re
 
+from transformers import AutoTokenizer
+
+# constants
+tokenizer = AutoTokenizer.from_pretrained("emilyalsentzer/Bio_ClinicalBERT")
 regex = pd.read_csv(r"static/keywords.csv")
 
 def compile_regex():
@@ -127,6 +131,7 @@ def create_context_windows(notes, i):
     
     return merged
 
+# TODO: will not be needed for notes that don't have keyword matches 
 def merge(intervals):  
     """
     intervals: list of tuples representing context windows 
@@ -149,6 +154,106 @@ def merge(intervals):
             
     ans.append(tempans)
     return ans
+
+# TODO: will not be needed for notes that don't have keyword matches 
+def pull_context_windows(notes, i, col):
+    """
+    notes: dataframe 
+    i: int that represents index in notes
+    col: name of column that has merged context windows 
+    """
+    # string that holds text for pulled context windows
+    sequence = ""
+    
+    for j in range(len(notes[col][i])):
+        # if multiple context windows per note
+        if j > 0 and sequence != "":
+            sequence += " ----- "
+            
+        start = notes[col][i][j][0]
+        end = notes[col][i][j][1]
+        
+        sequence += notes["NoteTXT"][i][start : end]
+    
+    return sequence
+
+def clinical_bert_tokenize(notes, i, col):
+    """
+    notes: dataframe 
+    i: int that represents index in notes
+    col: name of column that has merged context windows 
+    """
+    tokens = tokenizer.encode_plus(notes[col][i], add_special_tokens = False, return_tensors = 'pt')
+
+    return (len(tokens['input_ids'][0]))
+
+def generate_padded_context_windows(notes, i):
+    """
+    notes: dataframe 
+    i: int that represents index in notes
+    """    
+    if (notes["token_length"][i] <= 400):
+        locs = list((notes["merged_row_location"][i]))
+        length = len(locs)
+        start = locs[0][0] 
+        end = locs[length - 1][1]
+        
+        #print(start, end)
+                
+        seq_length = 1000
+        length_to_add_one_side = int((seq_length - notes["sequence_length"][i]) / 2)
+        
+        #print(length_to_add_one_side, notes["sequence_length"][i])
+        
+        prune_start = False
+        prune_end = False
+        if (start - length_to_add_one_side <= 0):
+            start = 0
+            prune_start = True
+        if (end + length_to_add_one_side >= len(notes["NoteTXT"][i]) - 1):
+            end = len(notes["NoteTXT"][i]) - 1
+            prune_end = True
+            
+        # print(start, end, prune_start, prune_end)
+        if(prune_start and prune_end):
+            start = 0
+            end = len(notes["NoteTXT"][i]) - 1
+        elif (prune_start):
+            end += length_to_add_one_side
+            if (end + length_to_add_one_side <= len(notes["NoteTXT"])):
+                end += length_to_add_one_side
+        elif (prune_end):
+            start -= length_to_add_one_side
+            if (start - length_to_add_one_side >= 0):
+                start -= length_to_add_one_side
+        # print(start, end, prune_start, prune_end)
+        if (not prune_start and not prune_end):
+            start -= length_to_add_one_side
+            end += length_to_add_one_side
+            
+        locs = [list(x) for x in locs]
+        locs[0][0] = start
+        locs[length - 1][1] = end
+        
+        notes["padded_merged_regex_location"][i] = locs
+
+def character_cleaning(notes):
+    notes['regex_matches'] = notes['regex_matches'].astype(str)
+    notes['regex_matches'] = notes['regex_matches'].str.replace("\[\]", '')
+
+    notes['padded_regex_sent'] = notes['padded_regex_sent'].astype(str)
+    notes['padded_regex_sent'] = notes['padded_regex_sent'].str.replace('[', '')
+    notes['padded_regex_sent'] = notes['padded_regex_sent'].str.replace(']', '')
+
+    notes = notes.dropna(subset=["padded_regex_sent"])
+    notes['padded_regex_sent'] = notes['padded_regex_sent'].str.replace('"', "'")
+
+def note_preprocessing(note):
+    note = re.sub(r'   • ', ' ; ', note)
+    note = re.sub(r'[ ]{4,}', ' ', note)
+    note = re.sub(r'  ', '\n', note)
+    note = re.sub(r'    ', '\n\n', note)
+    return note
 
 def sequence_extraction_pipeline(note_txt):
     """
@@ -182,10 +287,44 @@ def sequence_extraction_pipeline(note_txt):
         merged.append(merge(notes["context_windows"][i]))
     notes["merged_row_location"] = merged 
 
+    # pulling context windows
+    seqs = []
+    for i in range(len(notes)):
+        seqs.append(pull_context_windows(notes, i, "merged_row_location"))
+    notes["regex_sent"] = seqs
+
+    # tokenizing sequences into ClincalBERT tokens 
+    token_lens = []
+    for i in (range(len(notes))):
+        token_lens.append(clinical_bert_tokenize(notes, i, "regex_sent"))
+    notes["token_length"] = token_lens
+    
+    # padding all Sequences such that they are as close as possible to 512 ClincialBERT Tokens
+    notes["padded_merged_regex_location"] = notes["merged_row_location"].copy()
+    notes["sequence_length"] = notes["regex_sent"].astype(str).map(len)
+    for i in (range(len(notes))):
+        notes["padded_merged_regex_location"][i] = list(notes["padded_merged_regex_location"][i])
+
+    for i in (range(len(notes))):
+        generate_padded_context_windows(notes, i)
+
+    # pulling padded context windows
+    padded_seqs = []
+    for i in (range(len(notes))):
+        padded_seqs.append(pull_context_windows(notes, i, "padded_merged_regex_location"))
+    notes["padded_regex_sent"] = padded_seqs
+
+    # minor cleaning
+    # character_cleaning(notes)
+
+    # regex substitutions
+    for i in (range(len(notes))):
+        notes.at[i, "padded_regex_sent_preprocessed"] = note_preprocessing(notes.at[i, "padded_regex_sent"])
+
     return notes 
 
 def tester():
     notes = sequence_extraction_pipeline(r"C:\Users\tanis\OneDrive - Phillips Exeter Academy\Data\Programming\APOE-SLAT\Web-Tool\app\gui\static\test_notes.txt")
-    print(notes["merged_row_location"]) 
+    print(notes["padded_regex_sent_preprocessed"])
 
 tester()
