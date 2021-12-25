@@ -1,3 +1,3 @@
-from django.shortcuts import render
+# Author: Tanish Tyagi
 
-# Create your views here.
+from django.shortcuts import render
