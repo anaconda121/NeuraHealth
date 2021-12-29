@@ -1,12 +1,8 @@
 
 ## An Automated Electronic Health Records Scanning Pipeline to Detect Undiagnosed Cognitive Impairment with Deep Learning and Natural Language Processing
 
-## Authors
-Tanish Tyagi (1), Colin G. Magdamo (1), Ayush Noori (1), Zhaozhi Li (1), Xiao Liu (1), Mayuresh Deodhar (1), Zhuoqiao Hong (1), Wendong Ge (1), Elissa M. Ye (1), Yi-han Sheu (1), Haitham Alabsi (1), Laura Brenner (1), Gregory K. Robbins (1), Sahar Zafar (1), Nicole Benson (1), Lidia Moura (1), John Hsu (1), Alberto Serrano-Pozo (1), Dimitry Prokopenko (1 and 2), Rudolph E. Tanzi (1 and 2), Bradley T.Hyman (1), Deborah Blacker (1), Shibani S. Mukerji (1), M. Brandon Westover (1), Sudeshna Das (1) 
-
-((1) Massachusetts General Hospital, Boston, MA, (2) McCance Center for Brain Health, Boston, MA)
-
-First Author: Tanish Tyagi
+## Author
+Tanish Tyagi
 
 ## Abstract
 Because of the subtle onset with symptoms closely resembling that of normal aging, dementia related cognitive impairment is difficult to detect by health care professionals. With only one in four patients getting diagnosed, dementia’s underdiagnosis causes a significant public health concern, as millions are left behind without the necessary care and support for their chronic condition. Information relevant to dementia related cognitive impairment is often found in the electronic health records (EHR), but a manual review by physicians is time consuming and error-prone.
