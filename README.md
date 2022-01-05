@@ -1,4 +1,3 @@
-
 ## NeuraHealthNLP: An Automated Electronic Health Records Scanning Pipeline to Detect Undiagnosed Cognitive Impairment with Deep Learning and Natural Language Processing
 
 ## Author
@@ -17,6 +16,7 @@ With 55 million dementia patients worldwide and growing rapidly at the rate of o
 1. ```Models/``` - Houses all the code for the Machine Learning (```TFIDF/```) and Deep Learning (```Bert/```) models 
 2. ```Preprocessing/``` - Houses the code for the EHR Preprocessing Pipeline 
 3.  ```Submission/``` - Houses all Files for Submissions to Various Science Fairs and Conferences
+	* ``Davidson/`` - Houses all files used in preparation for submission to Davidson Research Fellowship
 	*  ```Martinos-Symposium/``` - Houses all files used in the preparation of a poster for the [Women in Science Symposium](https://wis.martinos.org/mcss/) on August 13th, 2021 
 	* ```ML4H-Paper/```  -  Houses all files used in the preparation of my [accepted Extended Abstract paper subsmission](https://arxiv.org/abs/2111.09115) (30 accepted out of over 500 submissions) for the [ML4H Conference](https://ml4health.github.io/2021/papers.html) 
 	* ```ML4H-Presentation/```  - Houses all files used in the preparation of my poster  presentation for the [ML4H Conference](https://ml4health.github.io/2021/papers.html) on December 5th, 2021 
