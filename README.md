@@ -1,4 +1,4 @@
-# <center>NeuraHealthNLP: An Automated Electronic Health Records Scanning Pipeline to Detect Undiagnosed Cognitive Impairment with Deep Learning and Natural Language Processing</center>
+# <center>NeuraHealth: An Automated Electronic Health Records Scanning Pipeline to Detect Undiagnosed Cognitive Impairment with Deep Learning and Natural Language Processing</center>
 
 ## Author
 Tanish Tyagi
