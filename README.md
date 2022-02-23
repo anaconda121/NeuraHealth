@@ -19,4 +19,4 @@ Each folder will also contain a ```README.md``` file that goes into further deta
 
 **Note**: 
 1. All folders named "Old" house code that was created during previous iterations of the project. All files in these folders are not relevant to the material discussed in the paper and do not need to be examined. Thank you!
-2. All the code in the attached files is written by me. I use Import statements to call functions from external libraries.
+2. Unless otherwise stated, all the code in the attached files is written by me. I use Import statements to call functions from external libraries.
