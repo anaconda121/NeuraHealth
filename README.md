@@ -1,16 +1,10 @@
-# <center>NeuraHealth: An Automated Electronic Health Records Scanning Pipeline to Detect Undiagnosed Cognitive Impairment with Deep Learning and Natural Language Processing</center>
+# <center>NeuraHealth: An Automated Screening Pipeline to Detect Undiagnosed Cognitive Impairment in Electronic Health Records using Deep Learning and Natural Language Processing</center>
 
 ## Author
 Tanish Tyagi
 
-## Project Description
-Dementia related cognitive impairment is often difficult to detect by health care professionals due to lack of time and/or expertise. With only one in four patients getting diagnosed, dementia’s underdiagnosis causes a significant public health concern, as millions are left behind without the necessary care and support for their chronic condition. Information relevant to dementia related cognitive impairment is often found in the electronic health records (EHR) and can aid in the diagnosis, but a manual review by physicians is time consuming and error-prone. 
-
-In my research, I developed natural language processing (NLP) models to create an automated EHR screening pipeline that can detect patients with dementia related cognitive impairment. The deep learning model understands the linguistic context in the EHRs and outperforms current methods to identify patients who had no earlier diagnosis, dementia-related diagnosis code, or dementia-related medications in their EHR. These cases would otherwise have gone undetected or been detected too late. 
-
-To make the EHR screening pipeline accessible and affordable, I also developed a web application that can be used on mobile or desktop devices by primary care physicians for accurate and real-time detection. 
-
-With 55 million dementia patients worldwide and growing rapidly at the rate of one new case every 3 seconds, early intervention is the key to reducing financial burden and improving clinical outcomes. My research tackles this global public health challenge and provides mechanisms for early detection of Alzheimer’s disease and related dementias, including Parkinson’s, Lewy Body and others.
+## Abstract
+Dementia related cognitive impairment (CI) is a neurodegenerative disorder, affecting over 55 million people worldwide and growing rapidly at the rate of one new case every 3 seconds. 75% cases go undiagnosed globally with up to 90% in low-and-middle-income countries, leading to an estimated annual worldwide cost of USD 1.3 trillion, forecasted to reach 2.8 trillion by 2030. With no cure, a recurring failure of clinical trials, and a lack of early diagnosis, the mortality rate is 100%. Information in electronic health records (EHRs) can provide vital clues for early detection of CI, but a manual review by experts is tedious and error prone. Several computational methods have been proposed, however, they lack an enhanced understanding of the linguistic context in complex language structures of EHRs. Therefore, I propose a novel and more accurate framework, NeuraHealth, to identify patients who had no earlier diagnosis. In NeuraHealth, using patient EHRs from Mass General Brigham BioBank, I trained a bi-directional attention-based deep learning natural language processing model to classify sequences. The sequence predictions were used to generate structured features as input for a patient level regularized logistic regression model. This two-step framework creates high dimensionality, outperforming all existing state-of-the-art computational methods as well as clinical methods. Further, I integrate the models into a real-world product, a web app, to create an automated EHR screening pipeline for scalable and high-speed discovery of undetected CI in EHRs, making early diagnosis viable in medical facilities and in regions with scarce health services.
 
 ## Navigating the Codebase
 1. ```Models/``` - Houses all the code for the Machine Learning (```TFIDF/```) and Deep Learning (```Bert/```) models 
@@ -23,4 +17,6 @@ With 55 million dementia patients worldwide and growing rapidly at the rate of o
 
 Each folder will also contain a ```README.md``` file that goes into further detail regarding its contents. 
 
-**Note**: All folders named "Old" house code that was created during previous iterations of the project. All files in these folders are not relevant to the material discussed in the paper and do not need to be examined. Thank you!
+**Note**: 
+1. All folders named "Old" house code that was created during previous iterations of the project. All files in these folders are not relevant to the material discussed in the paper and do not need to be examined. Thank you!
+2. All the code in the attached files is written by me. I use Import statements to call functions from external libraries.
