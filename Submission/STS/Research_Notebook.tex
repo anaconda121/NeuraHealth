@@ -1,0 +1,112 @@
+\documentclass[11pt,letterpaper]{article}
+
+\newcommand{\workingDate}{\textsc{2022 $|$ January $|$ 01}}
+\newcommand{\userName}{Tanish Tyagi}
+\newcommand{\institution}{Massachusetts General Hospital/Harvard Medical School}
+\usepackage{researchdiary_png}
+\usepackage{url}
+
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    pdfpagemode=FullScreen,
+    }
+    
+\begin{document}
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center
+\includegraphics[scale=0.5]{images/mgh_logo.eps}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+\center % Center everything on the page
+
+\textsc{\LARGE NeuraHealth Research Notebook}\\[1.5cm] % Name of your university/college
+\textsc{\Large Massachusetts General Hospital}\\[0.5cm] % Major heading such as course name
+\textsc{\large MIND Data Science Lab}\\[0.5cm] % Minor heading such as course title
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Tanish Tyagi % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Mentor:} \\
+Dr. Sudeshna Das \\[1.2em] % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[2cm]
+\makeatother
+
+{\large \today}\\[2cm]
+
+\vfill
+
+\end{titlepage}
+
+\section{March 6, 2022}
+
+Code Location: \texttt{APOE-V2/Analysis/Sequence v. Full Note Model Comparison.ipynb}
+
+The main phenomenon I am currently investigating is why the model Xiao trained using full notes as opposed to sequences has completely different predictions than the sequence model I trained for ML4H. Today I made a distribution plot of the ratios of sequences to notes stratified by cognitive statuses. I used the annotations from NAT (\url{nat.partners.org}) for this experiment. 
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=10cm]{ratio_sequences_notes.png}
+\caption{Distribution Plot of Ratio of Sequences to Notes by Cognitive Status}
+\end{figure}
+
+This figure confirmed my hypothesis that those with normal cognition would have a smaller sequence:note ratio. We also decided to have an average note:sequence ratio be around 0.1 based off this plot. 
+
+\section{March 7, 2022}
+
+Code Location: \texttt{APOE-V2/Analysis/Sequence v. Full Note Model Comparison.ipynb}
+
+At the daily meeting today, we looked at the sequences that the full note model and sequence model were run on. We concluded that the sequence level model was more accurate in its predictions, and that even when the sequence text was equivalent to the entire note, both models would give completely different class predictions. We also noticed that the full note model seemed much more unsure in its predictions compared to the sequence level model, as shown by the figure below:
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=10cm]{predicted_probabilites_sequence_full_note.png}
+\caption{Distribution Plot of Predicted Probabilites from Sequence and Full-Note models}
+\end{figure}
+
+Based of these observations, I will be meeting with Xiao tomorrow to go over her code for the full note model to see if there are any errors. 
+
+\section{March 8, 2022}
+
+I met with Xiao today to discuss the discrepancies between the sequence and full-note models. Upon looking at her code, I realized that she was using my sequence level model but instead making predictions using text of full-notes, meaning that there was no error in importing the model or with the attention weights as I had previously thought. In fact, all of her code was very similar to my prediction pipeline I made over the summer. Based off this, we both came to the conclusion that the process of using full-notes confuses the model as full-notes often contain conflicting information that can make a model uncertain and incorrect in its predictions.
+
+\section{March 9, 2022}
+
+Code Location: \texttt{APOE-V2/ClinicalBERT/ClinicalBERT NAT Sequence and Note Predictions.ipynb}
+
+We noticed a minor bug in my training code that could affect the predicted class assignments and decided to retrain both the sequence and full-note models. The full-note model code also had some bugs, and we thought retraining it using my code would fix the low predicted probabilities and incorrect predictions to some extent. However, upon training, the probability distribution for both models remained the same and worse, the sequence level model predictions changed, leading the model to predict more sequences incorrectly. Will investigate more tomorrow.
+
+\section{March 10 and 11, 2022}
+
+My attention during these two days was primarily focused on getting annotations using the new design web app. The current clusters of sequences loaded in are matches from memory and cognition, with sub-clusters of having impair, having intact, having both intact and impair, or neither. I was able to annotate three chunks adding up 114 sequences. I have also marked 9 sequences for further consensus to bring up at a future meeting.
+
+\section{March 14, 2022}
+
+Code Location: \texttt{APOE-V2/ClinicalBERT/ClinicalBERT Pipeline Inspection.ipynb}
+
+In a further attempt to understand the differences between predicting on the sequence vs. full-note level, I extracted the attention weights for the model when a test sequence or test note is inputted for prediction. When the sequence is equal to the full-note are the exact same, the attention weights are the same as well. When the sequence is a snippet of the note, the attention weights are considerably different, which makes sense. 
+
+\section{March 15, 2022}
+
+Code Location: \texttt{APOE-V2/ClinicalBERT/ClinicalBERT Pipeline Inspection.ipynb}
+
+During the daily 11:30 meeting, I extracted the pooling layers for the models when it encounters a sequence vs. full-note. I got similar results to results I got when the attention weights were extracted, which once again made sense.
+
+A minor breakthrough was made when we went back to further examining the predictions of the models that Xiao and I trained on 3/9/2022. When the sequence equals the full note, both the predictions of the sequence model and full note model are the same as well as the probability, which actually makes a lot of sense since the attention weights and pooling layers are the same among others. 
+
+\end{document}
