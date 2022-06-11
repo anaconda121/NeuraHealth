@@ -5,7 +5,10 @@
 \newcommand{\institution}{Massachusetts General Hospital/Harvard Medical School}
 \usepackage{researchdiary_png}
 \usepackage{url}
-
+\usepackage{amsmath}
+\usepackage{natbib}
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,open={(},close={)}}
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 
@@ -15,6 +18,7 @@
     linkcolor=blue,
     filecolor=blue,      
     urlcolor=blue,
+    allcolors=blue,
     pdfpagemode=FullScreen,
     }
     
@@ -97,13 +101,13 @@ My attention during these two days was primarily focused on getting annotations 
 
 \section{March 14, 2022}
 
-Code Location: \texttt{APOE-V2/ClinicalBERT/ClinicalBERT Pipeline Inspection.ipynb}
+Code Location: \texttt{APOE-V2/ClinicalBERT/Analysis/ClinicalBERT Pipeline Inspection.ipynb}
 
 In a further attempt to understand the differences between predicting on the sequence vs. full-note level, I extracted the attention weights for the model when a test sequence or test note is inputted for prediction. When the sequence is equal to the full-note are the exact same, the attention weights are the same as well. When the sequence is a snippet of the note, the attention weights are considerably different, which makes sense. 
 
 \section{March 15, 2022}
 
-Code Location: \texttt{APOE-V2/ClinicalBERT/ClinicalBERT Pipeline Inspection.ipynb}
+Code Location: \texttt{APOE-V2/ClinicalBERT/Analysis/ClinicalBERT Pipeline Inspection.ipynb}
 
 During the daily 11:30 meeting, I extracted the pooling layers for the models when it encounters a sequence vs. full-note. I got similar results to results I got when the attention weights were extracted, which once again made sense.
 
@@ -111,13 +115,13 @@ A minor breakthrough was made when we went back to further examining the predict
 
 \section{June 6, 2022}
 
-Code Location: \texttt{APOE-V2/ClinicalBERT/ClinicalBERT\_Training\_Script.ipynb}
+Code Location: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_Script\_0606.ipynb}
 
 Today was my first day doing full-time research at the lab since last summer, and it was a great feeling to finally get back into it! I used the ClinicalBERT training script I created to train the sequence level deep learning model and applied it to the current database of annotated sequences (around 4700). Future plans include to apply the ClinicalBERT model to a final dataset of around 6500 sequences so that it can become a great sequence level predictor. By improving the sequence level predictions, the logistic regression patient level predictor model will also become significantly improved. 
 
 \section{June 7, 2022}
 
-Code Location: \texttt{APOE-V2/ClinicalBERT/ClinicalBERT\_Training\_Script.ipynb}
+Code Location: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_Script\_0606.ipynb}
 
 I encountered a weird error when running the optuna study that I had not seen before. The terminal said that said \texttt{CUDA error: device-side assert triggered. CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect. For debugging consider passing CUDA\_LAUNCH\_BLOCKING=1.} This error really did not tell me much, so I asked my colleagues and they recommended checking the dataset to ensure there are no bugs and to run the script from the commmand line as a python file instead of a jupyter notebook while specifying the GPU ports to use.
 
@@ -125,9 +129,9 @@ None of the above fixes worked, but luckily I was able to find a fix which was t
 
 \section{June 8, 2022}
 
-Code Location: \texttt{APOE-V2/ClinicalBERT/ClinicalBERT\_Training\_Script.ipynb} \\ and \texttt{APOE-V2/ClinicalBERT/Analysis/ClinicalBERT\_Trial\_Analysis.ipynb}
+Code Location: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_Script\_0606.ipynb} \\ and \texttt{APOE-V2/ClinicalBERT/Analysis/ClinicalBERT\_Trial\_Analysis.ipynb}
 
-The model finished training this morning. The best trial was trial 10: with 0.974 AUC and 0.897 ACC on the evalulation set. The hyperparameters that were varied throughout the study had the below values for trial 10:
+The model finished training this morning. The best trial was trial 10: with 0.974 AUC and 0.897 ACC on the evalulation set. On the held out test set, the model achieved 0.829 ACC And 0.933 AUC. The hyperparameters that were varied throughout the study had the below values for trial 10:
 
 \begin{itemize}
    \item adam epilson: 5.3157E-06
@@ -145,5 +149,53 @@ To dig deeper, I performed an analysis of the hyperparameters values for each tr
 \includegraphics[width=10cm]{auc_trial.png}
 \caption{AUC per Trial}
 \end{figure}
+
+\section{June 10, 2022}
+
+To start the day, I cleaning up my folder on mindds and got my gitlab repo in order. I had neglected git duties for many months now, and I thought I would fix it today. Took a while, but I was able to get everything in order and resolve all merge conflicts. 
+
+Now, I explored options with tuning the hyperparameters for ClinicalBERT. I found that the important hyperparameters were already being tuned via Optuna. Learning rate stood out to me as a very important parameter, and found the paper by \citep{sun2019fine} titled, "How to fine-tune BERT for text classification?" very helpful for this task. Tuning the learning rate is very important to prevent catastrophic forgetting \citep{mccloskey1989catastrophic},  where the pre-trained knowledge is erased during learning of new knowledge. In \citep{sun2019fine}, the authors trained BERT on text classification for movie reviews, which shares similarities with my task. They tested multiple learning rates, which had the results shown in the convergence graphs shown below:
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=17cm]{learning_rates.png}
+\caption{Learning Rates and Convergence, Source: \citep{sun2019fine}}
+\end{figure}
+
+From the authors: ``We find that a lower learning rate, such as 2e-5, is necessary to make BERT overcome the catastrophic forgetting problem. With an aggressive learn rate of 4e-4, the training set fails to converge." With these results, I went to examine the learning rate of the best trial from my Optuna study. The learning rate was approximately 5e-5, and the loss on the evaluation set was 0.31. I figured that with an Optuna study of 40-50 trials, the model was come closer to a learning rate of 2e-5 and the loss would converge. 
+
+I also closely examined my values for the number of training epochs. From online research, I found that the max number of epochs needed for NLP tasks and transformers in general is 5, so I increased the max number of possible training epochs to 5 instead of 3. 
+
+I then started a 50 trial Optuna study to see if anything changes.
+
+\section{June 11, 2022}
+Code Location: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_Script\_0610.ipynb}
+
+Having an Optuna trial run for 50 trials did not change the performance much, if anything at all. The best trial was \#6, which was fairly disappointing considering that this was quite early in the study. The hyperparameters for this trial are as follows:
+
+\begin{itemize}
+   \item adam epilson: 2.4209E-06
+   \item early stopping patience: 2
+   \item learning rate: 6.6236E-06
+   \item num train epochs: 3
+\end{itemize}
+
+The learning did decrease from approximately 5E-5, but I am wondering whether this learning rate has the model learning too slow. I decided to also investigate the adam epsilon parameter and any way to tune the adam optimizer in general. After reading through numerous blog posts and scouring complicated equations I didn't understand, I came to the conclusion that the epilson parameter should be the only one that needs to be tuned during the training process.  
+
+The adam optimizer combines the RMSProp and Momentum optimizers. The equations for the adam optimizer are as follows: 
+
+\begin{center}
+$m_0 = 0, v_0 = 0$ \\
+Modified Momentum Equation: $m_{t+1} = \beta_{1}m_t + (1 - \beta_{1})\nabla_{\theta_{j}}\mathcal{L}(\theta)$ \\
+Modified RMSProp Equation: $v_{t+1} = \beta_{2}m_t + (1 - \beta_{2})\nabla_{\theta_{j}}\mathcal{L}(\theta)^2$ \\
+Correction: $\hat{m}_{t+1} = \frac{m_{t+1}}{1-(\beta_1)^2}$ and $\hat{v}_{t+1} = \frac{m_{t+1}}{1-(\beta_2)^2}$ \\
+$\theta_{j+1} = \theta_{j} - \frac{\epsilon}{\sqrt{v_{t+1}} + 1e^{-5}}m_{t+1}$
+\end{center}
+
+The $\beta_1$ and $\beta_2$ parameters are repeatedly multiplied with each other, so they should start at numbers close to 1 so that over time they approach 0 as gradient descent comes to a close. Pytorch, along with all other popular deep learning libraries, initializes $\beta_1$ to 0.9 and $\beta_2$ to 0.999, so they are fine as is. The tensorflow documentation, however, cautions against leaving the adam epilson value as is, saying, ``The default value of 1e-8 for epsilon might not be a good default in general. For example, when training an Inception network on ImageNet a current good choice is 1.0 or 0.1." So my current tuning mechanisms seem to be holding up.
+
+\clearpage
+\bibliography{main.bib}
+\nocite{*}
 
 \end{document}
