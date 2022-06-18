@@ -134,10 +134,10 @@ Code Location: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_Scrip
 The model finished training this morning. The best trial was trial 10: with 0.974 AUC and 0.897 ACC on the evalulation set. On the held out test set, the model achieved 0.829 ACC And 0.933 AUC. The hyperparameters that were varied throughout the study had the below values for trial 10:
 
 \begin{itemize}
-   \item adam epilson: 5.3157E-06
-   \item early stopping patience: 3
-   \item learning rate: 5.5703E-05
-   \item num train epochs: 1
+\item adam epilson: 5.3157E-06
+\item early stopping patience: 3
+\item learning rate: 5.5703E-05
+\item num train epochs: 1
 \end{itemize}
 
 The AUC and ACC were not as good as the previous iteration of the model, which means that I will have to spend more time finding hyperparameters to tune. Some options for this include increasing the number of trials in the Optuna study from 20 to 40 (potentially), having the Optuna study maximize AUC instead of ACC, increasing the range of possible values for the learning rate, and finding other hyperparameters to include in the Optuna tuning process in addition to the four mentioned above. 
@@ -145,6 +145,7 @@ The AUC and ACC were not as good as the previous iteration of the model, which m
 To dig deeper, I performed an analysis of the hyperparameters values for each trial and the corresponding AUC and ACC. 
 
 \begin{figure}[ht!]
+\label{auc_trial_20}
 \centering
 \includegraphics[width=10cm]{auc_trial.png}
 \caption{AUC per Trial}
@@ -174,10 +175,10 @@ Code Location: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_Scrip
 Having an Optuna trial run for 50 trials did not change the performance much, if anything at all. The best trial was \#6, which was fairly disappointing considering that this was quite early in the study. The hyperparameters for this trial are as follows:
 
 \begin{itemize}
-   \item adam epilson: 2.4209E-06
-   \item early stopping patience: 2
-   \item learning rate: 6.6236E-06
-   \item num train epochs: 3
+\item adam epilson: 2.4209E-06
+\item early stopping patience: 2
+\item learning rate: 6.6236E-06
+\item num train epochs: 3
 \end{itemize}
 
 The learning did decrease from approximately 5E-5, but I am wondering whether this learning rate has the model learning too slow. I decided to also investigate the adam epsilon parameter and any way to tune the adam optimizer in general. After reading through numerous blog posts and scouring complicated equations I didn't understand, I came to the conclusion that the epilson parameter should be the only one that needs to be tuned during the training process.  
@@ -193,6 +194,46 @@ $\theta_{j+1} = \theta_{j} - \frac{\epsilon}{\sqrt{v_{t+1}} + 1e^{-5}}m_{t+1}$
 \end{center}
 
 The $\beta_1$ and $\beta_2$ parameters are repeatedly multiplied with each other, so they should start at numbers close to 1 so that over time they approach 0 as gradient descent comes to a close. Pytorch, along with all other popular deep learning libraries, initializes $\beta_1$ to 0.9 and $\beta_2$ to 0.999, so they are fine as is. The tensorflow documentation, however, cautions against leaving the adam epilson value as is, saying, ``The default value of 1e-8 for epsilon might not be a good default in general. For example, when training an Inception network on ImageNet a current good choice is 1.0 or 0.1." So my current tuning mechanisms seem to be holding up.
+
+\section{June 13, 2022}
+
+Code Locations: \texttt{APOE-V2/ClinicalBERT/Analysis/ClinicalBERT\_Trial\_Analysis.py} \\ and \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Sequence\_Model.py}
+
+First, I created a general \texttt{Trial Analysis} class that I could use for gathering all the needed data from my Optuna studies and applied it to my 50 trial study.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=12cm]{50_trial.png}
+\caption{AUC per trial for 50 trial study}
+\end{figure}
+
+This graph is similar to the previous graph, as there is no clear trend. Upon looking at the learning rates chosen by Optuna and their corresponding AUCs, all learning rates of form \texttt{x} $\cdot 10^{-5}$ yield the highest AUCs. After trials with this learning rates, the sampler would mysteriously recommend a learning rate much smaller, which resulted in poor performance. The trial analysis spreadsheet is full of such trends, and yet the sampler is unable to pick up on the pattern.  
+
+On a separate note, I created a class for the \texttt{ClinicalBERT Sequence Model} for further hyperparameter tuning trials. I am running into a database error which I will address tomorrow.
+
+\section{June 14, 2022}
+
+Code Locations: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Sequence\_Model.py} \\ and \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_0616.ipynb}
+
+I fixed the errors with the \texttt{ClinicalBERT Sequence Model} class. The gold standard dataset consists of $\approx$ 6500 annotated sequences with keywords and 500 sequences that contain no keywords. I started training the model with one edit: changing the range of the learning from 1E-6 to 1E-4 as learning rates under 1E-6 inhibited the model's learning. 
+
+\section{June 15, 2022}
+
+Code Location: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_0616.ipynb}
+
+I realized that there was an error in the generation of the sequences that did not have a keyword match and had to stop training. The performance was quite similar to the previous study, but I believe there is potential for higher performance with correctly chosen sequences with no keywords.
+
+\section{June 16, 2022} 
+
+Code Location: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_0616.ipynb}
+
+I trained on solely the 6500 sequences with a possible range of learning rates from 1E-6 to 1E-3 to further explore the learning rate space. I found the performance was extremely poor (0.5 AUC), as the model was learning too fast and forgetting past knowledge and patterns. 
+
+\section{June 17, 2022} 
+
+Code Location: \texttt{APOE-V2/ClinicalBERT/Models/ClinicalBERT\_Training\_0616.ipynb} \\ and \texttt{APOE-V2/ClinicalBERT/Preprocessing/Generating\_No\_Keyword\_Sequences.ipynb}
+
+I created the new set of 500 sequences by sampling random 800 character portions from notes and started running a 50 study Optuna trial. The training will finish over the weekend, after which I will conduct a thorough analysis of the loss curves and parameter configurations.
 
 \clearpage
 \bibliography{main.bib}
